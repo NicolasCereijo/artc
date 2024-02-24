@@ -1,4 +1,4 @@
-from core.configurations import read_config
+from core.artc_configurations import read_config
 from pydub.utils import mediainfo
 import os
 

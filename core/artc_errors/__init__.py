@@ -1,1 +1,1 @@
-from core.errors.validations.path import validate_path
+from core.artc_errors.validations.path import validate_path
