@@ -11,7 +11,7 @@ def open_config(configuration_path):
                 - default: Use the default path.
 
         """
-    configuration_file = "core/configurations/configurations.json"
+    configuration_file = "core/artc_configurations/artc_configurations.json"
 
     if configuration_path != "default":
         configuration_file = configuration_path
