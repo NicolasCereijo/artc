@@ -1,0 +1,5 @@
+{
+  "audio": {
+    "valid_extensions": ["mp3", "wav"]
+  }
+}

@@ -1,6 +1,1 @@
-def main():
-    print("Harvesting potatoes, stay tuned")
-
-
-if __name__ == "__main__":
-    main()
+from core.errors.validations.path import validate_path
