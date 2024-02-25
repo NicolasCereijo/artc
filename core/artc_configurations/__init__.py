@@ -2,41 +2,39 @@ import json
 import os
 
 
-def open_config(configuration_path):
+def open_config(configuration_path="default"):
     """
-        Method to access configuration file path.
+        Function to access configuration file path.
 
         Args:
             configuration_path (str): The parameter value indicates the path of the configuration file:
-                - default: Use the default path.
-
-        """
-    configuration_file = "core/artc_configurations/artc_configurations.json"
-
-    if configuration_path != "default":
-        configuration_file = configuration_path
-
-    if os.access(configuration_file, os.R_OK):
-        with open(configuration_file, 'r') as file:
-            return json.load(file)
-    return None
-
-
-def read_config(configuration_path, config_section):
+                - empty: Use the default path.
     """
-        Method to read the configuration file.
+    if configuration_path == "default":
+        configuration_path = "core/artc_configurations/configurations.json"
+
+    try:
+        if os.access(configuration_path, os.R_OK):
+            with open(configuration_path, 'r') as file:
+                return json.load(file)
+    except ValueError:
+        print("Could not access file")
+
+
+def read_config(config_section, configuration_path="default"):
+    """
+        Function to read the configuration file.
 
         Args:
-            configuration_path (str): The parameter value indicates the path of the configuration file:
-                - default: Use the default path.
             config_section (str): The parameter value indicates the section of the configuration returned:
                 - 'all': Returns the entire file.
                 - 'extensions': Returns valid extensions for files.
+            configuration_path (str): The parameter value indicates the path of the configuration file:
+                - empty: Use the default path.
 
         Raises:
             ValueError: If the parameter is not in the options list.
-
-        """
+    """
     config = open_config(configuration_path)
 
     if config is not None:
@@ -50,8 +48,8 @@ def read_config(configuration_path, config_section):
         if case_function is not None:
             return case_function
         else:
-            raise ValueError("The specified section of the configuration file does not exist.")
+            print("The specified section of the configuration file does not exist.")
 
     else:
-        raise ValueError("Error, configuration file does not exist or is not accessible. "
-                         "\nA configuration file is required to run the program.")
+        print("Error, configuration file does not exist or is not accessible. \nA "
+              "configuration file is required to run the program.")
