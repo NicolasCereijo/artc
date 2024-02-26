@@ -37,13 +37,13 @@ def validate_path(path, name):
     """
     try:
         if path.startswith("http"):
-            check_url_reachable(path)
+            check_url_reachable(path + name)
         else:
             check_path_accessible(path)
+            check_file_readable(path, name)
 
-        check_file_readable(path, name)
     except ValueError:
-        print(f"Could not access {name} file")
+        print(f"Could not access '{name}' file")
         return False
 
     return True

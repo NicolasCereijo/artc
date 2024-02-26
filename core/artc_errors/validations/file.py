@@ -28,7 +28,7 @@ def check_audio_format(name, configuration_path="default"):
     check_path_accessible(configuration_path)
 
     if file_extension not in read_config("extensions", configuration_path):
-        raise ValueError("Invalid file format")
+        raise ValueError(f"Invalid file format for '{name}'")
     return True
 
 

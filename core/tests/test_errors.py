@@ -32,8 +32,8 @@ def test_check_audio_format(setup):
     path, name = setup
     configuration_file = path + name
 
-    assert file_err.check_audio_format("valid_file.mp3", configuration_file) is True
-    assert file_err.check_audio_format("valid_file.wav", configuration_file) is True
+    assert file_err.check_audio_format("valid_file.mp3", configuration_file)
+    assert file_err.check_audio_format("valid_file.wav", configuration_file)
 
     with pytest.raises(ValueError):
         assert file_err.check_audio_format("", configuration_file) is ValueError
@@ -52,7 +52,13 @@ def test_check_audio_format(setup):
 # Tests for core.artc_errors.validations.path
 # ----------------------------------------------------------------------------------------------------------------------
 def test_check_url_reachable():
-    assert path_err.check_url_reachable("https://www.google.com") is True
+    url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"
+
+    try:
+        assert path_err.check_url_reachable("https://www.google.com"), url_message_error
+    except Exception as ex:
+        print(url_message_error)
+        raise ex
 
     with pytest.raises(ValueError):
         assert path_err.check_url_reachable("") is ValueError
@@ -65,7 +71,7 @@ def test_check_path_accessible(setup):
     path, name = setup
     configuration_file = path + name
 
-    assert path_err.check_path_accessible(configuration_file) is True
+    assert path_err.check_path_accessible(configuration_file)
 
     with pytest.raises(ValueError):
         assert path_err.check_path_accessible("") is ValueError
@@ -77,7 +83,7 @@ def test_check_path_accessible(setup):
 def test_check_file_readable(setup):
     path, name = setup
 
-    assert path_err.check_file_readable(path, name) is True
+    assert path_err.check_file_readable(path, name)
 
     with pytest.raises(ValueError):
         assert path_err.check_file_readable("", name) is ValueError
@@ -94,10 +100,20 @@ def test_check_file_readable(setup):
 
 def test_validate_path(setup):
     path, name = setup
+    url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"
 
-    assert path_err.validate_path(path, name) is True
-
+    assert path_err.validate_path(path, name)
+    assert path_err.validate_path("", "") is False
     assert path_err.validate_path("", name) is False
     assert path_err.validate_path("invalid_path", name) is False
     assert path_err.validate_path(path, "") is False
     assert path_err.validate_path("", "invalid_name") is False
+    assert path_err.validate_path("https://invalid_url", "") is False
+    assert path_err.validate_path("https://invalid_url", "invalid_file") is False
+
+    try:
+        assert path_err.validate_path("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/",
+                                      "bootstrap.min.css"), url_message_error
+    except Exception as ex:
+        print(url_message_error)
+        raise ex
