@@ -32,20 +32,23 @@ def test_check_audio_format(setup):
     path, name = setup
     configuration_file = path + name
 
-    assert file_err.check_audio_format("valid_file.mp3", configuration_file)
-    assert file_err.check_audio_format("valid_file.wav", configuration_file)
+    assert file_err.check_audio_format("../../test_collection/ambient_sounds/",
+                                       "Desert Howling Wind.mp3", configuration_file)
+    assert file_err.check_audio_format("../../test_collection/fire_sounds/",
+                                       "Burning-fireplace.wav", configuration_file)
 
     with pytest.raises(ValueError):
-        assert file_err.check_audio_format("", configuration_file) is ValueError
+        assert file_err.check_audio_format("", "", configuration_file) is ValueError
 
     with pytest.raises(ValueError):
-        assert file_err.check_audio_format("invalid_file", configuration_file) is ValueError
+        assert file_err.check_audio_format("", "invalid_file", configuration_file) is ValueError
 
     with pytest.raises(ValueError):
-        assert file_err.check_audio_format("invalid_file.pdf", configuration_file) is ValueError
+        assert file_err.check_audio_format("", "invalid_file.pdf", configuration_file) is ValueError
 
     with pytest.raises(ValueError):
-        assert file_err.check_audio_format("valid_file.mp3", "invalid_path") is ValueError
+        assert file_err.check_audio_format("../../test_collection/ambient_sounds/",
+                                           "invalid_file", configuration_file) is ValueError
 
 
 # ----------------------------------------------------------------------------------------------------------------------

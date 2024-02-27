@@ -2,7 +2,7 @@ import requests.exceptions
 import os.path
 
 
-def check_url_reachable(url):
+def check_url_reachable(url: str):
     try:
         requests.get(url).raise_for_status()
         return True
@@ -10,19 +10,19 @@ def check_url_reachable(url):
         raise ValueError(f"URL '{url}' cannot be reached")
 
 
-def check_path_accessible(path):
+def check_path_accessible(path: str):
     if not os.path.exists(path):
         raise ValueError(f"Path '{path}' does not exist or is not accessible")
     return True
 
 
-def check_file_readable(path, name):
+def check_file_readable(path: str, name: str):
     if name is None or name == "" or not os.access(os.path.join(path, name), os.R_OK):
         raise ValueError(f"File '{name}' is not accessible for reading")
     return True
 
 
-def validate_path(path, name):
+def validate_path(path: str, name: str):
     """
         Function to check the validity of a path and the accessibility of the file.
         The file can be hosted locally or on the internet.
@@ -42,8 +42,8 @@ def validate_path(path, name):
             check_path_accessible(path)
             check_file_readable(path, name)
 
-    except ValueError:
-        print(f"Could not access '{name}' file")
+    except ValueError as ve:
+        print(ve)
         return False
 
     return True
