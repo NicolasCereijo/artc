@@ -31,7 +31,7 @@ def validate_path(path: str, name: str):
             path (str): Path or web address to the file.
             name (str): File name with extension.
 
-        Raises:
+        Returns:
             True: If the file is accessible.
             False: If the file is not accessible.
     """

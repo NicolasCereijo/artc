@@ -1,4 +1,4 @@
-from core.tests import test_configurations, test_errors
+from core.tests import *
 import pytest
 import os
 

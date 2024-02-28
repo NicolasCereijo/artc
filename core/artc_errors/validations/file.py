@@ -1,6 +1,5 @@
 from core.artc_errors.validations.path import check_path_accessible
 from core.artc_configurations import read_config
-from pydub.utils import mediainfo
 
 
 def get_extension(file: str):
@@ -18,7 +17,7 @@ def check_audio_corruption(file_path: str):
         Args:
             file_path (str): Path to the file with its name and extension included.
 
-        Raises:
+        Returns:
             True: If there were no problems reading.
             ValueError: If there were problems reading.
     """
@@ -38,7 +37,7 @@ def check_audio_format(path: str, name: str, configuration_path):
             name (str): File name with extension.
             configuration_path (str): Path to the configuration file, automatically assigned to the default value.
 
-        Raises:
+        Returns:
             True: If the file format is valid.
             ValueError: If the file format is invalid.
     """

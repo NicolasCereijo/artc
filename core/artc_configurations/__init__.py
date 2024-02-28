@@ -2,7 +2,7 @@ import json
 import os
 
 
-def open_config(configuration_path="default"):
+def open_config(configuration_path: str):
     """
         Function to access configuration file path.
 
@@ -10,9 +10,6 @@ def open_config(configuration_path="default"):
             configuration_path (str): The parameter value indicates the path of the configuration file:
                 - empty: Use the default path.
     """
-    if configuration_path == "default":
-        configuration_path = "core/artc_configurations/configurations.json"
-
     try:
         if os.access(configuration_path, os.R_OK):
             with open(configuration_path, 'r') as file:
@@ -21,7 +18,7 @@ def open_config(configuration_path="default"):
         print("Could not access file")
 
 
-def read_config(config_section, configuration_path="default"):
+def read_config(config_section, configuration_path: str):
     """
         Function to read the configuration file.
 

@@ -1,4 +1,3 @@
-import core.artc_collections.working_set as set
 import os
 
 

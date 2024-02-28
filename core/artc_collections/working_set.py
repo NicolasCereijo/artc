@@ -4,8 +4,19 @@ import os
 
 
 class WorkingSet:
-    def __init__(self):
-        self.working_set = {"individual_files":  []}
+    def __init__(self, test_mode=False, data_set=None):
+        """
+            Function to initialize instances of the class.
+            Test mode available, disabled by default.
+
+            Args:
+                test_mode (bool): True to use test mode.
+                data_set (dict): Data set to perform the tests.
+        """
+        if not test_mode:
+            self.working_set = {"individual_files":  []}
+        else:
+            self.working_set = data_set
 
     def search_file(self, name: str, group: str = "individual_files"):
         """
@@ -19,7 +30,8 @@ class WorkingSet:
                 True: if the file is in the group.
                 False: If the file is not found in the group.
         """
-        if name not in [file_data['name'] for file_data in self.working_set[group]]:
+        if (group not in self.working_set or
+                name not in [file_data['name'] for file_data in self.working_set[group]]):
             return False
         return True
 
@@ -43,7 +55,7 @@ class WorkingSet:
             print(ve)
             return False
 
-        if path_err.validate_path(path, name):
+        if path_err.validate_path(path, name) and group != "":
             if group not in self.working_set:
                 self.working_set[group] = []
 
@@ -64,7 +76,7 @@ class WorkingSet:
                 True: If the file can be deleted.
                 False: If the file cannot be deleted.
         """
-        if group not in self.working_set or not self.search_file(name, group):
+        if not self.search_file(name, group):
             return False
         else:
             for group in self.working_set:
@@ -89,6 +101,7 @@ class WorkingSet:
 
         try:
             path_err.check_path_accessible(path)
+            path_err.check_path_accessible(configuration_path)
         except ValueError as ve:
             print(ve)
             return False
