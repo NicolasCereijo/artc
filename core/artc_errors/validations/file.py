@@ -19,6 +19,7 @@ def check_audio_corruption(file_path: str):
 
         Returns:
             True: If there were no problems reading.
+        Raises:
             ValueError: If there were problems reading.
     """
     try:
@@ -28,7 +29,7 @@ def check_audio_corruption(file_path: str):
         raise ValueError(f"Audio file '{file_path}' is corrupted")
 
 
-def check_audio_format(path: str, name: str, configuration_path):
+def check_audio_format(path: str, name: str, configuration_path: str):
     """
         Function to check if the file extension is within the list of valid extensions.
 
@@ -39,13 +40,12 @@ def check_audio_format(path: str, name: str, configuration_path):
 
         Returns:
             True: If the file format is valid.
+        Raises:
             ValueError: If the file format is invalid.
     """
-    file_extension = get_extension(name)
-
     check_audio_corruption(path + name)
 
     check_path_accessible(configuration_path)
-    if file_extension not in read_config("extensions", configuration_path):
+    if get_extension(name) not in read_config("extensions", configuration_path):
         raise ValueError(f"Invalid file format for '{name}'")
     return True

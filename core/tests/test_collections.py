@@ -23,6 +23,22 @@ def setup():
     return "../artc_configurations/", "configurations.json", data_set
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Tests for core.artc_collections.harmonize
+# ----------------------------------------------------------------------------------------------------------------------
+def test_adjust_length():
+    # Pending
+    pass
+
+
+def test_normalize_btw_0_1():
+    # Pending
+    pass
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Tests for core.artc_collections.working_set
+# ----------------------------------------------------------------------------------------------------------------------
 def test_search_file(setup):
     path, name, data_set = setup
     test_set = w_set.WorkingSet(True, data_set)

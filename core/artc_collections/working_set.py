@@ -4,7 +4,7 @@ import os
 
 
 class WorkingSet:
-    def __init__(self, test_mode=False, data_set=None):
+    def __init__(self, test_mode: bool = False, data_set: dict = None):
         """
             Function to initialize instances of the class.
             Test mode available, disabled by default.
@@ -26,7 +26,7 @@ class WorkingSet:
                 name (str): File name with extension.
                 group (str): Group where the file should be.
 
-            Raises:
+            Returns:
                 True: if the file is in the group.
                 False: If the file is not found in the group.
         """
@@ -45,7 +45,7 @@ class WorkingSet:
                 configuration_path (str): Path to the configuration file.
                 group (str): Group to which the file will be added.
 
-            Raises:
+            Returns:
                 True: If the file is accessible.
                 False: If the file is not accessible.
         """
@@ -72,7 +72,7 @@ class WorkingSet:
                 name (str): File name with extension.
                 group (str): Group from which the file will be deleted.
 
-            Raises:
+            Returns:
                 True: If the file can be deleted.
                 False: If the file cannot be deleted.
         """
@@ -80,8 +80,9 @@ class WorkingSet:
             return False
         else:
             for group in self.working_set:
-                self.working_set[group] = list(filter(lambda file_data: file_data["name"] != name,
-                                                      self.working_set[group]))
+                # Create a list excluding the file to delete
+                self.working_set[group] = list(filter(lambda file_data:
+                                                      file_data["name"] != name, self.working_set[group]))
         return True
 
     def add_directory(self, path: str, configuration_path: str, group: str = "individual_files"):
@@ -93,7 +94,7 @@ class WorkingSet:
                 configuration_path (str): Path to the configuration file.
                 group (str): Group to which the files will be added.
 
-            Raises:
+            Returns:
                 True: If any file could be added.
                 False: If the directory could not be accessed or any files added.
         """
