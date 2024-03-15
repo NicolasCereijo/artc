@@ -1,4 +1,6 @@
+import core.artc_collections.harmonize as harm
 import core.artc_collections.working_set as w_set
+import numpy as np
 import pytest
 
 
@@ -27,13 +29,48 @@ def setup():
 # Tests for core.artc_collections.harmonize
 # ----------------------------------------------------------------------------------------------------------------------
 def test_adjust_length():
-    # Pending
-    pass
+    array1 = np.array([0])
+    array2 = np.array([1, 2e3])
+    array3 = np.array([-1, 2.09, 1e-100])
+
+    assert np.array_equal(harm.adjust_length(array1, array1), (np.array([0], dtype=np.float32),
+                                                               np.array([0], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array2, array2), (np.array([1, 2e3], dtype=np.float32),
+                                                               np.array([1, 2e3], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array3, array3), (np.array([-1, 2.09, 1e-100], dtype=np.float32),
+                                                               np.array([-1, 2.09, 1e-100], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array1, array2), (np.array([0], dtype=np.float32),
+                                                               np.array([1], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array1, array3), (np.array([0], dtype=np.float32),
+                                                               np.array([-1], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array2, array3), (np.array([1, 2e3], dtype=np.float32),
+                                                               np.array([-1, 2.09], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array2, array1), (np.array([1], dtype=np.float32),
+                                                               np.array([0], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array3, array1), (np.array([-1], dtype=np.float32),
+                                                               np.array([0], dtype=np.float32)))
+    assert np.array_equal(harm.adjust_length(array3, array2), (np.array([-1, 2.09], dtype=np.float32),
+                                                               np.array([1, 2e3], dtype=np.float32)))
 
 
 def test_normalize_btw_0_1():
-    # Pending
-    pass
+    array1 = np.array([0])
+    array2 = np.array([0, 2e3])
+    array3 = np.array([-1, 2.09, 1e-100])
+
+    compare_1_2 = harm.normalize_btw_0_1((array1, array2))
+    compare_1_3 = harm.normalize_btw_0_1((array1, array3))
+    compare_2_3 = harm.normalize_btw_0_1((array2, array3))
+    compare_3_2 = harm.normalize_btw_0_1((array3, array2))
+
+    assert np.array_equal(compare_1_2[0][0], np.array([0]))
+    assert np.array_equal(compare_1_2[0][1], np.array([0, 1]))
+    assert np.array_equal(compare_1_3[0][0], np.array([0.3236245954692557]))
+    assert np.array_equal(compare_1_3[0][1], np.array([0, 1, 0.3236245954692557]))
+    assert np.array_equal(compare_2_3[0][0], np.array([0.0004997501249375312, 1]))
+    assert np.array_equal(compare_2_3[0][1], np.array([0, 0.0015442278860569715, 0.0004997501249375312]))
+    assert np.array_equal(compare_3_2[0][0], np.array([0, 0.0015442278860569715, 0.0004997501249375312]))
+    assert np.array_equal(compare_3_2[0][1], np.array([0.0004997501249375312, 1]))
 
 
 # ----------------------------------------------------------------------------------------------------------------------
