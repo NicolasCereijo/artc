@@ -12,8 +12,9 @@ def setup():
         so it is necessary to specify it.
 
         Returns:
-            path: Relative path to the configuration file.
-            name: Name of the configuration file.
+            path (str): Relative path to the configuration file.
+            name (str): Name of the configuration file.
+            data_set (dict): Audio file paths to test.
     """
     files_path = "../../test_collection/water_sounds/"
     data_set = {"individual_files":  [
@@ -80,14 +81,14 @@ def test_search_file(setup):
     path, name, data_set = setup
     test_set = w_set.WorkingSet(True, data_set)
 
-    assert test_set.search_file("little-waves.mp3", "individual_files")
-    assert test_set.search_file("waves-in-caves.wav", "individual_files")
-    assert test_set.search_file("Water Sizzle.mp3", "individual_files")
+    assert test_set.search_file(data_set["individual_files"][0]["name"], "individual_files")
+    assert test_set.search_file(data_set["individual_files"][1]["name"], "individual_files")
+    assert test_set.search_file(data_set["individual_files"][2]["name"], "individual_files")
 
     assert test_set.search_file("", "") is False
-    assert test_set.search_file("Water Sizzle.mp3", "") is False
+    assert test_set.search_file(data_set["individual_files"][2]["name"], "") is False
     assert test_set.search_file("", "individual_files") is False
-    assert test_set.search_file("Water Sizzle.mp3", "invalid_group") is False
+    assert test_set.search_file(data_set["individual_files"][2]["name"], "invalid_group") is False
     assert test_set.search_file("invalid_file", "individual_files") is False
 
 
@@ -113,13 +114,13 @@ def test_remove_file(setup):
     test_set = w_set.WorkingSet(True, data_set)
 
     assert test_set.remove_file("little-waves.mp3")
-    assert test_set.remove_file("waves-in-caves.wav", "individual_files")
+    assert test_set.remove_file(data_set["individual_files"][1]["name"], "individual_files")
 
     assert test_set.remove_file("", "") is False
     assert test_set.remove_file("", "individual_files") is False
-    assert test_set.remove_file("little-waves.mp3", "") is False
+    assert test_set.remove_file(data_set["individual_files"][0]["name"], "") is False
     assert test_set.remove_file("invalid_name", "individual_files") is False
-    assert test_set.remove_file("little-waves.mp3", "invalid_group") is False
+    assert test_set.remove_file(data_set["individual_files"][0]["name"], "invalid_group") is False
 
 
 def test_add_directory(setup):

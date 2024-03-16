@@ -11,8 +11,8 @@ def setup():
         so it is necessary to specify it.
 
         Returns:
-            path: Relative path to the configuration file.
-            name: Name of the configuration file.
+            path (str): Relative path to the configuration file.
+            name (str): Name of the configuration file.
     """
     return "../artc_configurations/", "configurations.json"
 

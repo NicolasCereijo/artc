@@ -1,6 +1,1 @@
-def main():
-    print("Harvesting potatoes, stay tuned")
-
-
-if __name__ == "__main__":
-    main()
+from core.artc_analysis.zero_crossing_rate import check_zcr, compare_zcr

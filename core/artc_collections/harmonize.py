@@ -25,7 +25,7 @@ def normalize_btw_0_1(*ndarrays: tuple[np.ndarray[float, ...], ...]):
             *ndarrays (tuple[np.ndarray[float, ...], ...]): Tuple with the Numpy arrays to be normalized.
 
         Returns:
-            A tuple of normalized Numpy arrays between 0 and 1.
+            normalized_ndarrays (tuple): A tuple of normalized Numpy arrays between 0 and 1.
     """
     min_val = min(min(np.ravel(lst)) for lst in ndarrays[0])
     max_val = max(max(np.ravel(lst)) for lst in ndarrays[0])

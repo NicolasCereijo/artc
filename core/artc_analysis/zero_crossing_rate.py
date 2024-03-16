@@ -3,18 +3,26 @@ import numpy as np
 import librosa
 
 
-def check_zcr(signal: np.ndarray[bool, ...]):
+def check_zcr(signal: np.ndarray[float, ...]):
     """
         Check if the given signal has at least one zero crossing value.
 
         Arguments:
-            signal (np.ndarray[bool, ...]): Audio signal.
+            signal (np.ndarray[float, ...]): Audio signal.
 
         Returns:
-            True: If the given signal has at least one zero crossing value.
-            False: If the given signal does not have any zero crossing value.
+            check_zc (bool): True if the given signal has at least one zero crossing value,
+            False if the given signal does not have any zero crossing value.
+            count_zc (int): The number of zero crossing values.
     """
-    return any(librosa.zero_crossings(y=signal))
+    if len(signal) == 0:
+        return False, 0
+
+    zc = librosa.zero_crossings(y=signal)
+    check_zc = any(zc)
+    count_zc = np.count_nonzero(zc)
+
+    return check_zc, count_zc
 
 
 def calculate_zcr(*signals: np.ndarray[float, ...]):
@@ -55,4 +63,7 @@ def compare_zcr(*audio_signals: np.ndarray[float, ...]):
     correlation_coefficient = np.corrcoef(normalized_signals)
 
     result = np.mean(correlation_coefficient[0, 1:])
+    if result > 0.999:
+        result = 1
+
     return max(result, 0)
