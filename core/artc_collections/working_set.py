@@ -1,5 +1,6 @@
 import core.artc_errors.validations.file as file_err
 import core.artc_errors.validations.path as path_err
+import librosa
 import os
 
 
@@ -18,7 +19,25 @@ class WorkingSet:
         else:
             self.working_set = data_set
 
-    def search_file(self, name: str, group: str = "individual_files"):
+    def __getitem__(self, name: str, group: str = "individual_files"):
+        """
+            Retrieve the audio signal corresponding to the given file name from the specified group.
+
+            Args:
+                name (str): The name of the file to retrieve.
+                group (str): The name of the group containing the file, 'individual_files' by default.
+
+            Returns:
+                The audio signal associated with the file name.
+            Raises:
+                KeyError: If the file with the given name is not found in the specified group.
+        """
+        for file in self.working_set[group]:
+            if file["name"] == name:
+                return file["audio_signal"]
+        raise KeyError(f"No file with name '{name}' was found in key '{group}'")
+
+    def __contains__(self, name: str, group: str = "individual_files"):
         """
             Function to check the existence of a file within a group.
 
@@ -31,7 +50,7 @@ class WorkingSet:
                 False: If the file is not found in the group.
         """
         if (group not in self.working_set or
-                name not in [file_data['name'] for file_data in self.working_set[group]]):
+                name not in [file_name['name'] for file_name in self.working_set[group]]):
             return False
         return True
 
@@ -59,7 +78,9 @@ class WorkingSet:
             if group not in self.working_set:
                 self.working_set[group] = []
 
-            self.working_set[group].append({"path": path, "name": name})
+            audio_signal, sample_rate = librosa.load(path + name)
+            self.working_set[group].append({"path": path, "name": name,
+                                            "audio_signal": audio_signal, "sample_rate": sample_rate})
             return True
         else:
             return False
@@ -76,7 +97,7 @@ class WorkingSet:
                 True: If the file can be deleted.
                 False: If the file cannot be deleted.
         """
-        if not self.search_file(name, group):
+        if not self.__contains__(name, group):
             return False
         else:
             for group in self.working_set:

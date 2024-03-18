@@ -81,15 +81,15 @@ def test_search_file(setup):
     path, name, data_set = setup
     test_set = w_set.WorkingSet(True, data_set)
 
-    assert test_set.search_file(data_set["individual_files"][0]["name"], "individual_files")
-    assert test_set.search_file(data_set["individual_files"][1]["name"], "individual_files")
-    assert test_set.search_file(data_set["individual_files"][2]["name"], "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][0]["name"], "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][1]["name"], "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][2]["name"], "individual_files")
 
-    assert test_set.search_file("", "") is False
-    assert test_set.search_file(data_set["individual_files"][2]["name"], "") is False
-    assert test_set.search_file("", "individual_files") is False
-    assert test_set.search_file(data_set["individual_files"][2]["name"], "invalid_group") is False
-    assert test_set.search_file("invalid_file", "individual_files") is False
+    assert test_set.__contains__("", "") is False
+    assert test_set.__contains__(data_set["individual_files"][2]["name"], "") is False
+    assert test_set.__contains__("", "individual_files") is False
+    assert test_set.__contains__(data_set["individual_files"][2]["name"], "invalid_group") is False
+    assert test_set.__contains__("invalid_file", "individual_files") is False
 
 
 def test_add_file(setup):
