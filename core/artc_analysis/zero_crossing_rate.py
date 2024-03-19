@@ -30,7 +30,7 @@ def calculate_zcr(*signals: np.ndarray[float, ...]):
         Calculate the zero crossing rate for each signal.
 
         Arguments:
-            *signals (np.ndarray[float, ...]): Audio signals stored in Numpy arrays.
+            *signals (np.ndarray[float, ...]): Audio signals stored in NumPy arrays.
 
         Returns:
             zcr_values (np.ndarray[float, ...]): Tuple containing the ZCR values for each signal.

@@ -11,8 +11,8 @@ class WorkingSet:
             Test mode available, disabled by default.
 
             Args:
-                test_mode (bool): True to use test mode.
-                data_set (dict): Data set to perform the tests.
+                test_mode (bool, optional): True to use test mode.
+                data_set (dict, optional): Data set to perform the tests. Required if test_mode is True.
         """
         if not test_mode:
             self.working_set = {"individual_files":  []}
@@ -25,7 +25,7 @@ class WorkingSet:
 
             Args:
                 name (str): The name of the file to retrieve.
-                group (str): The name of the group containing the file, 'individual_files' by default.
+                group (str, optional): The name of the group containing the file, 'individual_files' by default.
 
             Returns:
                 The audio signal associated with the file name.
@@ -43,7 +43,7 @@ class WorkingSet:
 
             Args:
                 name (str): File name with extension.
-                group (str): Group where the file should be.
+                group (str, optional): Group where the file should be.
 
             Returns:
                 True: if the file is in the group.
@@ -62,7 +62,7 @@ class WorkingSet:
                 path (str): Path or web address to the file.
                 name (str): File name with extension.
                 configuration_path (str): Path to the configuration file.
-                group (str): Group to which the file will be added.
+                group (str, optional): Group to which the file will be added.
 
             Returns:
                 True: If the file is accessible.
@@ -91,7 +91,7 @@ class WorkingSet:
 
             Args:
                 name (str): File name with extension.
-                group (str): Group from which the file will be deleted.
+                group (str, optional): Group from which the file will be deleted.
 
             Returns:
                 True: If the file can be deleted.
@@ -113,7 +113,7 @@ class WorkingSet:
             Args:
                 path (str): Path to the directory. Can not use a web address.
                 configuration_path (str): Path to the configuration file.
-                group (str): Group to which the files will be added.
+                group (str, optional): Group to which the files will be added.
 
             Returns:
                 True: If any file could be added.
