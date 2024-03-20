@@ -1,4 +1,4 @@
-import core.artc_analysis as zcr
+import core.artc_analysis as analysis
 import numpy as np
 import librosa
 import pytest
@@ -31,12 +31,12 @@ def test_check_zcr():
     array5 = np.array([-1, 2e3])
     array6 = np.array([-1, 2.09, -98])
 
-    assert zcr.check_zcr(array1) == (False, 0)
-    assert zcr.check_zcr(array2) == (True, 1)
-    assert zcr.check_zcr(array3) == (True, 1)
-    assert zcr.check_zcr(array4) == (True, 2)
-    assert zcr.check_zcr(array5) == (True, 2)
-    assert zcr.check_zcr(array6) == (True, 3)
+    assert analysis.check_zcr(array1) == (False, 0)
+    assert analysis.check_zcr(array2) == (True, 1)
+    assert analysis.check_zcr(array3) == (True, 1)
+    assert analysis.check_zcr(array4) == (True, 2)
+    assert analysis.check_zcr(array5) == (True, 2)
+    assert analysis.check_zcr(array6) == (True, 3)
 
 
 def test_calculate_zcr(setup):
@@ -48,12 +48,12 @@ def test_calculate_zcr(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert zcr.compare_zcr(audio_signal1, audio_signal1) == 1
-    assert zcr.compare_zcr(audio_signal2, audio_signal2) == 1
-    assert zcr.compare_zcr(audio_signal3, audio_signal3) == 1
-    assert zcr.compare_zcr(audio_signal1, audio_signal2) == 0.024400430431495968
-    assert zcr.compare_zcr(audio_signal2, audio_signal1) == 0.02440043043149597
-    assert zcr.compare_zcr(audio_signal1, audio_signal3) == 0
-    assert zcr.compare_zcr(audio_signal3, audio_signal1) == 0
-    assert zcr.compare_zcr(audio_signal2, audio_signal3) == 0
-    assert zcr.compare_zcr(audio_signal3, audio_signal2) == 0
+    assert analysis.compare_zcr(audio_signal1, audio_signal1) == 1
+    assert analysis.compare_zcr(audio_signal2, audio_signal2) == 1
+    assert analysis.compare_zcr(audio_signal3, audio_signal3) == 1
+    assert analysis.compare_zcr(audio_signal1, audio_signal2) == 0.024400430431495968
+    assert analysis.compare_zcr(audio_signal2, audio_signal1) == 0.02440043043149597
+    assert analysis.compare_zcr(audio_signal1, audio_signal3) == 0
+    assert analysis.compare_zcr(audio_signal3, audio_signal1) == 0
+    assert analysis.compare_zcr(audio_signal2, audio_signal3) == 0
+    assert analysis.compare_zcr(audio_signal3, audio_signal2) == 0

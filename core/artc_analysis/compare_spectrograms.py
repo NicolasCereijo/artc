@@ -33,8 +33,11 @@ def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray):
     spectrogram2 = calculate_spectrogram(signal2)
     spectrogram1, spectrogram2 = harmonize.adjust_dimensions(spectrogram1, spectrogram2)
 
-    similarity_percentage = cosine_similarity([spectrogram1.reshape(-1)], [spectrogram2.reshape(-1)])[0][0] * 100
-    return similarity_percentage
+    similarity_percentage = cosine_similarity([spectrogram1.reshape(-1)], [spectrogram2.reshape(-1)])[0][0]
+    if similarity_percentage > 0.999:
+        similarity_percentage = 1
+
+    return max(0, similarity_percentage)
 
 
 def compare_multiple_spectrograms(*audio_signals: np.ndarray[float, ...]):

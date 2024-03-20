@@ -1,5 +1,4 @@
-import core.artc_errors.validations.file as file_err
-import core.artc_errors.validations.path as path_err
+import core.artc_errors as err
 import librosa
 import os
 
@@ -69,12 +68,12 @@ class WorkingSet:
                 False: If the file is not accessible.
         """
         try:
-            file_err.check_audio_format(path, name, configuration_path)
+            err.check_audio_format(path, name, configuration_path)
         except ValueError as ve:
             print(ve)
             return False
 
-        if path_err.validate_path(path, name) and group != "":
+        if err.validate_path(path, name) and group != "":
             if group not in self.working_set:
                 self.working_set[group] = []
 
@@ -122,8 +121,8 @@ class WorkingSet:
         any_files_added = False
 
         try:
-            path_err.check_path_accessible(path)
-            path_err.check_path_accessible(configuration_path)
+            err.check_path_accessible(path)
+            err.check_path_accessible(configuration_path)
         except ValueError as ve:
             print(ve)
             return False
