@@ -1,3 +1,4 @@
+from core.artc_errors import logger_config
 from core.artc_errors.validations.file import get_extension
 from core.artc_errors.validations.file import check_audio_corruption
 from core.artc_errors.validations.file import check_audio_format

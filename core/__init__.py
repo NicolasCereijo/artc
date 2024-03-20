@@ -1,13 +1,17 @@
 import core.artc_collections.working_set as w_set
 import core.artc_analysis as analysis
+import core.artc_errors as err
+import logging
 import os
 
 
 def main():
     configuration_path = "artc_configurations/configurations.json"
-    print("========================== Starting the ARtC suite... ==========================")
+    logger = err.logger_config.setup_logger()
 
-    if os.access("artc_configurations/configurations.json", os.R_OK):
+    logger.info("Starting the ARtC suite...")
+
+    if os.access(configuration_path, os.R_OK):
         example_set = w_set.WorkingSet()
         example_set.add_file("../test_collection/water_sounds/",
                              "little-waves.mp3", configuration_path)
@@ -33,9 +37,9 @@ def main():
         print(f"Espectrogram comparison between signals 2 and 1: "
               f"{analysis.compare_two_spectrograms(audio_signal_2, audio_signal_1)}")
     else:
-        print("========= Could not access configuration file, suite execution aborted =========\n"
-              "The configurations.json file should be located in the /core/artc_configurations/\n"
-              "folder. Check the directory and access permissions.")
+        logging.critical("Could not access configuration file, suite execution aborted. The\n"
+                         "configurations.json file should be located in the /core/artc_configurations/\n"
+                         "folder. Check the directory and access permissions.")
 
 
 if __name__ == "__main__":

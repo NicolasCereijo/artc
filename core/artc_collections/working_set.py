@@ -100,7 +100,6 @@ class WorkingSet:
             return False
         else:
             for group in self.working_set:
-                # Create a list excluding the file to delete
                 self.working_set[group] = list(filter(lambda file_data:
                                                       file_data["name"] != name, self.working_set[group]))
         return True
