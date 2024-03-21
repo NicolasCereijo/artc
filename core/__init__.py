@@ -7,7 +7,7 @@ import os
 
 def main():
     configuration_path = "artc_configurations/configurations.json"
-    logger = err.logger_config.setup_logger()
+    logger = err.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Starting the ARtC suite...")
 

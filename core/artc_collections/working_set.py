@@ -1,4 +1,5 @@
 import core.artc_errors as err
+import numpy as np
 import librosa
 import os
 
@@ -18,7 +19,7 @@ class WorkingSet:
         else:
             self.working_set = data_set
 
-    def __getitem__(self, name: str, group: str = "individual_files"):
+    def __getitem__(self, name: str, group: str = "individual_files") -> np.ndarray:
         """
             Retrieve the audio signal corresponding to the given file name from the specified group.
 
@@ -36,13 +37,13 @@ class WorkingSet:
                 return file["audio_signal"]
         raise KeyError(f"No file with name '{name}' was found in key '{group}'")
 
-    def __contains__(self, name: str, group: str = "individual_files"):
+    def __contains__(self, name: str, group: str = "individual_files") -> bool:
         """
             Function to check the existence of a file within a group.
 
             Args:
                 name (str): File name with extension.
-                group (str, optional): Group where the file should be.
+                group (str, optional): Group where the file should be, 'individual_files' by default.
 
             Returns:
                 True: if the file is in the group.
@@ -53,7 +54,7 @@ class WorkingSet:
             return False
         return True
 
-    def add_file(self, path: str, name: str, configuration_path: str, group: str = "individual_files"):
+    def add_file(self, path: str, name: str, configuration_path: str, group: str = "individual_files") -> bool:
         """
             Function to add files to a new or existing group.
 
@@ -61,7 +62,7 @@ class WorkingSet:
                 path (str): Path or web address to the file.
                 name (str): File name with extension.
                 configuration_path (str): Path to the configuration file.
-                group (str, optional): Group to which the file will be added.
+                group (str, optional): Group to which the file will be added, 'individual_files' by default.
 
             Returns:
                 True: If the file is accessible.
@@ -84,7 +85,7 @@ class WorkingSet:
         else:
             return False
 
-    def remove_file(self, name: str, group: str = "individual_files"):
+    def remove_file(self, name: str, group: str = "individual_files") -> bool:
         """
             Function to delete files from a group.
 
@@ -104,14 +105,14 @@ class WorkingSet:
                                                       file_data["name"] != name, self.working_set[group]))
         return True
 
-    def add_directory(self, path: str, configuration_path: str, group: str = "individual_files"):
+    def add_directory(self, path: str, configuration_path: str, group: str = "individual_files") -> bool:
         """
             Function to add all valid files in a directory to a group.
 
             Args:
                 path (str): Path to the directory. Can not use a web address.
                 configuration_path (str): Path to the configuration file.
-                group (str, optional): Group to which the files will be added.
+                group (str, optional): Group to which the files will be added, 'individual_files' by default.
 
             Returns:
                 True: If any file could be added.

@@ -2,27 +2,37 @@ import logging
 import colorlog
 
 
-def setup_logger():
-    """
+class LoggerSingleton:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._setup_logger()
+        return cls._instance
+
+    def _setup_logger(self):
+        """
         Configure the logger with a colored formatter and set the logging level to INFO.
-    """
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+        """
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.INFO)
 
-    handler = logging.StreamHandler()
-    handler.setLevel(logging.INFO)
+        handler = logging.StreamHandler()
+        handler.setLevel(logging.INFO)
 
-    formatter = colorlog.ColoredFormatter(
-        '%(log_color)s%(levelname)s - %(message)s',
-        log_colors={
-            'INFO': 'green',
-            'WARNING': 'yellow',
-            'ERROR': 'red',
-            'CRITICAL': 'bold_red',
-        }
-    )
+        formatter = colorlog.ColoredFormatter(
+            '%(log_color)s%(levelname)s - %(message)s',
+            log_colors={
+                'INFO': 'green',
+                'WARNING': 'yellow',
+                'ERROR': 'red',
+                'CRITICAL': 'bold_red',
+            }
+        )
 
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+        handler.setFormatter(formatter)
+        self.logger.addHandler(handler)
 
-    return logger
+    def get_logger(self):
+        return self.logger

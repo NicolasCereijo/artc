@@ -4,7 +4,7 @@ import numpy as np
 import librosa
 
 
-def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048):
+def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.ndarray:
     """
         Calculate the spectrogram of an audio signal.
 
@@ -18,17 +18,7 @@ def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048):
     return np.abs(librosa.stft(audio_signal, n_fft=n_fft))
 
 
-def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray):
-    """
-        Compare the similarity between two spectrograms.
-
-        Args:
-            signal1 (np.ndarray): The first audio signal.
-            signal2 (np.ndarray): The second audio signal.
-
-        Returns:
-            The similarity percentage between the two spectrograms.
-    """
+def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray) -> float:
     spectrogram1 = calculate_spectrogram(signal1)
     spectrogram2 = calculate_spectrogram(signal2)
     spectrogram1, spectrogram2 = harmonize.adjust_dimensions(spectrogram1, spectrogram2)
@@ -40,16 +30,7 @@ def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray):
     return max(0, similarity_percentage)
 
 
-def compare_multiple_spectrograms(*audio_signals: np.ndarray[float, ...]):
-    """
-        Compare the similarity between multiple spectrograms.
-
-        Args:
-            *audio_signals (np.ndarray): Variable number of audio signals to compare.
-
-        Returns:
-            The average similarity percentage between all spectrograms.
-    """
+def compare_multiple_spectrograms(*audio_signals: np.ndarray[float, ...]) -> float:
     spectrograms = map(lambda signal: calculate_spectrogram(signal), audio_signals)
     spectrograms = harmonize.adjust_dimensions(*spectrograms)
     results = []

@@ -2,7 +2,7 @@ from core.artc_errors.validations.path import check_path_accessible
 from core.artc_configurations import read_config
 
 
-def get_extension(file: str):
+def get_extension(file: str) -> str:
     parts = file.split('.')
 
     if len(parts) > 1:
@@ -10,18 +10,7 @@ def get_extension(file: str):
         return extension
 
 
-def check_audio_corruption(file_path: str):
-    """
-        Function to check the readability of the file.
-
-        Args:
-            file_path (str): Path to the file with its name and extension included.
-
-        Returns:
-            True: If there were no problems reading.
-        Raises:
-            ValueError: If there were problems reading.
-    """
+def check_audio_corruption(file_path: str) -> bool:
     try:
         open(file_path, 'rb').read()
         return True
@@ -29,7 +18,7 @@ def check_audio_corruption(file_path: str):
         raise ValueError(f"Audio file '{file_path}' is corrupted")
 
 
-def check_audio_format(path: str, name: str, configuration_path: str):
+def check_audio_format(path: str, name: str, configuration_path: str) -> bool:
     """
         Function to check if the file extension is within the list of valid extensions.
 

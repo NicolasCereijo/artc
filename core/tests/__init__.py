@@ -5,7 +5,7 @@ import os
 
 
 def main():
-    logger = err.logger_config.setup_logger()
+    logger = err.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Running the main test suite for ARtC...")
 

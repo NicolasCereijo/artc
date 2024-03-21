@@ -3,7 +3,7 @@ import numpy as np
 import librosa
 
 
-def check_zcr(signal: np.ndarray[float, ...]):
+def check_zcr(signal: np.ndarray[float, ...]) -> tuple[bool, int]:
     """
         Check if the given signal has at least one zero crossing value.
 
@@ -25,29 +25,20 @@ def check_zcr(signal: np.ndarray[float, ...]):
     return check_zc, count_zc
 
 
-def calculate_zcr(*signals: np.ndarray[float, ...]):
-    """
-        Calculate the zero crossing rate for each signal.
-
-        Arguments:
-            *signals (np.ndarray[float, ...]): Audio signals stored in NumPy arrays.
-
-        Returns:
-            zcr_values (np.ndarray[float, ...]): Tuple containing the ZCR values for each signal.
-    """
-    zcr_values = [0] * len(signals[0])
+def calculate_zcr(*signals: tuple) -> np.ndarray[..., np.dtype]:
+    zcr_values = [0.0] * len(signals[0])
     for i in range(0, len(signals[0])):
         zcr_values[i] += librosa.feature.zero_crossing_rate(y=signals[0][i])
 
-    return zcr_values
+    return np.array(zcr_values)
 
 
-def compare_zcr(*audio_signals: np.ndarray[float, ...]):
+def compare_zcr(*audio_signals: np.ndarray[float, ...]) -> float:
     """
-        Compare the ZCR values of given signals stored in Numpy arrays. Two to n audio signals can be used.
+        Compare the ZCR values of two or more signals stored in Numpy arrays.
 
         Args:
-            *audio_signals (np.ndarray[float, ...]): Audio signals.
+            *audio_signals (np.ndarray[float, ...]): Two or more audio signals.
 
         Returns:
             result (int): Average of the results of the comparisons. Value between 0 and 1, with 0 being
