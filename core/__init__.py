@@ -9,7 +9,12 @@ def main():
     configuration_path = "artc_configurations/configurations.json"
     logger = err.logger_config.LoggerSingleton().get_logger()
 
-    logger.info("Starting the ARtC suite...")
+    logger.info("Starting the ARtC suite...\n\n" +
+                "    |             |''||''|   ..|'''.|     .|'''.|            ||    .          \n" +
+                "   |||    ... ..     ||    .|'     '      ||..  '  ... ...  ...  .||.    .... \n" +
+                "  |  ||    ||' ''    ||    ||              ''|||.   ||  ||   ||   ||   .|...||\n" +
+                " .''''|.   ||        ||    '|.      .    .     '||  ||  ||   ||   ||   ||     \n" +
+                ".|.  .||. .||.      .||.    ''|....'     |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access(configuration_path, os.R_OK):
         example_set = w_set.WorkingSet()

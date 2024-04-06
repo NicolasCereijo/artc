@@ -70,8 +70,7 @@ class WorkingSet:
         """
         try:
             err.check_audio_format(path, name, configuration_path)
-        except ValueError as ve:
-            print(ve)
+        except ValueError:
             return False
 
         if err.validate_path(path, name) and group != "":
@@ -123,8 +122,7 @@ class WorkingSet:
         try:
             err.check_path_accessible(path)
             err.check_path_accessible(configuration_path)
-        except ValueError as ve:
-            print(ve)
+        except ValueError:
             return False
 
         for name in os.listdir(path):

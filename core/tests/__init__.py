@@ -7,7 +7,12 @@ import os
 def main():
     logger = err.logger_config.LoggerSingleton().get_logger()
 
-    logger.info("Running the main test suite for ARtC...")
+    logger.info("Running the main test suite for ARtC...\n\n" +
+                "    |             |''||''|   ..|'''.|     .|'''.|            ||    .          \n" +
+                "   |||    ... ..     ||    .|'     '      ||..  '  ... ...  ...  .||.    .... \n" +
+                "  |  ||    ||' ''    ||    ||              ''|||.   ||  ||   ||   ||   .|...||\n" +
+                " .''''|.   ||        ||    '|.      .    .     '||  ||  ||   ||   ||   ||     \n" +
+                ".|.  .||. .||.      .||.    ''|....'     |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access("../artc_configurations/configurations.json", os.R_OK):
         result = pytest.main()
