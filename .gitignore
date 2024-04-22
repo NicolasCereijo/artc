@@ -1,2 +1,14 @@
+# Ignore Python bytecode cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore C extension files
+*.so
+
+# Ignore application-generated log files
+*.log
+
 # Private until first kernel release
 test_collection/
