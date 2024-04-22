@@ -5,16 +5,6 @@ import librosa
 
 
 def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.ndarray:
-    """
-        Calculate the spectrogram of an audio signal.
-
-        Args:
-            audio_signal (np.ndarray): The input audio signal.
-            n_fft (int, optional): The number of points for the Fast Fourier Transform (FFT). Defaults to 2048.
-
-        Returns:
-            The spectrogram of the audio signal.
-    """
     return np.abs(librosa.stft(audio_signal, n_fft=n_fft))
 
 

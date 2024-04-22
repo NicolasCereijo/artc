@@ -26,6 +26,16 @@ def main():
         audio_signal_1, sample_rate1 = example_set.__getitem__("little-waves.mp3")
         audio_signal_2, sample_rate2 = example_set.__getitem__("waves-in-caves.wav")
 
+        print("Chroma comparison:")
+        print(f"Chroma of signal 1 with it self: "
+              f"{analysis.compare_two_chroma(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Chroma of signal 2 with it self: "
+              f"{analysis.compare_two_chroma(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Chroma between signals 1 and 2: "
+              f"{analysis.compare_two_chroma(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Chroma between signals 2 and 1: "
+              f"{analysis.compare_two_chroma(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("MFCC comparison:")
         print(f"MFCC of signal 1 with it self: "
               f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
@@ -35,6 +45,16 @@ def main():
               f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
         print(f"MFCC between signals 2 and 1: "
               f"{analysis.compare_two_mfcc(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
+        print("Rhythm comparison:")
+        print(f"Rhythm of signal 1 with itself: "
+              f"{analysis.compare_two_rhythm(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Rhythm of signal 2 with itself: "
+              f"{analysis.compare_two_rhythm(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Rhythm between signals 1 and 2: "
+              f"{analysis.compare_two_rhythm(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Rhythm between signals 2 and 1: "
+              f"{analysis.compare_two_rhythm(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
         print("Zero Crossing Rate:")
         print(f"ZCR of signal 1 with itself: {analysis.compare_zcr(audio_signal_1, audio_signal_1)}")

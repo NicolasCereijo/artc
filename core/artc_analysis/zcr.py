@@ -4,25 +4,14 @@ import librosa
 
 
 def check_zcr(signal: np.ndarray[float, ...]) -> tuple[bool, int]:
-    """
-        Check if the given signal has at least one zero crossing value.
-
-        Arguments:
-            signal (np.ndarray[float, ...]): Audio signal.
-
-        Returns:
-            check_zc (bool): True if the given signal has at least one zero crossing value,
-            False if the given signal does not have any zero crossing value.
-            count_zc (int): The number of zero crossing values.
-    """
     if len(signal) == 0:
         return False, 0
 
     zc = librosa.zero_crossings(y=signal)
-    check_zc = any(zc)
+    check_any_zc = any(zc)
     count_zc = np.count_nonzero(zc)
 
-    return check_zc, count_zc
+    return check_any_zc, count_zc
 
 
 def calculate_zcr(*signals: tuple) -> np.ndarray[..., np.dtype]:
@@ -34,18 +23,6 @@ def calculate_zcr(*signals: tuple) -> np.ndarray[..., np.dtype]:
 
 
 def compare_zcr(*audio_signals: np.ndarray[float, ...]) -> float:
-    """
-        Compare the ZCR values of two or more signals stored in Numpy arrays.
-
-        Args:
-            *audio_signals (np.ndarray[float, ...]): Two or more audio signals.
-
-        Returns:
-            result (int): Average of the results of the comparisons. Value between 0 and 1, with 0 being
-            completely different.
-        Raises:
-            ValueError: If there are not enough signals to compare.
-    """
     if len(audio_signals) < 2:
         raise ValueError("At least two signals must be passed as parameters")
 
