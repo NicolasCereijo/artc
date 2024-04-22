@@ -1,2 +1,3 @@
+from core.artc_analysis.compare_mfcc import compare_two_mfcc
 from core.artc_analysis.zero_crossing_rate import check_zcr, compare_zcr
 from core.artc_analysis.compare_spectrograms import compare_two_spectrograms

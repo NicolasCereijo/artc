@@ -19,7 +19,7 @@ class WorkingSet:
         else:
             self.working_set = data_set
 
-    def __getitem__(self, name: str, group: str = "individual_files") -> np.ndarray:
+    def __getitem__(self, name: str, group: str = "individual_files") -> (np.ndarray, float):
         """
             Retrieve the audio signal corresponding to the given file name from the specified group.
 
@@ -28,13 +28,13 @@ class WorkingSet:
                 group (str, optional): The name of the group containing the file, 'individual_files' by default.
 
             Returns:
-                The audio signal associated with the file name.
+                The audio signal associated with the file name and the sample rate.
             Raises:
                 KeyError: If the file with the given name is not found in the specified group.
         """
         for file in self.working_set[group]:
             if file["name"] == name:
-                return file["audio_signal"]
+                return file["audio_signal"], file["sample_rate"]
         raise KeyError(f"No file with name '{name}' was found in key '{group}'")
 
     def __contains__(self, name: str, group: str = "individual_files") -> bool:

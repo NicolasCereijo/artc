@@ -9,12 +9,12 @@ def main():
     configuration_path = "artc_configurations/configurations.json"
     logger = err.logger_config.LoggerSingleton().get_logger()
 
-    logger.info("Starting the ARtC suite...\n\n" +
-                "    |             |''||''|   ..|'''.|       .|'''.|            ||    .          \n" +
-                "   |||    ... ..     ||    .|'     '        ||..  '  ... ...  ...  .||.    .... \n" +
-                "  |  ||    ||' ''    ||    ||                ''|||.   ||  ||   ||   ||   .|...||\n" +
-                " .''''|.   ||        ||    '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
-                ".|.  .||. .||.      .||.    ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
+    logger.info("Running the main test suite for ARtC...\n\n" +
+                "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
+                "   |||     ||   ||  .||.  .|'     '        ||..  '  ... ...  ...  .||.    .... \n" +
+                "  |  ||    ||''|'    ||   ||                ''|||.   ||  ||   ||   ||   .|...||\n" +
+                " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
+                ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access(configuration_path, os.R_OK):
         example_set = w_set.WorkingSet()
@@ -23,8 +23,18 @@ def main():
         example_set.add_file("../test_collection/water_sounds/",
                              "waves-in-caves.wav", configuration_path)
 
-        audio_signal_1 = example_set.__getitem__("little-waves.mp3")
-        audio_signal_2 = example_set.__getitem__("waves-in-caves.wav")
+        audio_signal_1, sample_rate1 = example_set.__getitem__("little-waves.mp3")
+        audio_signal_2, sample_rate2 = example_set.__getitem__("waves-in-caves.wav")
+
+        print("MFCC comparison:")
+        print(f"MFCC of signal 1 with it self: "
+              f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"MFCC of signal 2 with it self: "
+              f"{analysis.compare_two_mfcc(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"MFCC between signals 1 and 2: "
+              f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"MFCC between signals 2 and 1: "
+              f"{analysis.compare_two_mfcc(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
         print("Zero Crossing Rate:")
         print(f"ZCR of signal 1 with itself: {analysis.compare_zcr(audio_signal_1, audio_signal_1)}")
