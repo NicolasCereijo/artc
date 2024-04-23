@@ -3,7 +3,7 @@ import numpy as np
 import librosa
 
 
-def check_zcr(signal: np.ndarray[float, ...]) -> tuple[bool, int]:
+def check_zcr(signal: np.ndarray) -> [bool, int]:
     if len(signal) == 0:
         return False, 0
 
@@ -14,7 +14,7 @@ def check_zcr(signal: np.ndarray[float, ...]) -> tuple[bool, int]:
     return check_any_zc, count_zc
 
 
-def calculate_zcr(audio_signal: np.ndarray) -> np.ndarray[..., np.dtype]:
+def calculate_zcr(audio_signal: np.ndarray) -> np.ndarray:
     return librosa.feature.zero_crossing_rate(y=audio_signal)
 
 
@@ -23,14 +23,17 @@ def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
     zcr1 = calculate_zcr(zcr1)
     zcr2 = calculate_zcr(zcr2)
 
-    normalized_signals = [arr[0].tolist() for arr in harmonize.normalize_btw_0_1(zcr1, zcr2)]
-    correlation_coefficient = np.corrcoef(normalized_signals)
+    zcr1_vector, zcr2_vector = [arr[0].tolist() for arr in harmonize.normalize_btw_0_1(zcr1, zcr2)]
+    zcr1_vector = np.array(zcr1_vector)
+    zcr2_vector = np.array(zcr2_vector)
 
-    result = np.mean(correlation_coefficient[0, 1:])
-    if result > 0.999:
-        result = 1
+    similarity_percentage = 1 - (np.abs(zcr1_vector - zcr2_vector) / np.maximum(zcr1_vector.max(), zcr2_vector.max()))
+    similarity_percentage = np.mean(similarity_percentage)
 
-    return max(result, 0)
+    if similarity_percentage > 0.999:
+        similarity_percentage = 1
+
+    return max(similarity_percentage, 0)
 
 
 def compare_multiple_zcr(audio_signals: list) -> float:

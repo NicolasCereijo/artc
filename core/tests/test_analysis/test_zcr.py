@@ -51,12 +51,12 @@ def test_compare_two_zcr(setup):
     assert analysis.compare_two_zcr(audio_signal1, audio_signal1) == 1
     assert analysis.compare_two_zcr(audio_signal2, audio_signal2) == 1
     assert analysis.compare_two_zcr(audio_signal3, audio_signal3) == 1
-    assert analysis.compare_two_zcr(audio_signal1, audio_signal2) == 0.024400430431495968
-    assert analysis.compare_two_zcr(audio_signal2, audio_signal1) == 0.02440043043149597
-    assert analysis.compare_two_zcr(audio_signal1, audio_signal3) == 0
-    assert analysis.compare_two_zcr(audio_signal3, audio_signal1) == 0
-    assert analysis.compare_two_zcr(audio_signal2, audio_signal3) == 0
-    assert analysis.compare_two_zcr(audio_signal3, audio_signal2) == 0
+    assert analysis.compare_two_zcr(audio_signal1, audio_signal2) == 0.4703782140435168
+    assert analysis.compare_two_zcr(audio_signal2, audio_signal1) == 0.4703782140435168
+    assert analysis.compare_two_zcr(audio_signal1, audio_signal3) == 0.3154215272606933
+    assert analysis.compare_two_zcr(audio_signal3, audio_signal1) == 0.3154215272606933
+    assert analysis.compare_two_zcr(audio_signal2, audio_signal3) == 0.44035933417840545
+    assert analysis.compare_two_zcr(audio_signal3, audio_signal2) == 0.44035933417840545
 
 
 def test_compare_multiple_zcr(setup):
@@ -71,12 +71,12 @@ def test_compare_multiple_zcr(setup):
     assert analysis.compare_multiple_zcr([audio_signal1, audio_signal1]) == 1
     assert analysis.compare_multiple_zcr([audio_signal2, audio_signal2]) == 1
     assert analysis.compare_multiple_zcr([audio_signal3, audio_signal3]) == 1
-    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal2]) == 0.024400430431495968
-    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal1]) == 0.02440043043149597
-    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal3]) == 0
-    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal1]) == 0
-    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal3]) == 0
-    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal2]) == 0
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal2]) == 0.4703782140435168
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal1]) == 0.4703782140435168
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal3]) == 0.3154215272606933
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal1]) == 0.3154215272606933
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal3]) == 0.44035933417840545
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal2]) == 0.44035933417840545
 
     assert analysis.compare_multiple_zcr([audio_signal1, audio_signal1, audio_signal1]) == 1
     assert analysis.compare_multiple_zcr([audio_signal2, audio_signal2, audio_signal2]) == 1

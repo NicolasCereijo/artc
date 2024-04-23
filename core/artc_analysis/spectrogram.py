@@ -14,6 +14,7 @@ def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: in
     spectrogram1, spectrogram2 = harmonize.adjust_dimensions(spectrogram1, spectrogram2)
 
     similarity_percentage = cosine_similarity([spectrogram1.reshape(-1)], [spectrogram2.reshape(-1)])[0][0]
+
     if similarity_percentage > 0.999:
         similarity_percentage = 1
 

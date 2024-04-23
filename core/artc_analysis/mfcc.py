@@ -10,7 +10,7 @@ def calculate_mfcc(audio_signal: np.ndarray, sample_rate: float, n_fft: int = 81
 
 
 def compare_two_mfcc(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                     sample_rate1: float, sample_rate2: float, n_fft: int = 8192) -> np.float32:
+                     sample_rate1: float, sample_rate2: float, n_fft: int = 8192) -> float:
     mfcc1 = calculate_mfcc(audio_signal1, sample_rate1, n_fft)
     mfcc2 = calculate_mfcc(audio_signal2, sample_rate2, n_fft)
 

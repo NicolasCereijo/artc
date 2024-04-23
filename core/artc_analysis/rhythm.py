@@ -2,7 +2,7 @@ import numpy as np
 import librosa
 
 
-def calculate_rhythm(audio_signal: np.ndarray, sample_rate: float, hop_length: int = 1024) -> [np.float64, np.ndarray]:
+def calculate_rhythm(audio_signal: np.ndarray, sample_rate: float, hop_length: int = 1024) -> [float, np.ndarray]:
     tempo, beat_frames = librosa.beat.beat_track(y=audio_signal, sr=sample_rate, hop_length=hop_length)
     return tempo, beat_frames
 
