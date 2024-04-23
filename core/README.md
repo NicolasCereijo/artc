@@ -4,15 +4,15 @@
 
 - Pearson correlation
 
-$ \rho_{X,Y} = \frac{{\sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})}}{{\sqrt{\sum_{i=1}^{n} (X_i - \bar{X})^2 \sum_{i=1}^{n} (Y_i - \bar{Y})^2}}} $
+![\rho_{X,Y}=\frac{{\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})}}{{\sqrt{\sum_{i=1}^{n}(X_i-\bar{X})^2\sum_{i=1}^{n}(Y_i-\bar{Y})^2}}}](https://latex.codecogs.com/svg.image?\rho_{X,Y}=\frac{{\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})}}{{\sqrt{\sum_{i=1}^{n}(X_i-\bar{X})^2\sum_{i=1}^{n}(Y_i-\bar{Y})^2}}})
 
 - Cosine Similarity
 
-$ \text{similarity} = \frac{{A \cdot B}}{{|A| |B|}} $
+![similarity=\frac{A\cdot&space;B}{\left\|\left\|A\right\|\right\|\left\|\left\|B\right\|\right\|}](https://latex.codecogs.com/svg.image?similarity=\frac{A\cdot&space;B}{\left\|\left\|A\right\|\right\|\left\|\left\|B\right\|\right\|})
 
 - Normalized relative difference
 
-$ \text{normalized\_difference} = 1 - \frac{{|x - y|}}{{\max(x, y)}} $
+![nrd=1-\frac{{|x-y|}}{{\max(x,y)}}](https://latex.codecogs.com/svg.image?nrd=1-\frac{{|x-y|}}{{\max(x,y)}})
 
 ### Metrics
 - chroma ─> Pearson correlation
