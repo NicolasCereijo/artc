@@ -1,4 +1,3 @@
-from typing import Iterable
 import numpy as np
 
 
@@ -14,9 +13,10 @@ def adjust_dimensions(*ndarrays: np.ndarray[float, ...]) -> list[np.ndarray[floa
     return [array[:, :min_frames] for array in ndarrays]
 
 
-def normalize_btw_0_1(*iterables: Iterable) -> tuple[list, ...]:
-    min_val = min(min(np.ravel(itr)) for itr in iterables[0])
-    max_val = max(max(np.ravel(itr)) for itr in iterables[0])
+def normalize_btw_0_1(*iterables: np.ndarray[float, ...]) -> tuple[list, ...]:
+    all_values = np.hstack(iterables)
+    min_val = np.min(all_values)
+    max_val = np.max(all_values)
 
     normalized_ndarrays = tuple(map(lambda lst: list(
         map(lambda x: (x - min_val) / (max_val - min_val), lst)), iterables))

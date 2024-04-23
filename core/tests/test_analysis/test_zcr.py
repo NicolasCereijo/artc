@@ -39,7 +39,7 @@ def test_check_zcr():
     assert analysis.check_zcr(array6) == (True, 3)
 
 
-def test_calculate_zcr(setup):
+def test_compare_two_zcr(setup):
     data_set = setup
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
@@ -48,12 +48,36 @@ def test_calculate_zcr(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_zcr(audio_signal1, audio_signal1) == 1
-    assert analysis.compare_zcr(audio_signal2, audio_signal2) == 1
-    assert analysis.compare_zcr(audio_signal3, audio_signal3) == 1
-    assert analysis.compare_zcr(audio_signal1, audio_signal2) == 0.024400430431495968
-    assert analysis.compare_zcr(audio_signal2, audio_signal1) == 0.02440043043149597
-    assert analysis.compare_zcr(audio_signal1, audio_signal3) == 0
-    assert analysis.compare_zcr(audio_signal3, audio_signal1) == 0
-    assert analysis.compare_zcr(audio_signal2, audio_signal3) == 0
-    assert analysis.compare_zcr(audio_signal3, audio_signal2) == 0
+    assert analysis.compare_two_zcr(audio_signal1, audio_signal1) == 1
+    assert analysis.compare_two_zcr(audio_signal2, audio_signal2) == 1
+    assert analysis.compare_two_zcr(audio_signal3, audio_signal3) == 1
+    assert analysis.compare_two_zcr(audio_signal1, audio_signal2) == 0.024400430431495968
+    assert analysis.compare_two_zcr(audio_signal2, audio_signal1) == 0.02440043043149597
+    assert analysis.compare_two_zcr(audio_signal1, audio_signal3) == 0
+    assert analysis.compare_two_zcr(audio_signal3, audio_signal1) == 0
+    assert analysis.compare_two_zcr(audio_signal2, audio_signal3) == 0
+    assert analysis.compare_two_zcr(audio_signal3, audio_signal2) == 0
+
+
+def test_compare_multiple_zcr(setup):
+    data_set = setup
+    audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
+                                               data_set["individual_files"][0]["name"])
+    audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
+                                               data_set["individual_files"][1]["name"])
+    audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
+                                               data_set["individual_files"][2]["name"])
+
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal1]) == 1
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal2]) == 1
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal3]) == 1
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal2]) == 0.024400430431495968
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal1]) == 0.02440043043149597
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal3]) == 0
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal1]) == 0
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal3]) == 0
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal2]) == 0
+
+    assert analysis.compare_multiple_zcr([audio_signal1, audio_signal1, audio_signal1]) == 1
+    assert analysis.compare_multiple_zcr([audio_signal2, audio_signal2, audio_signal2]) == 1
+    assert analysis.compare_multiple_zcr([audio_signal3, audio_signal3, audio_signal3]) == 1

@@ -87,10 +87,10 @@ def main():
               f"{analysis.compare_two_spectrograms(audio_signal_2, audio_signal_1)}\n")
 
         print("Zero Crossing Rate:")
-        print(f"ZCR of signal 1 with itself: {analysis.compare_zcr(audio_signal_1, audio_signal_1)}")
-        print(f"ZCR of signal 2 with itself: {analysis.compare_zcr(audio_signal_2, audio_signal_2)}")
-        print(f"ZCR between signals 1 and 2: {analysis.compare_zcr(audio_signal_1, audio_signal_2)}")
-        print(f"ZCR between signals 2 and 1: {analysis.compare_zcr(audio_signal_2, audio_signal_1)}\n")
+        print(f"ZCR of signal 1 with itself: {analysis.compare_two_zcr(audio_signal_1, audio_signal_1)}")
+        print(f"ZCR of signal 2 with itself: {analysis.compare_two_zcr(audio_signal_2, audio_signal_2)}")
+        print(f"ZCR between signals 1 and 2: {analysis.compare_two_zcr(audio_signal_1, audio_signal_2)}")
+        print(f"ZCR between signals 2 and 1: {analysis.compare_two_zcr(audio_signal_2, audio_signal_1)}\n")
     else:
         logging.critical("Could not access configuration file, suite execution aborted. The\n"
                          "configurations.json file should be located in the /core/artc_configurations/\n"
