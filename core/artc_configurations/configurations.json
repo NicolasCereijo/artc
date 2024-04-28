@@ -1,5 +1,15 @@
 {
   "audio": {
     "valid_extensions": ["mp3", "wav"]
+  },
+  "metric": {
+    "window_parameter": {
+      "chroma": 2048,
+      "energy_envelope": 2048,
+      "mfcc": 8192,
+      "rhythm": 1024,
+      "spectral_contrast": 2048,
+      "spectrogram": 2048
+    }
   }
 }

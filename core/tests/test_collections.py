@@ -18,12 +18,15 @@ def setup():
     """
     files_path = "../../test_collection/water_sounds/"
     data_set = {"individual_files":  [
-        {"path": files_path, "name": "little-waves.mp3"},
-        {"path": files_path, "name": "waves-in-caves.wav"},
-        {"path": files_path, "name": "Water Sizzle.mp3"}
+        w_set.AudioFile(path=files_path, name="little-waves.mp3",
+                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
+        w_set.AudioFile(path=files_path, name="waves-in-caves.wav",
+                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
+        w_set.AudioFile(path=files_path, name="Water Sizzle.mp3",
+                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100)
     ]}
 
-    return "../artc_configurations/", "configurations.json", data_set
+    return "../artc_configurations/", "configurations.json", data_set, files_path
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -78,54 +81,52 @@ def test_normalize_btw_0_1():
 # Tests for core.artc_collections.working_set
 # ----------------------------------------------------------------------------------------------------------------------
 def test_search_file(setup):
-    path, name, data_set = setup
-    test_set = w_set.WorkingSet(True, data_set)
+    path, name, data_set, _ = setup
+    test_set = w_set.WorkingSet("test_set", True, data_set)
 
-    assert test_set.__contains__(data_set["individual_files"][0]["name"], "individual_files")
-    assert test_set.__contains__(data_set["individual_files"][1]["name"], "individual_files")
-    assert test_set.__contains__(data_set["individual_files"][2]["name"], "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][0].name, "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][1].name, "individual_files")
+    assert test_set.__contains__(data_set["individual_files"][2].name, "individual_files")
 
     assert test_set.__contains__("", "") is False
-    assert test_set.__contains__(data_set["individual_files"][2]["name"], "") is False
+    assert test_set.__contains__(data_set["individual_files"][2].name, "") is False
     assert test_set.__contains__("", "individual_files") is False
-    assert test_set.__contains__(data_set["individual_files"][2]["name"], "invalid_group") is False
+    assert test_set.__contains__(data_set["individual_files"][2].name, "invalid_group") is False
     assert test_set.__contains__("invalid_file", "individual_files") is False
 
 
 def test_add_file(setup):
-    path, name, data_set = setup
-    test_set = w_set.WorkingSet(True, data_set)
+    path, name, data_set, files_path = setup
+    test_set = w_set.WorkingSet("test_set", True, data_set)
 
-    assert test_set.add_file("../../test_collection/water_sounds/", "smallwaves1.mp3", path + name)
+    assert test_set.add_file(files_path, "smallwaves1.mp3", path + name)
 
     assert test_set.add_file("", "", "") is False
     assert test_set.add_file("", "smallwaves1.mp3", path + name) is False
-    assert test_set.add_file("../../test_collection/water_sounds/", "smallwaves1.mp3",
-                             "") is False
-    assert test_set.add_file("../../test_collection/water_sounds/", "", path + name) is False
+    assert test_set.add_file(files_path, "smallwaves1.mp3", "") is False
+    assert test_set.add_file(files_path, "", path + name) is False
     assert test_set.add_file("invalid_path", "smallwaves1.mp3", path + name) is False
-    assert test_set.add_file("../../test_collection/water_sounds/", "smallwaves1.mp3",
-                             "invalid_config_path") is False
-    assert test_set.add_file("../../test_collection/water_sounds/", "invalid_name", path + name) is False
+    assert test_set.add_file(files_path, "smallwaves1.mp3", "invalid_config_path") is False
+    assert test_set.add_file(files_path, "invalid_name", path + name) is False
 
 
 def test_remove_file(setup):
-    path, name, data_set = setup
-    test_set = w_set.WorkingSet(True, data_set)
+    path, name, data_set, _ = setup
+    test_set = w_set.WorkingSet("test_set", True, data_set)
 
     assert test_set.remove_file("little-waves.mp3")
-    assert test_set.remove_file(data_set["individual_files"][1]["name"], "individual_files")
+    assert test_set.remove_file(data_set["individual_files"][1].name, "individual_files")
 
     assert test_set.remove_file("", "") is False
     assert test_set.remove_file("", "individual_files") is False
-    assert test_set.remove_file(data_set["individual_files"][0]["name"], "") is False
+    assert test_set.remove_file(data_set["individual_files"][0].name, "") is False
     assert test_set.remove_file("invalid_name", "individual_files") is False
-    assert test_set.remove_file(data_set["individual_files"][0]["name"], "invalid_group") is False
+    assert test_set.remove_file(data_set["individual_files"][0].name, "invalid_group") is False
 
 
 def test_add_directory(setup):
-    path, name, data_set = setup
-    test_set = w_set.WorkingSet(True, data_set)
+    path, name, data_set, _ = setup
+    test_set = w_set.WorkingSet("test_set", True, data_set)
 
     assert test_set.add_directory("../../test_collection/water_sounds/", path + name, "individual_files")
     assert test_set.add_directory("../../test_collection/water_sounds/", path + name, "new_group")

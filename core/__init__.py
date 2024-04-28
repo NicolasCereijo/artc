@@ -11,20 +11,22 @@ def main():
 
     logger.info("Starting the ARtC suite...\n\n" +
                 "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
-                "   |||     ||   ||  .||.  .|'     '        ||..  '  ... ...  ...  .||.    .... \n" +
+                "   |||     ||   ||  .||.  .|'      '       ||..  '  ... ...  ...  .||.    .... \n" +
                 "  |  ||    ||''|'    ||   ||                ''|||.   ||  ||   ||   ||   .|...||\n" +
                 " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
                 ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access(configuration_path, os.R_OK):
-        example_set = w_set.WorkingSet()
+        example_set = w_set.WorkingSet("main_set")
         example_set.add_file("../test_collection/water_sounds/",
                              "little-waves.mp3", configuration_path)
         example_set.add_file("../test_collection/water_sounds/",
                              "waves-in-caves.wav", configuration_path)
 
-        audio_signal_1, sample_rate1 = example_set.__getitem__("little-waves.mp3")
-        audio_signal_2, sample_rate2 = example_set.__getitem__("waves-in-caves.wav")
+        audio_signal_1 = example_set["little-waves.mp3"].audio_signal_loaded
+        sample_rate1 = example_set["little-waves.mp3"].sample_rate
+        audio_signal_2 = example_set["waves-in-caves.wav"].audio_signal_loaded
+        sample_rate2 = example_set["waves-in-caves.wav"].sample_rate
 
         print("Chroma comparison:")
         print(f"Chroma of signal 1 with it self: "

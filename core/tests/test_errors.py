@@ -36,18 +36,11 @@ def test_check_audio_format(setup):
     assert err.check_audio_format("../../test_collection/fire_sounds/",
                                   "Burning-fireplace.wav", configuration_file)
 
-    with pytest.raises(ValueError):
-        assert err.check_audio_format("", "", configuration_file) is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_audio_format("", "invalid_file", configuration_file) is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_audio_format("", "invalid_file.pdf", configuration_file) is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_audio_format("../../test_collection/ambient_sounds/",
-                                      "invalid_file", configuration_file) is ValueError
+    assert err.check_audio_format("", "", configuration_file) is False
+    assert err.check_audio_format("", "invalid_file", configuration_file) is False
+    assert err.check_audio_format("", "invalid_file.pdf", configuration_file) is False
+    assert err.check_audio_format("../../test_collection/ambient_sounds/",
+                                  "invalid_file", configuration_file) is False
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -62,11 +55,8 @@ def test_check_url_reachable():
         print(url_message_error)
         raise ex
 
-    with pytest.raises(ValueError):
-        assert err.check_url_reachable("") is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_url_reachable("https://invalid_url") is ValueError
+    assert err.check_url_reachable("") is False
+    assert err.check_url_reachable("https://invalid_url") is False
 
 
 def test_check_path_accessible(setup):
@@ -75,11 +65,8 @@ def test_check_path_accessible(setup):
 
     assert err.check_path_accessible(configuration_file)
 
-    with pytest.raises(ValueError):
-        assert err.check_path_accessible("") is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_path_accessible("invalid_path") is ValueError
+    assert err.check_path_accessible("") is False
+    assert err.check_path_accessible("invalid_path") is False
 
 
 def test_check_file_readable(setup):
@@ -87,17 +74,10 @@ def test_check_file_readable(setup):
 
     assert err.check_file_readable(path, name)
 
-    with pytest.raises(ValueError):
-        assert err.check_file_readable("", name) is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_file_readable("invalid_path", name) is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_file_readable(path, "") is ValueError
-
-    with pytest.raises(ValueError):
-        assert err.check_file_readable(path, "invalid_name") is ValueError
+    assert err.check_file_readable("", name) is False
+    assert err.check_file_readable("invalid_path", name) is False
+    assert err.check_file_readable(path, "") is False
+    assert err.check_file_readable(path, "invalid_name") is False
 
 
 def test_validate_path(setup):
@@ -105,6 +85,7 @@ def test_validate_path(setup):
     url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"
 
     assert err.validate_path(path, name)
+
     assert err.validate_path("", "") is False
     assert err.validate_path("", name) is False
     assert err.validate_path("invalid_path", name) is False
@@ -114,8 +95,7 @@ def test_validate_path(setup):
     assert err.validate_path("https://invalid_url", "invalid_file") is False
 
     try:
-        assert err.validate_path("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/",
-                                 "bootstrap.min.css"), url_message_error
+        assert err.validate_path("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/", "bootstrap.css")
     except Exception as ex:
         print(url_message_error)
         raise ex

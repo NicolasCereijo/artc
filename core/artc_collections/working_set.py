@@ -1,132 +1,130 @@
+import core.artc_errors.logger_config as log
 import core.artc_errors as err
+from dataclasses import dataclass
+from typing import Callable, Optional
 import numpy as np
 import librosa
 import os
 
+logger = log.LoggerSingleton().get_logger()
+
+
+@dataclass
+class AudioFile:
+    path: str
+    name: str
+    audio_signal_unloaded: Callable[[], np.ndarray]
+    sample_rate: int
+
+    @property
+    def audio_signal_loaded(self) -> np.ndarray:
+        return self.audio_signal_unloaded()
+
+    def check_audio(self, configuration_path: str) -> bool:
+        verifications = [
+            (err.check_audio_corruption, (self.path + self.name,),
+                f"Audio file '{self.path}' is corrupted"),
+            (err.check_audio_format, (self.path, self.name, configuration_path),
+                f"Invalid file format for '{self.name}'"),
+            (err.check_path_accessible, (self.path,),
+                f"Path '{self.path}' does not exist or is not accessible"),
+            (err.check_path_accessible, (configuration_path,),
+                f"Path '{configuration_path}' does not exist or is not accessible")
+        ]
+
+        no_error = all(
+            logger.error(error_message.format(audio_data=self))
+            if not check_function(*args)
+            else True
+            for check_function, args, error_message in verifications
+        )
+
+        return no_error
+
 
 class WorkingSet:
-    def __init__(self, test_mode: bool = False, data_set: dict = None):
-        """
-            Function to initialize instances of the class.
-            Test mode available, disabled by default.
+    name: str
 
-            Args:
-                test_mode (bool, optional): True to use test mode.
-                data_set (dict, optional): Data set to perform the tests. Required if test_mode is True.
-        """
+    def __init__(self, name: str, test_mode: bool = False, data_set: dict = None):
+        self.name = name
+
         if not test_mode:
             self.working_set = {"individual_files":  []}
         else:
             self.working_set = data_set
 
-    def __getitem__(self, name: str, group: str = "individual_files") -> (np.ndarray, float):
-        """
-            Retrieve the audio signal corresponding to the given file name from the specified group.
+    def __getitem__(self, name: str, group: str = "individual_files") -> Optional[AudioFile]:
+        if group not in self.working_set:
+            logger.error(f"No group with name '{group}' was found in working set '{self.name}'")
+            return None
 
-            Args:
-                name (str): The name of the file to retrieve.
-                group (str, optional): The name of the group containing the file, 'individual_files' by default.
-
-            Returns:
-                The audio signal associated with the file name and the sample rate.
-            Raises:
-                KeyError: If the file with the given name is not found in the specified group.
-        """
         for file in self.working_set[group]:
-            if file["name"] == name:
-                return file["audio_signal"], file["sample_rate"]
-        raise KeyError(f"No file with name '{name}' was found in key '{group}'")
+            if file.name == name:
+                return file
+        logger.error(f"No file with name '{name}' was found in key '{group}' in working set '{self.name}'")
+        return None
 
     def __contains__(self, name: str, group: str = "individual_files") -> bool:
-        """
-            Function to check the existence of a file within a group.
-
-            Args:
-                name (str): File name with extension.
-                group (str, optional): Group where the file should be, 'individual_files' by default.
-
-            Returns:
-                True: if the file is in the group.
-                False: If the file is not found in the group.
-        """
         if (group not in self.working_set or
-                name not in [file_name['name'] for file_name in self.working_set[group]]):
+                name not in [audio.name for audio in self.working_set[group]]):
             return False
         return True
 
     def add_file(self, path: str, name: str, configuration_path: str, group: str = "individual_files") -> bool:
-        """
-            Function to add files to a new or existing group.
-
-            Args:
-                path (str): Path or web address to the file.
-                name (str): File name with extension.
-                configuration_path (str): Path to the configuration file.
-                group (str, optional): Group to which the file will be added, 'individual_files' by default.
-
-            Returns:
-                True: If the file is accessible.
-                False: If the file is not accessible.
-        """
-        try:
-            err.check_audio_format(path, name, configuration_path)
-        except ValueError:
+        if not err.validate_path(path, name):
+            logger.error(f"Path '{path + name}' does not exist or is not accessible")
             return False
 
-        if err.validate_path(path, name) and group != "":
-            if group not in self.working_set:
-                self.working_set[group] = []
+        audio_signal, sample_rate = librosa.load(os.path.join(path, name))
+        audio = AudioFile(path=path, name=name,
+                          audio_signal_unloaded=lambda: audio_signal, sample_rate=int(sample_rate))
 
-            audio_signal, sample_rate = librosa.load(path + name)
-            self.working_set[group].append({"path": path, "name": name,
-                                            "audio_signal": audio_signal, "sample_rate": sample_rate})
-            return True
+        if not audio.check_audio(configuration_path):
+            logger.error(f"Could not add file '{name}' in group '{group}' in working set '{self.name}'")
+            return False
+        if group == "":
+            logger.error("Can not add groups with empty names")
+            return False
+
+        if group in self.working_set:
+            self.working_set[group].append(audio)
         else:
-            return False
-
-    def remove_file(self, name: str, group: str = "individual_files") -> bool:
-        """
-            Function to delete files from a group.
-
-            Args:
-                name (str): File name with extension.
-                group (str, optional): Group from which the file will be deleted.
-
-            Returns:
-                True: If the file can be deleted.
-                False: If the file cannot be deleted.
-        """
-        if not self.__contains__(name, group):
-            return False
-        else:
-            for group in self.working_set:
-                self.working_set[group] = list(filter(lambda file_data:
-                                                      file_data["name"] != name, self.working_set[group]))
+            self.working_set[group] = [audio]
         return True
 
+    def remove_file(self, name: str, group: str = "individual_files") -> bool:
+        if group not in self.working_set or not any(audio.name == name for audio in self.working_set[group]):
+            logger.error(f"Could not delete file. "
+                         f"No file with name '{name}' was found in key '{group}' in working set '{self.name}'")
+            return False
+        else:
+            self.working_set[group] = [audio for audio in self.working_set[group] if audio.name != name]
+            return True
+
     def add_directory(self, path: str, configuration_path: str, group: str = "individual_files") -> bool:
-        """
-            Function to add all valid files in a directory to a group.
-
-            Args:
-                path (str): Path to the directory. Can not use a web address.
-                configuration_path (str): Path to the configuration file.
-                group (str, optional): Group to which the files will be added, 'individual_files' by default.
-
-            Returns:
-                True: If any file could be added.
-                False: If the directory could not be accessed or any files added.
-        """
         any_files_added = False
 
-        try:
-            err.check_path_accessible(path)
-            err.check_path_accessible(configuration_path)
-        except ValueError:
+        directory_verifications = [
+            (err.check_path_accessible, (path,),
+             f"Path '{path}' does not exist or is not accessible"),
+            (err.check_path_accessible, (configuration_path,),
+             f"Path '{configuration_path}' does not exist or is not accessible"),
+            (lambda check_group: group != "", (group,), "Can not add groups with empty names")
+        ]
+
+        no_error = all(
+            logger.error(error_message.format(audio_data=self))
+            if not check_function(*args)
+            else True
+            for check_function, args, error_message in directory_verifications
+        )
+
+        if not no_error:
             return False
 
-        for name in os.listdir(path):
-            if self.add_file(path, name, configuration_path, group):
-                any_files_added = True
+        for file_name in os.listdir(path):
+            if os.path.isfile(os.path.join(path, file_name)):
+                if self.add_file(path, file_name, configuration_path, group):
+                    any_files_added = True
 
         return any_files_added
