@@ -1,12 +1,11 @@
-import core.artc_errors.logger_config as log
-import core.artc_errors as err
-from dataclasses import dataclass
-from typing import Callable, Optional
+import core.errors as errors
 import numpy as np
 import librosa
 import os
+from dataclasses import dataclass
+from typing import Callable, Optional
 
-logger = log.LoggerSingleton().get_logger()
+logger = errors.logger_config.LoggerSingleton().get_logger()
 
 
 @dataclass
@@ -22,13 +21,13 @@ class AudioFile:
 
     def check_audio(self, configuration_path: str) -> bool:
         verifications = [
-            (err.check_audio_corruption, (self.path + self.name,),
+            (errors.check_audio_corruption, (self.path + self.name,),
                 f"Audio file '{self.path}' is corrupted"),
-            (err.check_audio_format, (self.path, self.name, configuration_path),
+            (errors.check_audio_format, (self.path, self.name, configuration_path),
                 f"Invalid file format for '{self.name}'"),
-            (err.check_path_accessible, (self.path,),
+            (errors.check_path_accessible, (self.path,),
                 f"Path '{self.path}' does not exist or is not accessible"),
-            (err.check_path_accessible, (configuration_path,),
+            (errors.check_path_accessible, (configuration_path,),
                 f"Path '{configuration_path}' does not exist or is not accessible")
         ]
 
@@ -71,7 +70,7 @@ class WorkingSet:
         return True
 
     def add_file(self, path: str, name: str, configuration_path: str, group: str = "individual_files") -> bool:
-        if not err.validate_path(path, name):
+        if not errors.validate_path(path, name):
             logger.error(f"Path '{path + name}' does not exist or is not accessible")
             return False
 
@@ -105,9 +104,9 @@ class WorkingSet:
         any_files_added = False
 
         directory_verifications = [
-            (err.check_path_accessible, (path,),
+            (errors.check_path_accessible, (path,),
              f"Path '{path}' does not exist or is not accessible"),
-            (err.check_path_accessible, (configuration_path,),
+            (errors.check_path_accessible, (configuration_path,),
              f"Path '{configuration_path}' does not exist or is not accessible"),
             (lambda check_group: group != "", (group,), "Can not add groups with empty names")
         ]

@@ -1,4 +1,4 @@
-from core.artc_collections import harmonize
+import core.datastructures as dt_structs
 import numpy as np
 import librosa
 
@@ -19,11 +19,11 @@ def calculate_zcr(audio_signal: np.ndarray) -> np.ndarray:
 
 
 def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
-    zcr1, zcr2 = harmonize.adjust_length(signal1, signal2)
+    zcr1, zcr2 = dt_structs.adjust_length(signal1, signal2)
     zcr1 = calculate_zcr(zcr1)
     zcr2 = calculate_zcr(zcr2)
 
-    zcr1_vector, zcr2_vector = [arr[0].tolist() for arr in harmonize.normalize_btw_0_1(zcr1, zcr2)]
+    zcr1_vector, zcr2_vector = [arr[0].tolist() for arr in dt_structs.normalize_btw_0_1(zcr1, zcr2)]
     zcr1_vector = np.array(zcr1_vector)
     zcr2_vector = np.array(zcr2_vector)
 

@@ -12,9 +12,6 @@ class LoggerSingleton:
         return cls._instance
 
     def _setup_logger(self):
-        """
-        Configure the logger with a colored formatter and set the logging level to INFO.
-        """
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 

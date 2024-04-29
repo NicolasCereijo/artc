@@ -1,5 +1,5 @@
-from core.artc_errors.path import check_path_accessible
-from core.artc_configurations import read_config
+import core.errors as errors
+import core.configurations as config
 import os
 
 
@@ -21,8 +21,8 @@ def check_audio_corruption(file_path: str) -> bool:
 
 def check_audio_format(path: str, name: str, configuration_path: str) -> bool:
     if (not check_audio_corruption(path + name)
-            or not check_path_accessible(configuration_path)
+            or not errors.check_path_accessible(configuration_path)
             or not (os.path.isfile(os.path.join(path, name))
-                    or get_extension(name) not in read_config("extensions", configuration_path))):
+                    or get_extension(name) not in config.read_config("extensions", configuration_path))):
         return False
     return True

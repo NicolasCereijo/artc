@@ -1,4 +1,4 @@
-import core.artc_errors as err
+import core.errors as err
 import pytest
 
 
@@ -13,11 +13,11 @@ def setup():
             path (str): Relative path to the configuration file.
             name (str): Name of the configuration file.
     """
-    return "../artc_configurations/", "configurations.json"
+    return "../configurations/", "configurations.json"
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Tests for core.artc_errors.validations.file
+# Tests for core.errors.validations.file
 # ----------------------------------------------------------------------------------------------------------------------
 def test_get_extension():
     assert err.get_extension("file.mp3") == "mp3"
@@ -44,7 +44,7 @@ def test_check_audio_format(setup):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Tests for core.artc_errors.validations.path
+# Tests for core.errors.validations.path
 # ----------------------------------------------------------------------------------------------------------------------
 def test_check_url_reachable():
     url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"

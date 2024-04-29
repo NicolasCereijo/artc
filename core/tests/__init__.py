@@ -1,11 +1,11 @@
 from core.tests import *
-import core.artc_errors as err
+import core.errors as errors
 import pytest
 import os
 
 
 def main():
-    logger = err.logger_config.LoggerSingleton().get_logger()
+    logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Running the main test suite for ARtC...\n\n" +
                 "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
@@ -14,7 +14,7 @@ def main():
                 " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
                 ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
-    if os.access("../artc_configurations/configurations.json", os.R_OK):
+    if os.access("../configurations/configurations.json", os.R_OK):
         result = pytest.main()
 
         if result == 0:
@@ -23,7 +23,7 @@ def main():
             logger.error("Bugs were found in the test set during execution")
     else:
         logger.critical("Could not access configuration file, suite execution aborted. The\n"
-                        "configurations.json file should be located in the /core/artc_configurations/\n"
+                        "configurations.json file should be located in the /core/configurations/\n"
                         "folder. Check the directory and access permissions.")
 
 

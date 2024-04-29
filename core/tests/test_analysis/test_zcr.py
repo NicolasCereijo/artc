@@ -1,4 +1,4 @@
-import core.artc_analysis as analysis
+import core.analysis as analysis
 import numpy as np
 import librosa
 import pytest

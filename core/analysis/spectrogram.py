@@ -1,7 +1,7 @@
-from core.artc_collections import harmonize
-from sklearn.metrics.pairwise import cosine_similarity
+import core.datastructures as dt_structs
 import numpy as np
 import librosa
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.ndarray:
@@ -11,7 +11,7 @@ def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.nda
 def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: int = 2048) -> float:
     spectrogram1 = calculate_spectrogram(signal1, n_fft)
     spectrogram2 = calculate_spectrogram(signal2, n_fft)
-    spectrogram1, spectrogram2 = harmonize.adjust_dimensions(spectrogram1, spectrogram2)
+    spectrogram1, spectrogram2 = dt_structs.adjust_dimensions(spectrogram1, spectrogram2)
 
     similarity_percentage = cosine_similarity([spectrogram1.reshape(-1)], [spectrogram2.reshape(-1)])[0][0]
 

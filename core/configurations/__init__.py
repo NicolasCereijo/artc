@@ -1,11 +1,11 @@
-import core.artc_errors.logger_config as log
+import core.errors as errors
 import json
 import os
 
+logger = errors.logger_config.LoggerSingleton().get_logger()
+
 
 def open_config(configuration_path: str) -> dict:
-    logger = log.LoggerSingleton().get_logger()
-
     try:
         if os.access(configuration_path, os.R_OK):
             with open(configuration_path, 'r') as file:
@@ -32,7 +32,6 @@ def read_config(config_section: str, configuration_path: str) -> dict:
             based on the provided `config_section`. If the specified section or the configuration file
             itself does not exist, appropriate error messages are logged.
     """
-    logger = log.LoggerSingleton().get_logger()
     config = open_config(configuration_path)
 
     if config is not None:

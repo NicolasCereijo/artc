@@ -1,5 +1,4 @@
-import core.artc_collections.harmonize as harm
-import core.artc_collections.working_set as w_set
+import core.datastructures as dt_structs
 import numpy as np
 import pytest
 
@@ -18,43 +17,43 @@ def setup():
     """
     files_path = "../../test_collection/water_sounds/"
     data_set = {"individual_files":  [
-        w_set.AudioFile(path=files_path, name="little-waves.mp3",
-                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
-        w_set.AudioFile(path=files_path, name="waves-in-caves.wav",
-                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
-        w_set.AudioFile(path=files_path, name="Water Sizzle.mp3",
-                        audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100)
+        dt_structs.AudioFile(path=files_path, name="little-waves.mp3",
+                             audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
+        dt_structs.AudioFile(path=files_path, name="waves-in-caves.wav",
+                             audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100),
+        dt_structs.AudioFile(path=files_path, name="Water Sizzle.mp3",
+                             audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100)
     ]}
 
-    return "../artc_configurations/", "configurations.json", data_set, files_path
+    return "../configurations/", "configurations.json", data_set, files_path
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Tests for core.artc_collections.harmonize
+# Tests for core.datastructures.harmonize
 # ----------------------------------------------------------------------------------------------------------------------
 def test_adjust_length():
     array1 = np.array([0])
     array2 = np.array([1, 2e3])
     array3 = np.array([-1, 2.09, 1e-100])
 
-    assert np.array_equal(harm.adjust_length(array1, array1), (np.array([0], dtype=np.float32),
-                                                               np.array([0], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array2, array2), (np.array([1, 2e3], dtype=np.float32),
-                                                               np.array([1, 2e3], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array3, array3), (np.array([-1, 2.09, 1e-100], dtype=np.float32),
-                                                               np.array([-1, 2.09, 1e-100], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array1, array2), (np.array([0], dtype=np.float32),
-                                                               np.array([1], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array1, array3), (np.array([0], dtype=np.float32),
-                                                               np.array([-1], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array2, array3), (np.array([1, 2e3], dtype=np.float32),
-                                                               np.array([-1, 2.09], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array2, array1), (np.array([1], dtype=np.float32),
-                                                               np.array([0], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array3, array1), (np.array([-1], dtype=np.float32),
-                                                               np.array([0], dtype=np.float32)))
-    assert np.array_equal(harm.adjust_length(array3, array2), (np.array([-1, 2.09], dtype=np.float32),
-                                                               np.array([1, 2e3], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array1, array1), (np.array([0], dtype=np.float32),
+                                                                     np.array([0], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array2, array2), (np.array([1, 2e3], dtype=np.float32),
+                                                                     np.array([1, 2e3], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array3, array3), (np.array([-1, 2.09, 1e-100], dtype=np.float32),
+                                                                     np.array([-1, 2.09, 1e-100], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array1, array2), (np.array([0], dtype=np.float32),
+                                                                     np.array([1], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array1, array3), (np.array([0], dtype=np.float32),
+                                                                     np.array([-1], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array2, array3), (np.array([1, 2e3], dtype=np.float32),
+                                                                     np.array([-1, 2.09], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array2, array1), (np.array([1], dtype=np.float32),
+                                                                     np.array([0], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array3, array1), (np.array([-1], dtype=np.float32),
+                                                                     np.array([0], dtype=np.float32)))
+    assert np.array_equal(dt_structs.adjust_length(array3, array2), (np.array([-1, 2.09], dtype=np.float32),
+                                                                     np.array([1, 2e3], dtype=np.float32)))
 
 
 def test_normalize_btw_0_1():
@@ -62,10 +61,10 @@ def test_normalize_btw_0_1():
     array2 = np.array([0, 2e3])
     array3 = np.array([-1, 2.09, 1e-100])
 
-    compare_1_2 = harm.normalize_btw_0_1(array1, array2)
-    compare_1_3 = harm.normalize_btw_0_1(array1, array3)
-    compare_2_3 = harm.normalize_btw_0_1(array2, array3)
-    compare_3_2 = harm.normalize_btw_0_1(array3, array2)
+    compare_1_2 = dt_structs.normalize_btw_0_1(array1, array2)
+    compare_1_3 = dt_structs.normalize_btw_0_1(array1, array3)
+    compare_2_3 = dt_structs.normalize_btw_0_1(array2, array3)
+    compare_3_2 = dt_structs.normalize_btw_0_1(array3, array2)
 
     assert np.array_equal(compare_1_2[0], np.array([0]))
     assert np.array_equal(compare_1_2[1], np.array([0, 1]))
@@ -78,11 +77,11 @@ def test_normalize_btw_0_1():
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Tests for core.artc_collections.working_set
+# Tests for core.datastructures.working_set
 # ----------------------------------------------------------------------------------------------------------------------
 def test_search_file(setup):
     path, name, data_set, _ = setup
-    test_set = w_set.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", True, data_set)
 
     assert test_set.__contains__(data_set["individual_files"][0].name, "individual_files")
     assert test_set.__contains__(data_set["individual_files"][1].name, "individual_files")
@@ -97,7 +96,7 @@ def test_search_file(setup):
 
 def test_add_file(setup):
     path, name, data_set, files_path = setup
-    test_set = w_set.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", True, data_set)
 
     assert test_set.add_file(files_path, "smallwaves1.mp3", path + name)
 
@@ -112,7 +111,7 @@ def test_add_file(setup):
 
 def test_remove_file(setup):
     path, name, data_set, _ = setup
-    test_set = w_set.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", True, data_set)
 
     assert test_set.remove_file("little-waves.mp3")
     assert test_set.remove_file(data_set["individual_files"][1].name, "individual_files")
@@ -126,7 +125,7 @@ def test_remove_file(setup):
 
 def test_add_directory(setup):
     path, name, data_set, _ = setup
-    test_set = w_set.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", True, data_set)
 
     assert test_set.add_directory("../../test_collection/water_sounds/", path + name, "individual_files")
     assert test_set.add_directory("../../test_collection/water_sounds/", path + name, "new_group")

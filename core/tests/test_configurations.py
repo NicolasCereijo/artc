@@ -1,4 +1,4 @@
-import core.artc_configurations as config
+import core.configurations as config
 import pytest
 
 
@@ -13,7 +13,7 @@ def setup():
             path: Relative path to the configuration file.
             name: Name of the configuration file.
     """
-    return "../artc_configurations/", "configurations.json"
+    return "../configurations/", "configurations.json"
 
 
 def test_open_config(setup):

@@ -1,13 +1,13 @@
-import core.artc_collections.working_set as w_set
-import core.artc_analysis as analysis
-import core.artc_errors as err
+import core.datastructures as dt_structs
+import core.analysis as analysis
+import core.errors as errors
 import logging
 import os
 
 
 def main():
-    configuration_path = "artc_configurations/configurations.json"
-    logger = err.logger_config.LoggerSingleton().get_logger()
+    configuration_path = "configurations/configurations.json"
+    logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Starting the ARtC suite...\n\n" +
                 "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
@@ -17,7 +17,7 @@ def main():
                 ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access(configuration_path, os.R_OK):
-        example_set = w_set.WorkingSet("main_set")
+        example_set = dt_structs.WorkingSet("main_set")
         example_set.add_file("../test_collection/water_sounds/",
                              "little-waves.mp3", configuration_path)
         example_set.add_file("../test_collection/water_sounds/",
@@ -95,7 +95,7 @@ def main():
         print(f"ZCR between signals 2 and 1: {analysis.compare_two_zcr(audio_signal_2, audio_signal_1)}\n")
     else:
         logging.critical("Could not access configuration file, suite execution aborted. The\n"
-                         "configurations.json file should be located in the /core/artc_configurations/\n"
+                         "configurations.json file should be located in the /core/configurations/\n"
                          "folder. Check the directory and access permissions.")
 
 
