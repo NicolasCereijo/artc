@@ -11,9 +11,10 @@ def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.nda
 def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: int = 2048) -> float:
     spectrogram1 = calculate_spectrogram(signal1, n_fft)
     spectrogram2 = calculate_spectrogram(signal2, n_fft)
+
     spectrogram1, spectrogram2 = dt_structs.adjust_dimensions(spectrogram1, spectrogram2)
 
-    similarity_percentage = cosine_similarity([spectrogram1.reshape(-1)], [spectrogram2.reshape(-1)])[0][0]
+    similarity_percentage = cosine_similarity(spectrogram1, spectrogram2)[0][0]
 
     if similarity_percentage > 0.999:
         similarity_percentage = 1

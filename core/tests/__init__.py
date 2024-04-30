@@ -7,7 +7,8 @@ import os
 def main():
     logger = errors.logger_config.LoggerSingleton().get_logger()
 
-    logger.info("Running the main test suite for ARtC...\n\n" +
+    logger.info("Running the main test suite for ARtC...\n" +
+                "If internet access is not possible some tests will be skipped\n\n" +
                 "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
                 "   |||     ||   ||  .||.  .|'      '       ||..  '  ... ...  ...  .||.    .... \n" +
                 "  |  ||    ||''|'    ||   ||                ''|||.   ||  ||   ||   ||   .|...||\n" +
@@ -18,7 +19,7 @@ def main():
         result = pytest.main()
 
         if result == 0:
-            logger.info("All tests ran successfully")
+            logger.info("All executed tests were successful")
         else:
             logger.error("Bugs were found in the test set during execution")
     else:
