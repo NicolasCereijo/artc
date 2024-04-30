@@ -13,7 +13,7 @@ def setup():
             path: Relative path to the configuration file.
             name: Name of the configuration file.
     """
-    return "../configurations/", "configurations.json"
+    return "../configurations/", "default_configurations.json"
 
 
 def test_open_config(setup):

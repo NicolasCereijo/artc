@@ -25,7 +25,7 @@ def setup():
                              audio_signal_unloaded=lambda: np.zeros(100), sample_rate=44100)
     ]}
 
-    return "../configurations/", "configurations.json", data_set, files_path
+    return "../configurations/", "default_configurations.json", data_set, files_path
 
 
 # ----------------------------------------------------------------------------------------------------------------------

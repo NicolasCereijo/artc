@@ -6,7 +6,7 @@ import os
 
 
 def main():
-    configuration_path = "configurations/configurations.json"
+    configuration_path = "configurations/default_configurations.json"
     logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Starting the ARtC suite...\n\n" +
@@ -95,7 +95,7 @@ def main():
         print(f"ZCR between signals 2 and 1: {analysis.compare_two_zcr(audio_signal_2, audio_signal_1)}\n")
     else:
         logging.critical("Could not access configuration file, suite execution aborted. The\n"
-                         "configurations.json file should be located in the /core/configurations/\n"
+                         "default_configurations.json file should be located in the /core/configurations/\n"
                          "folder. Check the directory and access permissions.")
 
 

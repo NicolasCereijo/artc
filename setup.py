@@ -17,7 +17,7 @@ requires = [
 
 setup(
     name="artc-suite",
-    version="1.0a1",
+    version="1.0a2",
     description="Alpha version of the ARtC (Audio Real-time Comparator) core",
     long_description="A suite designed to compare and analyze audio files in real time.",
     author="Nicolás Cereijo Ranchal",

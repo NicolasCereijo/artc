@@ -14,7 +14,7 @@ def main():
                 " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
                 ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
-    if os.access("../configurations/configurations.json", os.R_OK):
+    if os.access("../configurations/default_configurations.json", os.R_OK):
         result = pytest.main()
 
         if result == 0:
@@ -23,7 +23,7 @@ def main():
             logger.error("Bugs were found in the test set during execution")
     else:
         logger.critical("Could not access configuration file, suite execution aborted. The\n"
-                        "configurations.json file should be located in the /core/configurations/\n"
+                        "default_configurations.json file should be located in the /core/configurations/\n"
                         "folder. Check the directory and access permissions.")
 
 
