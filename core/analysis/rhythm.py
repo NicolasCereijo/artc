@@ -1,3 +1,4 @@
+from core.analysis import comparisons
 import numpy as np
 import librosa
 
@@ -12,7 +13,7 @@ def compare_two_rhythm(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     tempo1, _ = calculate_rhythm(audio_signal1, sample_rate1, hop_length)
     tempo2, _ = calculate_rhythm(audio_signal2, sample_rate2, hop_length)
 
-    similarity_percentage = 1 - (abs(tempo1 - tempo2) / max(tempo1, tempo2))
+    similarity_percentage = comparisons.normalized_relative_difference_individual(tempo1, tempo2)
 
     if similarity_percentage > 0.999:
         similarity_percentage = 1

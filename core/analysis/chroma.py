@@ -1,4 +1,4 @@
-import core.datastructures as dt_structs
+from core.analysis import comparisons
 import numpy as np
 import librosa
 
@@ -12,11 +12,7 @@ def compare_two_chroma(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     chroma1 = calculate_chroma(audio_signal1, sample_rate1, n_fft)
     chroma2 = calculate_chroma(audio_signal2, sample_rate2, n_fft)
 
-    dt_structs.adjust_length(chroma1, chroma2)
-    chroma1_vector, chroma2_vector = dt_structs.adjust_dimensions(chroma1, chroma2)
-
-    correlation = np.corrcoef(chroma1_vector.flatten(), chroma2_vector.flatten())[0, 1]
-    similarity_percentage = (correlation + 1) / 2
+    similarity_percentage = comparisons.pearson_correlation(chroma1, chroma2)
 
     if similarity_percentage > 0.999:
         similarity_percentage = 1

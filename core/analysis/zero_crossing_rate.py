@@ -1,4 +1,5 @@
 import core.datastructures as dt_structs
+from core.analysis import comparisons
 import numpy as np
 import librosa
 
@@ -27,8 +28,7 @@ def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
     zcr1_vector = np.array(zcr1_vector)
     zcr2_vector = np.array(zcr2_vector)
 
-    similarity_percentage = 1 - (np.abs(zcr1_vector - zcr2_vector) / np.maximum(zcr1_vector.max(), zcr2_vector.max()))
-    similarity_percentage = np.mean(similarity_percentage)
+    similarity_percentage = comparisons.normalized_relative_difference_array(zcr1_vector, zcr2_vector)
 
     if similarity_percentage > 0.999:
         similarity_percentage = 1

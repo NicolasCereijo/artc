@@ -1,7 +1,6 @@
-import core.datastructures as dt_structs
+from core.analysis import comparisons
 import numpy as np
 import librosa
-from sklearn.metrics.pairwise import cosine_similarity
 
 
 def calculate_mfcc(audio_signal: np.ndarray, sample_rate: float, n_fft: int = 8192) -> np.ndarray:
@@ -14,9 +13,7 @@ def compare_two_mfcc(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     mfcc1 = calculate_mfcc(audio_signal1, sample_rate1, n_fft)
     mfcc2 = calculate_mfcc(audio_signal2, sample_rate2, n_fft)
 
-    mfcc1_vector, mfcc2_vector = dt_structs.adjust_dimensions(mfcc1, mfcc2)
-
-    similarity_percentage = cosine_similarity(mfcc1_vector, mfcc2_vector)[0][0]
+    similarity_percentage = comparisons.cosine_similarity_coefficient(mfcc1, mfcc2)
 
     if similarity_percentage > 0.999:
         similarity_percentage = 1
