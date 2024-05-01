@@ -28,12 +28,10 @@ def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
     zcr1_vector = np.array(zcr1_vector)
     zcr2_vector = np.array(zcr2_vector)
 
-    similarity_percentage = comparisons.normalized_relative_difference_array(zcr1_vector, zcr2_vector)
+    similarity_percentage = comparisons.round_to_one(
+        comparisons.normalized_relative_difference_array(zcr1_vector, zcr2_vector))
 
-    if similarity_percentage > 0.999:
-        similarity_percentage = 1
-
-    return max(similarity_percentage, 0)
+    return max(0.0, similarity_percentage)
 
 
 def compare_multiple_zcr(audio_signals: list) -> float:
@@ -45,9 +43,6 @@ def compare_multiple_zcr(audio_signals: list) -> float:
             similarity = compare_two_zcr(audio_signals[i], audio_signals[j])
             similarity_values.append(similarity)
 
-    mean_similarity = np.mean(similarity_values)
-
-    if mean_similarity > 0.999:
-        mean_similarity = 1
+    mean_similarity = comparisons.round_to_one(np.mean(similarity_values))
 
     return mean_similarity

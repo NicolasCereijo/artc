@@ -13,12 +13,10 @@ def compare_two_rhythm(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     tempo1, _ = calculate_rhythm(audio_signal1, sample_rate1, hop_length)
     tempo2, _ = calculate_rhythm(audio_signal2, sample_rate2, hop_length)
 
-    similarity_percentage = comparisons.normalized_relative_difference_individual(tempo1, tempo2)
+    similarity_percentage = comparisons.round_to_one(
+        comparisons.normalized_relative_difference_individual(tempo1, tempo2))
 
-    if similarity_percentage > 0.999:
-        similarity_percentage = 1
-
-    return similarity_percentage
+    return max(0.0, similarity_percentage)
 
 
 def compare_multiple_rhythm(audio_signals: list, sample_rates: list, hop_length: int = 1024) -> float:
@@ -34,9 +32,6 @@ def compare_multiple_rhythm(audio_signals: list, sample_rates: list, hop_length:
                                             sample_rates[i], sample_rates[j], hop_length)
             similarity_values.append(similarity)
 
-    mean_similarity = np.mean(similarity_values)
-
-    if mean_similarity > 0.999:
-        mean_similarity = 1
+    mean_similarity = comparisons.round_to_one(np.mean(similarity_values))
 
     return mean_similarity

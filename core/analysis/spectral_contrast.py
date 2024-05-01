@@ -12,12 +12,10 @@ def compare_two_spectral_contrast(audio_signal1: np.ndarray, audio_signal2: np.n
     spectral_contrast1 = calculate_spectral_contrast(audio_signal1, sample_rate1, hop_length)
     spectral_contrast2 = calculate_spectral_contrast(audio_signal2, sample_rate2, hop_length)
 
-    similarity_percentage = comparisons.pearson_correlation(spectral_contrast1, spectral_contrast2)
+    similarity_percentage = comparisons.round_to_one(
+        comparisons.pearson_correlation(spectral_contrast1, spectral_contrast2))
 
-    if similarity_percentage > 0.999:
-        similarity_percentage = 1
-
-    return similarity_percentage
+    return max(0.0, similarity_percentage)
 
 
 def compare_multiple_spectral_contrast(audio_signals: list, sample_rates: list, hop_length: int = 2048) -> float:
@@ -33,9 +31,6 @@ def compare_multiple_spectral_contrast(audio_signals: list, sample_rates: list, 
                                                        sample_rates[i], sample_rates[j], hop_length)
             similarity_values.append(similarity)
 
-    mean_similarity = np.mean(similarity_values)
-
-    if mean_similarity > 0.999:
-        mean_similarity = 1
+    mean_similarity = comparisons.round_to_one(np.mean(similarity_values))
 
     return mean_similarity
