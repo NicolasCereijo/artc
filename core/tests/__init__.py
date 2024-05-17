@@ -1,10 +1,12 @@
 from core.tests import *
 import core.errors as errors
+import importlib.resources
 import pytest
 import os
 
 
 def main():
+    configuration_path = str(importlib.resources.files('core.configurations') / 'default_configurations.json')
     logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Running the main test suite for ARtC...\n" +
@@ -15,7 +17,7 @@ def main():
                 " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
                 ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
-    if os.access("../configurations/default_configurations.json", os.R_OK):
+    if os.access(configuration_path, os.R_OK):
         result = pytest.main()
 
         if result == 0:

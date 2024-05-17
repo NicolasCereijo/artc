@@ -1,12 +1,14 @@
 import core.datastructures as dt_structs
 import core.analysis as analysis
 import core.errors as errors
+import importlib.resources
 import logging
 import os
 
 
 def main():
-    configuration_path = "configurations/default_configurations.json"
+    configuration_path = str(importlib.resources.files('core.configurations') / 'default_configurations.json')
+    files_path = str(importlib.resources.path('test_collection.water_sounds', '')) + '/'
     logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Starting the ARtC suite...\n\n" +
@@ -18,10 +20,8 @@ def main():
 
     if os.access(configuration_path, os.R_OK):
         example_set = dt_structs.WorkingSet("main_set")
-        example_set.add_file("../test_collection/water_sounds/",
-                             "little-waves.mp3", configuration_path)
-        example_set.add_file("../test_collection/water_sounds/",
-                             "waves-in-caves.wav", configuration_path)
+        example_set.add_file(files_path, "little-waves.mp3", configuration_path)
+        example_set.add_file(files_path, "waves-in-caves.wav", configuration_path)
 
         audio_signal_1 = example_set["little-waves.mp3"].audio_signal_loaded
         sample_rate1 = example_set["little-waves.mp3"].sample_rate

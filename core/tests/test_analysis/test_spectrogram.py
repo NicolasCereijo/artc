@@ -1,18 +1,13 @@
 import core.analysis as analysis
+import importlib.resources
 import librosa
 import pytest
 
 
 @pytest.fixture()
 def setup():
-    """
-        Audio files for testing. When running the tests the relative
-        path to the files changes, so it is necessary to specify it.
+    files_path = str(importlib.resources.path('test_collection.water_sounds', '')) + '/'
 
-        Returns:
-            data_set (dict): Dictionary with file paths.
-    """
-    files_path = "../../test_collection/water_sounds/"
     data_set = {"individual_files":  [
         {"path": files_path, "name": "little-waves.mp3"},
         {"path": files_path, "name": "waves-in-caves.wav"},

@@ -1,24 +1,15 @@
 import core.configurations as config
+import importlib.resources
 import pytest
 
 
 @pytest.fixture()
 def setup():
-    """
-        Selection of the path to the configuration file. When running
-        the tests the relative path to the configuration file changes,
-        so it is necessary to specify it.
-
-        Returns:
-            path: Relative path to the configuration file.
-            name: Name of the configuration file.
-    """
-    return "../configurations/", "default_configurations.json"
+    return str(importlib.resources.files('core.configurations') / 'default_configurations.json')
 
 
 def test_open_config(setup):
-    path, name = setup
-    configuration_file = path + name
+    configuration_file = setup
 
     assert config.open_config(configuration_file) is not None
 
@@ -27,8 +18,7 @@ def test_open_config(setup):
 
 
 def test_read_config(setup):
-    path, name = setup
-    configuration_file = path + name
+    configuration_file = setup
 
     assert config.read_config("all", configuration_file) is not None
     assert config.read_config("extensions", configuration_file) is not None

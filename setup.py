@@ -1,19 +1,13 @@
 import sys
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Check Python version
 if sys.version_info < (3, 10):
     sys.exit("Python 3.10 or higher is required for this project.")
 
 # Dependencies list
-requires = [
-        "colorlog==6.8.2",
-        "librosa==0.10.1",
-        "numpy==1.26.1",
-        "pytest==8.0.1",
-        "requests==2.31.0",
-        "scikit-learn==1.3.2",
-]
+with open('requirements.txt') as f:
+    requires = f.read().splitlines()
 
 setup(
     name="artc-suite",
@@ -26,4 +20,6 @@ setup(
     keywords=["audio", "analysis", "comparison", "real-time", "data collection"],
     license="MIT",
     install_requires=requires,
+    packages=find_packages(),
+    package_data={'core.configurations': ['default_configurations.json']}
 )

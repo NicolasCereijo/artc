@@ -1,19 +1,15 @@
 import core.errors as errors
+import importlib.resources
 import pytest
 
 
 @pytest.fixture()
 def setup():
-    """
-        Selection of the path to the configuration file. When running
-        the tests the relative path to the configuration file changes,
-        so it is necessary to specify it.
+    configuration_path = str(importlib.resources.path('core.configurations', '')) + '/'
+    ambient_sounds_path = str(importlib.resources.path('test_collection.ambient_sounds', '')) + '/'
+    fire_sounds_path = str(importlib.resources.path('test_collection.fire_sounds', '')) + '/'
 
-        Returns:
-            path (str): Relative path to the configuration file.
-            name (str): Name of the configuration file.
-    """
-    return "../configurations/", "default_configurations.json"
+    return configuration_path, "default_configurations.json", ambient_sounds_path, fire_sounds_path
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -28,19 +24,16 @@ def test_get_extension():
 
 
 def test_check_audio_format(setup):
-    path, name = setup
+    path, name, ambient_sounds_path, fire_sounds_path = setup
     configuration_file = path + name
 
-    assert errors.check_audio_format("../../test_collection/ambient_sounds/",
-                                     "Desert Howling Wind.mp3", configuration_file)
-    assert errors.check_audio_format("../../test_collection/fire_sounds/",
-                                     "Burning-fireplace.wav", configuration_file)
+    assert errors.check_audio_format(ambient_sounds_path, "Desert Howling Wind.mp3", configuration_file)
+    assert errors.check_audio_format(fire_sounds_path, "Burning-fireplace.wav", configuration_file)
 
     assert errors.check_audio_format("", "", configuration_file) is False
     assert errors.check_audio_format("", "invalid_file", configuration_file) is False
     assert errors.check_audio_format("", "invalid_file.pdf", configuration_file) is False
-    assert errors.check_audio_format("../../test_collection/ambient_sounds/",
-                                     "invalid_file", configuration_file) is False
+    assert errors.check_audio_format(ambient_sounds_path, "invalid_file", configuration_file) is False
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -62,7 +55,7 @@ def test_check_url_reachable():
 
 
 def test_check_path_accessible(setup):
-    path, name = setup
+    path, name, _, _ = setup
     configuration_file = path + name
 
     assert errors.check_path_accessible(configuration_file)
@@ -72,7 +65,7 @@ def test_check_path_accessible(setup):
 
 
 def test_check_file_readable(setup):
-    path, name = setup
+    path, name, _, _ = setup
 
     assert errors.check_file_readable(path, name)
 
@@ -85,7 +78,7 @@ def test_check_file_readable(setup):
 @pytest.mark.skipif(not errors.check_url_reachable("https://www.google.com/"),
                     reason="This test requires an internet connection to run")
 def test_validate_path(setup):
-    path, name = setup
+    path, name, _, _ = setup
     url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"
 
     assert errors.validate_path(path, name)
