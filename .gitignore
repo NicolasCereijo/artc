@@ -10,5 +10,8 @@ __pycache__/
 # Ignore application-generated log files
 *.log
 
+# Ignore PyCharm project files
+.idea/
+
 # Private until first kernel release
 test_collection/
