@@ -1,6 +1,6 @@
-import core.datastructures as dt_structs
-import core.analysis as analysis
-import core.errors as errors
+from . import datastructures as dt_structs
+from . import analysis as analysis
+from . import errors as errors
 import importlib.resources
 import logging
 import os

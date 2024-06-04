@@ -10,10 +10,10 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 setup(
-    name="artc-suite",
+    name="artc",
     version="1.0a2",
     description="Alpha version of the ARtC (Audio Real-time Comparator) core",
-    long_description="A suite designed to compare and analyze audio files in real time.",
+    long_description="A tool designed to compare and analyze audio files in real time.",
     author="Nicolás Cereijo Ranchal",
     author_email="nicolascereijoranchal@gmail.com",
     url="https://github.com/NicolasCereijo/artc-suite",
