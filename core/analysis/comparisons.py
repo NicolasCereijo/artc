@@ -35,3 +35,13 @@ def normalized_relative_difference_array(array1: np.ndarray, array2: np.ndarray)
     similarity_percentage = np.mean(similarity_percentage)
 
     return similarity_percentage
+
+
+def normalized_euclidean_distance(array1: np.ndarray, array2: np.ndarray) -> float:
+    vector1, vector2 = dt_structs.adjust_dimensions(array1, array2)
+
+    euclidean_distance = np.linalg.norm(vector1 - vector2)
+    max_distance = np.sqrt(len(vector1))
+    normalized_distance = euclidean_distance / max_distance
+
+    return normalized_distance
