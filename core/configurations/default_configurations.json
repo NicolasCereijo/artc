@@ -6,6 +6,7 @@
     "window_parameter": {
       "chroma": 2048,
       "energy_envelope": 2048,
+      "harmonic_noise_ratio": 1024,
       "mfcc": 8192,
       "rhythm": 1024,
       "spectral_contrast": 2048,

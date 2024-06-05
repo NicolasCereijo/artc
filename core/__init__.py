@@ -48,6 +48,16 @@ def main():
         print(f"Energy envelope between signals 2 and 1: "
               f"{analysis.compare_two_energy_envelope(audio_signal_2, audio_signal_1)}\n")
 
+        print("Harmonic noise ratio comparison:")
+        print(f"Harmonic noise ratio of signal 1 with it self: "
+              f"{analysis.compare_two_harmonic_noise_ratio(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Harmonic noise ratio of signal 2 with it self: "
+              f"{analysis.compare_two_harmonic_noise_ratio(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Harmonic noise ratio between signals 1 and 2: "
+              f"{analysis.compare_two_harmonic_noise_ratio(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Harmonic noise ratio between signals 2 and 1: "
+              f"{analysis.compare_two_harmonic_noise_ratio(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("MFCC comparison:")
         print(f"MFCC of signal 1 with it self: "
               f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
