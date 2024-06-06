@@ -58,6 +58,16 @@ def main():
         print(f"Harmonic noise ratio between signals 2 and 1: "
               f"{analysis.compare_two_harm_noise_ratio(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
+        print("Loudness comparison:")
+        print(f"Loudness of signal 1 with it self: "
+              f"{analysis.compare_two_loudness(audio_signal_1, audio_signal_1)}")
+        print(f"Loudness of signal 2 with it self: "
+              f"{analysis.compare_two_loudness(audio_signal_2, audio_signal_2)}")
+        print(f"Loudness between signals 1 and 2: "
+              f"{analysis.compare_two_loudness(audio_signal_1, audio_signal_2)}")
+        print(f"Loudness between signals 2 and 1: "
+              f"{analysis.compare_two_loudness(audio_signal_2, audio_signal_1)}\n")
+
         print("MFCC comparison:")
         print(f"MFCC of signal 1 with it self: "
               f"{analysis.compare_two_mfcc(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")

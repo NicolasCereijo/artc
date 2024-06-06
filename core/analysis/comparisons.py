@@ -41,7 +41,12 @@ def normalized_euclidean_distance(array1: np.ndarray, array2: np.ndarray) -> flo
     vector1, vector2 = dt_structs.adjust_dimensions(array1, array2)
 
     euclidean_distance = np.linalg.norm(vector1 - vector2)
-    max_distance = np.sqrt(len(vector1))
+    max_distance = np.linalg.norm(np.ones_like(vector1) * (np.max(vector1) - np.min(vector1)) +
+                                  np.ones_like(vector2) * (np.max(vector2) - np.min(vector2)))
     normalized_distance = euclidean_distance / max_distance
 
-    return normalized_distance
+    # The normalized distance approaches 0 for very similar vectors and 1 for
+    # completely different vectors, the percentage is returned in reverse
+    similarity_percentage = 1 - normalized_distance
+
+    return similarity_percentage
