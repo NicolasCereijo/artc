@@ -78,6 +78,16 @@ def main():
         print(f"MFCC between signals 2 and 1: "
               f"{analysis.compare_two_mfcc(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
+        print("Onset detection comparison:")
+        print(f"Onset detection of signal 1 with it self: "
+              f"{analysis.compare_two_onset_detection(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Onset detection of signal 2 with it self: "
+              f"{analysis.compare_two_onset_detection(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Onset detection between signals 1 and 2: "
+              f"{analysis.compare_two_onset_detection(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Onset detection between signals 2 and 1: "
+              f"{analysis.compare_two_onset_detection(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("Rhythm comparison:")
         print(f"Rhythm of signal 1 with itself: "
               f"{analysis.compare_two_rhythm(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")

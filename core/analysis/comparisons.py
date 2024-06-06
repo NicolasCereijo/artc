@@ -31,7 +31,9 @@ def normalized_relative_difference_individual(value1: float, value2: float) -> f
 
 
 def normalized_relative_difference_array(array1: np.ndarray, array2: np.ndarray) -> float:
-    similarity_percentage = 1 - (abs(array1 - array2) / max(array1.max(), array2.max()))
+    vector1, vector2 = dt_structs.adjust_length(array1, array2)
+
+    similarity_percentage = 1 - (abs(vector1 - vector2) / max(vector1.max(), vector2.max()))
     similarity_percentage = np.mean(similarity_percentage)
 
     return similarity_percentage

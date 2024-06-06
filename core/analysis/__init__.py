@@ -3,6 +3,7 @@ from core.analysis.energy_envelope import compare_two_energy_envelope, compare_m
 from core.analysis.harmonic_noise_ratio import compare_two_harm_noise_ratio, compare_multiple_harm_noise_ratio
 from core.analysis.loudness import compare_two_loudness, compare_multiple_loudness
 from core.analysis.mfcc import compare_two_mfcc, compare_multiple_mfcc
+from core.analysis.onset_detection import compare_two_onset_detection, compare_multiple_onset_detection
 from core.analysis.rhythm import compare_two_rhythm, compare_multiple_rhythm
 from core.analysis.spectral_contrast import compare_two_spectral_contrast, compare_multiple_spectral_contrast
 from core.analysis.spectrogram import compare_two_spectrograms, compare_multiple_spectrograms

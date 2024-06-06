@@ -17,7 +17,7 @@ def setup():
     return data_set
 
 
-def test_compare_two_chroma(setup):
+def test_compare_two_harm_noise_ratio(setup):
     data_set = setup
     n_fft = 1024
     hop_length: int = 1024
@@ -48,7 +48,7 @@ def test_compare_two_chroma(setup):
                                                  n_fft, hop_length) == 0.6266191303730011
 
 
-def test_compare_multiple_chroma(setup):
+def test_compare_multiple_harm_noise_ratio(setup):
     data_set = setup
     n_fft = 1024
     hop_length: int = 1024
