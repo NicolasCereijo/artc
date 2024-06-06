@@ -1,6 +1,6 @@
 from core.analysis.chroma import compare_two_chroma, compare_multiple_chroma
 from core.analysis.energy_envelope import compare_two_energy_envelope, compare_multiple_energy_envelope
-from core.analysis.harmonic_noise_ratio import compare_two_harmonic_noise_ratio, compare_multiple_harmonic_noise_ratio
+from core.analysis.harmonic_noise_ratio import compare_two_harm_noise_ratio, compare_multiple_harm_noise_ratio
 from core.analysis.mfcc import compare_two_mfcc, compare_multiple_mfcc
 from core.analysis.rhythm import compare_two_rhythm, compare_multiple_rhythm
 from core.analysis.spectral_contrast import compare_two_spectral_contrast, compare_multiple_spectral_contrast

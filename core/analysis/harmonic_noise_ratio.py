@@ -12,8 +12,8 @@ def calculate_harmonic_noise_ratio(audio_signal: np.ndarray, n_fft: int = 1024, 
     return harmonic_power / (harmonic_power + percussive_power)
 
 
-def compare_two_harmonic_noise_ratio(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                                     n_fft: int = 1024, hop_length: int = 1024) -> float:
+def compare_two_harm_noise_ratio(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
+                                 n_fft: int = 1024, hop_length: int = 1024) -> float:
     harmonic1 = calculate_harmonic_noise_ratio(audio_signal1, n_fft, hop_length)
     harmonic2 = calculate_harmonic_noise_ratio(audio_signal2, n_fft, hop_length)
 
@@ -23,13 +23,13 @@ def compare_two_harmonic_noise_ratio(audio_signal1: np.ndarray, audio_signal2: n
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_harmonic_noise_ratio(audio_signals: list, n_fft: int = 1024, hop_length: int = 1024) -> float:
+def compare_multiple_harm_noise_ratio(audio_signals: list, n_fft: int = 1024, hop_length: int = 1024) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 
     for i in range(num_signals):
         for j in range(i + 1, num_signals):
-            similarity = compare_two_harmonic_noise_ratio(audio_signals[i], audio_signals[j], n_fft, hop_length)
+            similarity = compare_two_harm_noise_ratio(audio_signals[i], audio_signals[j], n_fft, hop_length)
             similarity_values.append(similarity)
 
     mean_similarity = comparisons.round_to_one(np.mean(similarity_values))
