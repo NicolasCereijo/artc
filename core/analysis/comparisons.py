@@ -10,6 +10,10 @@ def round_to_one(number: float) -> float:
 
 
 def pearson_correlation(array1: np.ndarray, array2: np.ndarray) -> float:
+    """
+        The expected input format is [[..., float, ...]] For single
+        dimension collections apply .reshape(1, -1) previously
+    """
     vector1, vector2 = dt_structs.adjust_dimensions(array1, array2)
 
     correlation = np.corrcoef(vector1.flatten(), vector2.flatten())[0, 1]

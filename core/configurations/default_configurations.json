@@ -4,6 +4,7 @@
   },
   "metric": {
     "window_parameter": {
+      "beat_alignment": 1024,
       "chroma": 2048,
       "energy_envelope": 2048,
       "harmonic_noise_ratio": 1024,

@@ -28,6 +28,16 @@ def main():
         audio_signal_2 = example_set["waves-in-caves.wav"].audio_signal_loaded
         sample_rate2 = example_set["waves-in-caves.wav"].sample_rate
 
+        print("Beat alignment comparison:")
+        print(f"Beat alignment of signal 1 with it self: "
+              f"{analysis.compare_two_beat_alignment(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Beat alignment of signal 2 with it self: "
+              f"{analysis.compare_two_beat_alignment(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Beat alignment between signals 1 and 2: "
+              f"{analysis.compare_two_beat_alignment(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Beat alignment between signals 2 and 1: "
+              f"{analysis.compare_two_beat_alignment(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("Chroma comparison:")
         print(f"Chroma of signal 1 with it self: "
               f"{analysis.compare_two_chroma(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
