@@ -1,8 +1,8 @@
-import core.tests as t
+import core
 
 
 def main():
-    t.main()
+    core.main()
 
 
 if __name__ == "__main__":
