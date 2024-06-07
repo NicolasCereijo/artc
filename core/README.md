@@ -19,6 +19,7 @@
 ![\color{white}NED_{X,Y}=\frac{\sqrt{\sum_{i=1}^{n}(X_{i}-Y_{i})^2}}{\sqrt[]{n}}](https://latex.codecogs.com/svg.image?\color{white}NED_{X,Y}=\frac{\sqrt{\sum_{i=1}^{n}(X_{i}-Y_{i})^2}}{\sqrt[]{n}})
 
 ### Metrics
+- beat_alignment ⟶ <span style="color:#FF0082">Normalized relative difference</span>
 - chroma ⟶ <span style="color:#7B68EE">Pearson correlation</span>
 - energy_envelope ⟶ <span style="color:#7B68EE">Pearson correlation</span>
 - harmonic_noise_ratio ⟶ <span style="color:#FF0082">Normalized relative difference</span>
