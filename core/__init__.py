@@ -48,6 +48,16 @@ def main():
         print(f"Chroma between signals 2 and 1: "
               f"{analysis.compare_two_chroma(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
+        print("Dynamic time warping comparison:")
+        print(f"Dynamic time warping comparison of signal 1 with it self: "
+              f"{analysis.compare_two_dtw(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Dynamic time warping comparison of signal 2 with it self: "
+              f"{analysis.compare_two_dtw(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Dynamic time warping comparison between signals 1 and 2: "
+              f"{analysis.compare_two_dtw(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Dynamic time warping comparison between signals 2 and 1: "
+              f"{analysis.compare_two_dtw(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("Energy envelope comparison:")
         print(f"Energy envelope of signal 1 with it self: "
               f"{analysis.compare_two_energy_envelope(audio_signal_1, audio_signal_1)}")

@@ -21,6 +21,7 @@
 ### Metrics
 - beat_alignment ⟶ <span style="color:#FF0082">Normalized relative difference</span>
 - chroma ⟶ <span style="color:#7B68EE">Pearson correlation</span>
+- dynamic_time_warping ⟶ <span style="color:#7B68EE">Pearson correlation</span>
 - energy_envelope ⟶ <span style="color:#7B68EE">Pearson correlation</span>
 - harmonic_noise_ratio ⟶ <span style="color:#FF0082">Normalized relative difference</span>
 - loudness ⟶ <span style="color:#1682B4">Normalized euclidean distance</span>
