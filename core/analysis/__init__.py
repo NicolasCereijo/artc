@@ -7,6 +7,7 @@ from core.analysis.loudness import compare_two_loudness, compare_multiple_loudne
 from core.analysis.mfcc import compare_two_mfcc, compare_multiple_mfcc
 from core.analysis.onset_detection import compare_two_onset_detection, compare_multiple_onset_detection
 from core.analysis.peak_matching import compare_two_peak_matching, compare_multiple_peak_matching
+from core.analysis.pitch import compare_two_pitch, compare_multiple_pitch
 from core.analysis.rhythm import compare_two_rhythm, compare_multiple_rhythm
 from core.analysis.spectral_contrast import compare_two_spectral_contrast, compare_multiple_spectral_contrast
 from core.analysis.spectrogram import compare_two_spectrograms, compare_multiple_spectrograms

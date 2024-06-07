@@ -118,6 +118,16 @@ def main():
         print(f"Peak matching between signals 2 and 1: "
               f"{analysis.compare_two_peak_matching(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
+        print("Pitch comparison:")
+        print(f"Pitch of signal 1 with it self: "
+              f"{analysis.compare_two_pitch(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Pitch of signal 2 with it self: "
+              f"{analysis.compare_two_pitch(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Pitch between signals 1 and 2: "
+              f"{analysis.compare_two_pitch(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Pitch between signals 2 and 1: "
+              f"{analysis.compare_two_pitch(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
         print("Rhythm comparison:")
         print(f"Rhythm of signal 1 with itself: "
               f"{analysis.compare_two_rhythm(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
