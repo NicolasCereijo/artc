@@ -34,17 +34,17 @@ def test_compare_two_sp_contrast(setup):
     assert analysis.compare_two_spectral_contrast(audio_signal3, audio_signal3,
                                                   sample_rate3, sample_rate3, hop_length) == 1
     assert analysis.compare_two_spectral_contrast(audio_signal1, audio_signal2,
-                                                  sample_rate1, sample_rate2, hop_length) == 0.9595097341913768
+                                                  sample_rate1, sample_rate2, hop_length) == 0.7382178677736705
     assert analysis.compare_two_spectral_contrast(audio_signal2, audio_signal1,
-                                                  sample_rate2, sample_rate1, hop_length) == 0.9595097341913768
+                                                  sample_rate2, sample_rate1, hop_length) == 0.7382178677736705
     assert analysis.compare_two_spectral_contrast(audio_signal1, audio_signal3,
-                                                  sample_rate1, sample_rate3, hop_length) == 0.9645128780338763
+                                                  sample_rate1, sample_rate3, hop_length) == 0.7430795299456762
     assert analysis.compare_two_spectral_contrast(audio_signal3, audio_signal1,
-                                                  sample_rate3, sample_rate1, hop_length) == 0.9645128780338763
+                                                  sample_rate3, sample_rate1, hop_length) == 0.7430795299456762
     assert analysis.compare_two_spectral_contrast(audio_signal2, audio_signal3,
-                                                  sample_rate2, sample_rate3, hop_length) == 0.9746462489641077
+                                                  sample_rate2, sample_rate3, hop_length) == 0.751099381802975
     assert analysis.compare_two_spectral_contrast(audio_signal3, audio_signal2,
-                                                  sample_rate3, sample_rate2, hop_length) == 0.9746462489641077
+                                                  sample_rate3, sample_rate2, hop_length) == 0.751099381802975
 
 
 def test_compare_multiple_sp_contrast(setup):
@@ -64,17 +64,17 @@ def test_compare_multiple_sp_contrast(setup):
     assert analysis.compare_multiple_spectral_contrast([audio_signal3, audio_signal3],
                                                        [sample_rate3, sample_rate3], hop_length) == 1
     assert analysis.compare_multiple_spectral_contrast([audio_signal1, audio_signal2],
-                                                       [sample_rate1, sample_rate2], hop_length) == 0.9595097341913768
+                                                       [sample_rate1, sample_rate2], hop_length) == 0.7382178677736705
     assert analysis.compare_multiple_spectral_contrast([audio_signal2, audio_signal1],
-                                                       [sample_rate2, sample_rate1], hop_length) == 0.9595097341913768
+                                                       [sample_rate2, sample_rate1], hop_length) == 0.7382178677736705
     assert analysis.compare_multiple_spectral_contrast([audio_signal1, audio_signal3],
-                                                       [sample_rate1, sample_rate3], hop_length) == 0.9645128780338763
+                                                       [sample_rate1, sample_rate3], hop_length) == 0.7430795299456762
     assert analysis.compare_multiple_spectral_contrast([audio_signal3, audio_signal1],
-                                                       [sample_rate3, sample_rate1], hop_length) == 0.9645128780338763
+                                                       [sample_rate3, sample_rate1], hop_length) == 0.7430795299456762
     assert analysis.compare_multiple_spectral_contrast([audio_signal2, audio_signal3],
-                                                       [sample_rate2, sample_rate3], hop_length) == 0.9746462489641077
+                                                       [sample_rate2, sample_rate3], hop_length) == 0.751099381802975
     assert analysis.compare_multiple_spectral_contrast([audio_signal3, audio_signal2],
-                                                       [sample_rate3, sample_rate2], hop_length) == 0.9746462489641077
+                                                       [sample_rate3, sample_rate2], hop_length) == 0.751099381802975
 
     assert analysis.compare_multiple_spectral_contrast([audio_signal1, audio_signal1, audio_signal1],
                                                        [sample_rate1, sample_rate1, sample_rate1], hop_length) == 1

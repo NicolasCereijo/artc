@@ -34,17 +34,17 @@ def test_compare_two_chroma(setup):
     assert analysis.compare_two_chroma(audio_signal3, audio_signal3,
                                        sample_rate3, sample_rate3, n_fft) == 1
     assert analysis.compare_two_chroma(audio_signal1, audio_signal2,
-                                       sample_rate1, sample_rate2, n_fft) == 0.5119260753515165
+                                       sample_rate1, sample_rate2, n_fft) == 0.7473810479150438
     assert analysis.compare_two_chroma(audio_signal2, audio_signal1,
-                                       sample_rate2, sample_rate1, n_fft) == 0.5119260753515165
+                                       sample_rate2, sample_rate1, n_fft) == 0.7473810479150438
     assert analysis.compare_two_chroma(audio_signal1, audio_signal3,
-                                       sample_rate1, sample_rate3, n_fft) == 0.5222065993957332
+                                       sample_rate1, sample_rate3, n_fft) == 0.7572948702819622
     assert analysis.compare_two_chroma(audio_signal3, audio_signal1,
-                                       sample_rate3, sample_rate1, n_fft) == 0.5222065993957332
+                                       sample_rate3, sample_rate1, n_fft) == 0.7572948702819622
     assert analysis.compare_two_chroma(audio_signal2, audio_signal3,
-                                       sample_rate2, sample_rate3, n_fft) == 0.5073207366154815
+                                       sample_rate2, sample_rate3, n_fft) == 0.7497419964509855
     assert analysis.compare_two_chroma(audio_signal3, audio_signal2,
-                                       sample_rate3, sample_rate2, n_fft) == 0.5073207366154815
+                                       sample_rate3, sample_rate2, n_fft) == 0.7497419964509855
 
 
 def test_compare_multiple_chroma(setup):
@@ -64,17 +64,17 @@ def test_compare_multiple_chroma(setup):
     assert analysis.compare_multiple_chroma([audio_signal3, audio_signal3],
                                             [sample_rate3, sample_rate3], n_fft) == 1
     assert analysis.compare_multiple_chroma([audio_signal1, audio_signal2],
-                                            [sample_rate1, sample_rate2], n_fft) == 0.5119260753515165
+                                            [sample_rate1, sample_rate2], n_fft) == 0.7473810479150438
     assert analysis.compare_multiple_chroma([audio_signal2, audio_signal1],
-                                            [sample_rate2, sample_rate1], n_fft) == 0.5119260753515165
+                                            [sample_rate2, sample_rate1], n_fft) == 0.7473810479150438
     assert analysis.compare_multiple_chroma([audio_signal1, audio_signal3],
-                                            [sample_rate1, sample_rate3], n_fft) == 0.5222065993957332
+                                            [sample_rate1, sample_rate3], n_fft) == 0.7572948702819622
     assert analysis.compare_multiple_chroma([audio_signal3, audio_signal1],
-                                            [sample_rate3, sample_rate1], n_fft) == 0.5222065993957332
+                                            [sample_rate3, sample_rate1], n_fft) == 0.7572948702819622
     assert analysis.compare_multiple_chroma([audio_signal2, audio_signal3],
-                                            [sample_rate2, sample_rate3], n_fft) == 0.5073207366154815
+                                            [sample_rate2, sample_rate3], n_fft) == 0.7497419964509855
     assert analysis.compare_multiple_chroma([audio_signal3, audio_signal2],
-                                            [sample_rate3, sample_rate2], n_fft) == 0.5073207366154815
+                                            [sample_rate3, sample_rate2], n_fft) == 0.7497419964509855
 
     assert analysis.compare_multiple_chroma([audio_signal1, audio_signal1, audio_signal1],
                                             [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1

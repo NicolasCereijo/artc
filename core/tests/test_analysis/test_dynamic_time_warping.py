@@ -19,7 +19,7 @@ def setup():
 
 def test_compare_two_dtw(setup):
     data_set = setup
-    n_fft = 8192
+    n_fft = 1024
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -34,22 +34,22 @@ def test_compare_two_dtw(setup):
     assert analysis.compare_two_dtw(audio_signal3, audio_signal3,
                                     sample_rate3, sample_rate3, n_fft) == 1
     assert analysis.compare_two_dtw(audio_signal1, audio_signal2,
-                                    sample_rate1, sample_rate2, n_fft) == 0.9295386510652237
+                                    sample_rate1, sample_rate2, n_fft) == 0.6983221751229416
     assert analysis.compare_two_dtw(audio_signal2, audio_signal1,
-                                    sample_rate2, sample_rate1, n_fft) == 0.9295386510652237
+                                    sample_rate2, sample_rate1, n_fft) == 0.6983221751229416
     assert analysis.compare_two_dtw(audio_signal1, audio_signal3,
-                                    sample_rate1, sample_rate3, n_fft) == 0.9271201742287539
+                                    sample_rate1, sample_rate3, n_fft) == 0.7210570801164502
     assert analysis.compare_two_dtw(audio_signal3, audio_signal1,
-                                    sample_rate3, sample_rate1, n_fft) == 0.9271201742287539
+                                    sample_rate3, sample_rate1, n_fft) == 0.7210570801164502
     assert analysis.compare_two_dtw(audio_signal2, audio_signal3,
-                                    sample_rate2, sample_rate3, n_fft) == 0.7215312445709708
+                                    sample_rate2, sample_rate3, n_fft) == 0.7079522966345457
     assert analysis.compare_two_dtw(audio_signal3, audio_signal2,
-                                    sample_rate3, sample_rate2, n_fft) == 0.7215312445709708
+                                    sample_rate3, sample_rate2, n_fft) == 0.7079522966345457
 
 
 def test_compare_multiple_dtw(setup):
     data_set = setup
-    n_fft = 8192
+    n_fft = 1024
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -64,17 +64,17 @@ def test_compare_multiple_dtw(setup):
     assert analysis.compare_multiple_dtw([audio_signal3, audio_signal3],
                                          [sample_rate3, sample_rate3], n_fft) == 1
     assert analysis.compare_multiple_dtw([audio_signal1, audio_signal2],
-                                         [sample_rate1, sample_rate2], n_fft) == 0.9295386510652237
+                                         [sample_rate1, sample_rate2], n_fft) == 0.6983221751229416
     assert analysis.compare_multiple_dtw([audio_signal2, audio_signal1],
-                                         [sample_rate2, sample_rate1], n_fft) == 0.9295386510652237
+                                         [sample_rate2, sample_rate1], n_fft) == 0.6983221751229416
     assert analysis.compare_multiple_dtw([audio_signal1, audio_signal3],
-                                         [sample_rate1, sample_rate3], n_fft) == 0.9271201742287539
+                                         [sample_rate1, sample_rate3], n_fft) == 0.7210570801164502
     assert analysis.compare_multiple_dtw([audio_signal3, audio_signal1],
-                                         [sample_rate3, sample_rate1], n_fft) == 0.9271201742287539
+                                         [sample_rate3, sample_rate1], n_fft) == 0.7210570801164502
     assert analysis.compare_multiple_dtw([audio_signal2, audio_signal3],
-                                         [sample_rate2, sample_rate3], n_fft) == 0.7215312445709708
+                                         [sample_rate2, sample_rate3], n_fft) == 0.7079522966345457
     assert analysis.compare_multiple_dtw([audio_signal3, audio_signal2],
-                                         [sample_rate3, sample_rate2], n_fft) == 0.7215312445709708
+                                         [sample_rate3, sample_rate2], n_fft) == 0.7079522966345457
 
     assert analysis.compare_multiple_dtw([audio_signal1, audio_signal1, audio_signal1],
                                          [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1

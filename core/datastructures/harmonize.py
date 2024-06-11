@@ -9,8 +9,8 @@ def adjust_length(*ndarrays: np.ndarray[float, ...]) -> tuple[np.ndarray[..., np
 
 
 def adjust_dimensions(*ndarrays: np.ndarray[float, ...]) -> list[np.ndarray[float, ...]]:
-    min_frames = min(array.shape[1] for array in ndarrays)
-    return [array[:, :min_frames] for array in ndarrays]
+    min_frames = min(array.size for array in ndarrays)
+    return [array[:min_frames] for array in ndarrays]
 
 
 def normalize_btw_0_1(*iterables: np.ndarray[float, ...]) -> tuple[list, ...]:

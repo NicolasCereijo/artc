@@ -5,14 +5,14 @@ import librosa
 
 
 def compare_two_dtw(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                    sample_rate1: float, sample_rate2: float, n_fft: int = 8192) -> float:
+                    sample_rate1: float, sample_rate2: float, n_fft: int = 1024) -> float:
     mfcc1 = calculate_mfcc(audio_signal1, sample_rate1, n_fft)
     mfcc2 = calculate_mfcc(audio_signal2, sample_rate2, n_fft)
 
     _, optimal_alignment_path = librosa.sequence.dtw(X=mfcc1, Y=mfcc2, metric='cosine')
 
-    aligned_mfcc1 = mfcc1[:, optimal_alignment_path[:, 0]]
-    aligned_mfcc2 = mfcc2[:, optimal_alignment_path[:, 1]]
+    aligned_mfcc1 = mfcc1[optimal_alignment_path[:, 0]]
+    aligned_mfcc2 = mfcc2[optimal_alignment_path[:, 1]]
 
     similarity_percentage = comparisons.round_to_one(
         comparisons.pearson_correlation(aligned_mfcc1, aligned_mfcc2))
@@ -20,7 +20,7 @@ def compare_two_dtw(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_dtw(audio_signals: list, sample_rates: list, n_fft: int = 8192) -> float:
+def compare_multiple_dtw(audio_signals: list, sample_rates: list, n_fft: int = 1024) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

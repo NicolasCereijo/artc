@@ -9,15 +9,18 @@ def round_to_one(number: float) -> float:
     return number
 
 
+def map_to_zero_one(value: float) -> float:
+    value = max(-1.0, min(1.0, value))
+    return (value + 1) / 2
+
+
 def pearson_correlation(array1: np.ndarray, array2: np.ndarray) -> float:
-    """
-        The expected input format is [[..., float, ...]] For single
-        dimension collections apply .reshape(1, -1) previously
-    """
     vector1, vector2 = dt_structs.adjust_dimensions(array1, array2)
 
+    # The returned correlation matrix contains the correlations between pairs of variables,
+    # the first position contains the correlation of the two vectors.
     correlation = np.corrcoef(vector1.flatten(), vector2.flatten())[0, 1]
-    similarity_percentage = (correlation + 1) / 2
+    similarity_percentage = (map_to_zero_one(float(correlation)) + 1) / 2
 
     return similarity_percentage
 
@@ -25,8 +28,9 @@ def pearson_correlation(array1: np.ndarray, array2: np.ndarray) -> float:
 def cosine_similarity_coefficient(array1: np.ndarray, array2: np.ndarray) -> float:
     vector1, vector2 = dt_structs.adjust_dimensions(array1, array2)
 
-    similarity_percentage = cosine_similarity(vector1, vector2)[0][0]
-    return similarity_percentage
+    # The format returned by cosine similarity is [[value]], the value is returned without square brackets
+    similarity_percentage = cosine_similarity(vector1.reshape(1, -1), vector2.reshape(1, -1))[0][0]
+    return map_to_zero_one(similarity_percentage)
 
 
 def normalized_relative_difference_individual(value1: float, value2: float) -> float:

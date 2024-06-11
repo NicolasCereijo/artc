@@ -3,7 +3,7 @@ import numpy as np
 import librosa
 
 
-def calculate_harmonic_noise_ratio(audio_signal: np.ndarray, n_fft: int = 1024, hop_length: int = 1024) -> float:
+def calculate_harmonic_noise_ratio(audio_signal: np.ndarray, n_fft: int = 512, hop_length: int = 512) -> float:
     harmonic, _ = librosa.effects.hpss(y=audio_signal)
 
     harmonic_power = np.sum(np.abs(librosa.stft(harmonic, n_fft=n_fft, hop_length=hop_length))**2)
@@ -13,7 +13,7 @@ def calculate_harmonic_noise_ratio(audio_signal: np.ndarray, n_fft: int = 1024, 
 
 
 def compare_two_harm_noise_ratio(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                                 n_fft: int = 1024, hop_length: int = 1024) -> float:
+                                 n_fft: int = 512, hop_length: int = 512) -> float:
     harmonic1 = calculate_harmonic_noise_ratio(audio_signal1, n_fft, hop_length)
     harmonic2 = calculate_harmonic_noise_ratio(audio_signal2, n_fft, hop_length)
 
@@ -23,7 +23,7 @@ def compare_two_harm_noise_ratio(audio_signal1: np.ndarray, audio_signal2: np.nd
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_harm_noise_ratio(audio_signals: list, n_fft: int = 1024, hop_length: int = 1024) -> float:
+def compare_multiple_harm_noise_ratio(audio_signals: list, n_fft: int = 512, hop_length: int = 512) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

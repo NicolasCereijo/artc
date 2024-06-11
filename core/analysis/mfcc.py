@@ -4,7 +4,7 @@ import librosa
 
 
 def calculate_mfcc(audio_signal: np.ndarray, sample_rate: float, n_fft: int = 8192) -> np.ndarray:
-    return librosa.feature.mfcc(y=audio_signal, sr=sample_rate, n_mfcc=13, n_fft=n_fft)
+    return librosa.feature.mfcc(y=audio_signal, sr=sample_rate, n_mfcc=13, n_fft=n_fft)[0]
 
 
 def compare_two_mfcc(audio_signal1: np.ndarray, audio_signal2: np.ndarray,

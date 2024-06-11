@@ -4,7 +4,7 @@ import librosa
 
 
 def calculate_spectral_contrast(audio_signal: np.ndarray, sample_rate: float, hop_length: int = 2048) -> np.ndarray:
-    return librosa.feature.spectral_contrast(y=audio_signal, sr=sample_rate, hop_length=hop_length)
+    return librosa.feature.spectral_contrast(y=audio_signal, sr=sample_rate, hop_length=hop_length)[0]
 
 
 def compare_two_spectral_contrast(audio_signal1: np.ndarray, audio_signal2: np.ndarray,

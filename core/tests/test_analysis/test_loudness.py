@@ -29,12 +29,12 @@ def test_compare_two_loudness(setup):
     assert analysis.compare_two_loudness(audio_signal1, audio_signal1) == 1
     assert analysis.compare_two_loudness(audio_signal2, audio_signal2) == 1
     assert analysis.compare_two_loudness(audio_signal3, audio_signal3) == 1
-    assert analysis.compare_two_loudness(audio_signal1, audio_signal2) == 0.8704582303762436
-    assert analysis.compare_two_loudness(audio_signal2, audio_signal1) == 0.8704582303762436
-    assert analysis.compare_two_loudness(audio_signal1, audio_signal3) == 0.748262494802475
-    assert analysis.compare_two_loudness(audio_signal3, audio_signal1) == 0.748262494802475
-    assert analysis.compare_two_loudness(audio_signal2, audio_signal3) == 0.8486940115690231
-    assert analysis.compare_two_loudness(audio_signal3, audio_signal2) == 0.8486940115690231
+    assert analysis.compare_two_loudness(audio_signal1, audio_signal2) == 0.8860558569431305
+    assert analysis.compare_two_loudness(audio_signal2, audio_signal1) == 0.8860558569431305
+    assert analysis.compare_two_loudness(audio_signal1, audio_signal3) == 0.7317001819610596
+    assert analysis.compare_two_loudness(audio_signal3, audio_signal1) == 0.7317001819610596
+    assert analysis.compare_two_loudness(audio_signal2, audio_signal3) == 0.7393499612808228
+    assert analysis.compare_two_loudness(audio_signal3, audio_signal2) == 0.7393499612808228
 
 
 def test_compare_multiple_loudness(setup):
@@ -49,12 +49,12 @@ def test_compare_multiple_loudness(setup):
     assert analysis.compare_multiple_loudness([audio_signal1, audio_signal1]) == 1
     assert analysis.compare_multiple_loudness([audio_signal2, audio_signal2]) == 1
     assert analysis.compare_multiple_loudness([audio_signal3, audio_signal3]) == 1
-    assert analysis.compare_multiple_loudness([audio_signal1, audio_signal2]) == 0.8704582303762436
-    assert analysis.compare_multiple_loudness([audio_signal2, audio_signal1]) == 0.8704582303762436
-    assert analysis.compare_multiple_loudness([audio_signal1, audio_signal3]) == 0.748262494802475
-    assert analysis.compare_multiple_loudness([audio_signal3, audio_signal1]) == 0.748262494802475
-    assert analysis.compare_multiple_loudness([audio_signal2, audio_signal3]) == 0.8486940115690231
-    assert analysis.compare_multiple_loudness([audio_signal3, audio_signal2]) == 0.8486940115690231
+    assert analysis.compare_multiple_loudness([audio_signal1, audio_signal2]) == 0.8860558569431305
+    assert analysis.compare_multiple_loudness([audio_signal2, audio_signal1]) == 0.8860558569431305
+    assert analysis.compare_multiple_loudness([audio_signal1, audio_signal3]) == 0.7317001819610596
+    assert analysis.compare_multiple_loudness([audio_signal3, audio_signal1]) == 0.7317001819610596
+    assert analysis.compare_multiple_loudness([audio_signal2, audio_signal3]) == 0.7393499612808228
+    assert analysis.compare_multiple_loudness([audio_signal3, audio_signal2]) == 0.7393499612808228
 
     assert analysis.compare_multiple_loudness([audio_signal1, audio_signal1, audio_signal1]) == 1
     assert analysis.compare_multiple_loudness([audio_signal2, audio_signal2, audio_signal2]) == 1

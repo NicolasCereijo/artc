@@ -19,8 +19,8 @@ def setup():
 
 def test_compare_two_harm_noise_ratio(setup):
     data_set = setup
-    n_fft = 1024
-    hop_length: int = 1024
+    n_fft = 512
+    hop_length: int = 512
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -35,23 +35,23 @@ def test_compare_two_harm_noise_ratio(setup):
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal3,
                                                  n_fft, hop_length) == 1
     assert analysis.compare_two_harm_noise_ratio(audio_signal1, audio_signal2,
-                                                 n_fft, hop_length) == 0.7002754211425781
+                                                 n_fft, hop_length) == 0.731856495141983
     assert analysis.compare_two_harm_noise_ratio(audio_signal2, audio_signal1,
-                                                 n_fft, hop_length) == 0.7002754211425781
+                                                 n_fft, hop_length) == 0.731856495141983
     assert analysis.compare_two_harm_noise_ratio(audio_signal1, audio_signal3,
-                                                 n_fft, hop_length) == 0.4388059377670288
+                                                 n_fft, hop_length) == 0.4296490550041199
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal1,
-                                                 n_fft, hop_length) == 0.4388059377670288
+                                                 n_fft, hop_length) == 0.4296490550041199
     assert analysis.compare_two_harm_noise_ratio(audio_signal2, audio_signal3,
-                                                 n_fft, hop_length) == 0.6266191303730011
+                                                 n_fft, hop_length) == 0.5870673954486847
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal2,
-                                                 n_fft, hop_length) == 0.6266191303730011
+                                                 n_fft, hop_length) == 0.5870673954486847
 
 
 def test_compare_multiple_harm_noise_ratio(setup):
     data_set = setup
-    n_fft = 1024
-    hop_length: int = 1024
+    n_fft = 512
+    hop_length: int = 512
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -66,17 +66,17 @@ def test_compare_multiple_harm_noise_ratio(setup):
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal3],
                                                       n_fft, hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal2],
-                                                      n_fft, hop_length) == 0.7002754211425781
+                                                      n_fft, hop_length) == 0.731856495141983
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal1],
-                                                      n_fft, hop_length) == 0.7002754211425781
+                                                      n_fft, hop_length) == 0.731856495141983
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal3],
-                                                      n_fft, hop_length) == 0.4388059377670288
+                                                      n_fft, hop_length) == 0.4296490550041199
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal1],
-                                                      n_fft, hop_length) == 0.4388059377670288
+                                                      n_fft, hop_length) == 0.4296490550041199
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal3],
-                                                      n_fft, hop_length) == 0.6266191303730011
+                                                      n_fft, hop_length) == 0.5870673954486847
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal2],
-                                                      n_fft, hop_length) == 0.6266191303730011
+                                                      n_fft, hop_length) == 0.5870673954486847
 
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal1, audio_signal1],
                                                       n_fft, hop_length) == 1

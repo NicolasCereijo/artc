@@ -5,7 +5,7 @@ import librosa
 
 def calculate_rhythm(audio_signal: np.ndarray, sample_rate: float, hop_length: int = 1024) -> [float, np.ndarray]:
     tempo, beat_frames = librosa.beat.beat_track(y=audio_signal, sr=sample_rate, hop_length=hop_length)
-    return tempo, beat_frames
+    return tempo[0], beat_frames
 
 
 def compare_two_rhythm(audio_signal1: np.ndarray, audio_signal2: np.ndarray,

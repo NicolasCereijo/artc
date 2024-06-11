@@ -5,7 +5,7 @@ import librosa
 
 def calculate_loudness(audio_signal: np.ndarray) -> np.ndarray:
     magnitude_spectrogram = np.abs(librosa.stft(audio_signal))
-    return librosa.amplitude_to_db(magnitude_spectrogram, ref=np.max)
+    return librosa.amplitude_to_db(magnitude_spectrogram, ref=np.max)[0]
 
 
 def compare_two_loudness(audio_signal1: np.ndarray, audio_signal2: np.ndarray) -> float:

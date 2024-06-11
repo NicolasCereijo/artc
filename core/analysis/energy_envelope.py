@@ -3,11 +3,11 @@ import numpy as np
 import librosa
 
 
-def calculate_energy_envelope(audio_signal: np.ndarray, hop_length: int = 2048) -> np.ndarray:
-    return librosa.feature.rms(y=audio_signal, hop_length=hop_length)
+def calculate_energy_envelope(audio_signal: np.ndarray, hop_length: int = 512) -> np.ndarray:
+    return librosa.feature.rms(y=audio_signal, hop_length=hop_length)[0]
 
 
-def compare_two_energy_envelope(audio_signal1: np.ndarray, audio_signal2: np.ndarray, hop_length: int = 2048) -> float:
+def compare_two_energy_envelope(audio_signal1: np.ndarray, audio_signal2: np.ndarray, hop_length: int = 512) -> float:
     energy_envelope1 = calculate_energy_envelope(audio_signal1, hop_length)
     energy_envelope2 = calculate_energy_envelope(audio_signal2, hop_length)
 
@@ -17,7 +17,7 @@ def compare_two_energy_envelope(audio_signal1: np.ndarray, audio_signal2: np.nda
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_energy_envelope(audio_signals: list, hop_length: int = 2048) -> float:
+def compare_multiple_energy_envelope(audio_signals: list, hop_length: int = 512) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

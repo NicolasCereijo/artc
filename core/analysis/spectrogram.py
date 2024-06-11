@@ -3,11 +3,11 @@ import numpy as np
 import librosa
 
 
-def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 2048) -> np.ndarray:
-    return np.abs(librosa.stft(audio_signal, n_fft=n_fft))
+def calculate_spectrogram(audio_signal: np.ndarray, n_fft: int = 4096) -> np.ndarray:
+    return np.abs(librosa.stft(audio_signal, n_fft=n_fft))[0]
 
 
-def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: int = 2048) -> float:
+def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: int = 4096) -> float:
     spectrogram1 = calculate_spectrogram(signal1, n_fft)
     spectrogram2 = calculate_spectrogram(signal2, n_fft)
 
@@ -17,7 +17,7 @@ def compare_two_spectrograms(signal1: np.ndarray, signal2: np.ndarray, n_fft: in
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_spectrograms(audio_signals: list, n_fft: int = 2048) -> float:
+def compare_multiple_spectrograms(audio_signals: list, n_fft: int = 4096) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

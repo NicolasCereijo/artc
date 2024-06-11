@@ -34,17 +34,17 @@ def test_compare_two_mfcc(setup):
     assert analysis.compare_two_mfcc(audio_signal3, audio_signal3,
                                      sample_rate3, sample_rate3, n_fft) == 1
     assert analysis.compare_two_mfcc(audio_signal1, audio_signal2,
-                                     sample_rate1, sample_rate2, n_fft) == 0.8113852739334106
+                                     sample_rate1, sample_rate2, n_fft) == 0.9056926369667053
     assert analysis.compare_two_mfcc(audio_signal2, audio_signal1,
-                                     sample_rate2, sample_rate1, n_fft) == 0.8113852739334106
+                                     sample_rate2, sample_rate1, n_fft) == 0.9056926369667053
     assert analysis.compare_two_mfcc(audio_signal1, audio_signal3,
-                                     sample_rate1, sample_rate3, n_fft) == 0.85392165184021
+                                     sample_rate1, sample_rate3, n_fft) == 0.9269608557224274
     assert analysis.compare_two_mfcc(audio_signal3, audio_signal1,
-                                     sample_rate3, sample_rate1, n_fft) == 0.85392165184021
+                                     sample_rate3, sample_rate1, n_fft) == 0.9269608557224274
     assert analysis.compare_two_mfcc(audio_signal2, audio_signal3,
-                                     sample_rate2, sample_rate3, n_fft) == 0.7408664226531982
+                                     sample_rate2, sample_rate3, n_fft) == 0.870433121919632
     assert analysis.compare_two_mfcc(audio_signal3, audio_signal2,
-                                     sample_rate3, sample_rate2, n_fft) == 0.7408664226531982
+                                     sample_rate3, sample_rate2, n_fft) == 0.870433121919632
 
 
 def test_compare_multiple_mfcc(setup):
@@ -64,17 +64,17 @@ def test_compare_multiple_mfcc(setup):
     assert analysis.compare_multiple_mfcc([audio_signal3, audio_signal3],
                                           [sample_rate3, sample_rate3], n_fft) == 1
     assert analysis.compare_multiple_mfcc([audio_signal1, audio_signal2],
-                                          [sample_rate1, sample_rate2], n_fft) == 0.8113852739334106
+                                          [sample_rate1, sample_rate2], n_fft) == 0.9056926369667053
     assert analysis.compare_multiple_mfcc([audio_signal2, audio_signal1],
-                                          [sample_rate2, sample_rate1], n_fft) == 0.8113852739334106
+                                          [sample_rate2, sample_rate1], n_fft) == 0.9056926369667053
     assert analysis.compare_multiple_mfcc([audio_signal1, audio_signal3],
-                                          [sample_rate1, sample_rate3], n_fft) == 0.85392165184021
+                                          [sample_rate1, sample_rate3], n_fft) == 0.9269608557224274
     assert analysis.compare_multiple_mfcc([audio_signal3, audio_signal1],
-                                          [sample_rate3, sample_rate1], n_fft) == 0.85392165184021
+                                          [sample_rate3, sample_rate1], n_fft) == 0.9269608557224274
     assert analysis.compare_multiple_mfcc([audio_signal2, audio_signal3],
-                                          [sample_rate2, sample_rate3], n_fft) == 0.7408664226531982
+                                          [sample_rate2, sample_rate3], n_fft) == 0.870433121919632
     assert analysis.compare_multiple_mfcc([audio_signal3, audio_signal2],
-                                          [sample_rate3, sample_rate2], n_fft) == 0.7408664226531982
+                                          [sample_rate3, sample_rate2], n_fft) == 0.870433121919632
 
     assert analysis.compare_multiple_mfcc([audio_signal1, audio_signal1, audio_signal1],
                                           [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1
