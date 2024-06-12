@@ -34,8 +34,8 @@
 - spectral_centroid ⟶ <span style="color:#1682B4">Normalized euclidean distance</span>
 - spectral_contrast ⟶ <span style="color:#7B68EE">Pearson correlation</span>
 - spectral_flatness ⟶ <span style="color:#FF0082">Normalized relative difference</span>
+- spectral_roll_off ⟶ <span style="color:#1682B4">Normalized euclidean distance</span>
 - spectrogram ⟶ <span style="color:#559B2F">Cosine Similarity</span>
 - temporal_centroid ⟶ <span style="color:#FF0082">Normalized relative difference</span>
-- timbre ⟶ <span style="color:#FF0082">Normalized relative difference</span>
-- waveform_distance ⟶ <span style="color:#1682B4">Normalized Euclidean distance</span>
+- temporal_flux ⟶ <span style="color:#FF0082">Normalized relative difference</span>
 - zero_crossing_rate ⟶ <span style="color:#FF0082">Normalized relative difference</span>

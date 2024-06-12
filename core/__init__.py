@@ -162,11 +162,11 @@ def main():
         print(f"Spectral contrast of signal 1 with it self: "
               f"{analysis.compare_two_spect_contrast(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
         print(f"Spectral contrast of signal 2 with it self: "
-              f"{analysis.compare_two_spect_contrast(audio_signal_2, audio_signal_2, sample_rate1, sample_rate1)}")
+              f"{analysis.compare_two_spect_contrast(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
         print(f"Spectral contrast between signals 1 and 2: "
-              f"{analysis.compare_two_spect_contrast(audio_signal_1, audio_signal_2, sample_rate1, sample_rate1)}")
+              f"{analysis.compare_two_spect_contrast(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
         print(f"Spectral contrast between signals 2 and 1: "
-              f"{analysis.compare_two_spect_contrast(audio_signal_2, audio_signal_1, sample_rate1, sample_rate1)}\n")
+              f"{analysis.compare_two_spect_contrast(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
         print("Spectral flatness comparison:")
         print(f"Spectral flatness of signal 1 with it self: "
@@ -177,6 +177,16 @@ def main():
               f"{analysis.compare_two_spect_flatness(audio_signal_1, audio_signal_2)}")
         print(f"Spectral flatness between signals 2 and 1: "
               f"{analysis.compare_two_spect_flatness(audio_signal_2, audio_signal_1)}\n")
+
+        print("Spectral roll off comparison:")
+        print(f"Spectral roll off of signal 1 with it self: "
+              f"{analysis.compare_two_spectral_roll_off(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Spectral roll off of signal 2 with it self: "
+              f"{analysis.compare_two_spectral_roll_off(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Spectral roll off between signals 1 and 2: "
+              f"{analysis.compare_two_spectral_roll_off(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Spectral roll off between signals 2 and 1: "
+              f"{analysis.compare_two_spectral_roll_off(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
         print("Espectrograms comparison:")
         print(f"Espectrogram comparison of signal 1 with itself: "
@@ -192,11 +202,21 @@ def main():
         print(f"Temporal centroid of signal 1 with it self: "
               f"{analysis.compare_two_temporal_centroid(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
         print(f"Temporal centroid of signal 2 with it self: "
-              f"{analysis.compare_two_temporal_centroid(audio_signal_2, audio_signal_2, sample_rate1, sample_rate1)}")
+              f"{analysis.compare_two_temporal_centroid(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
         print(f"Temporal centroid between signals 1 and 2: "
-              f"{analysis.compare_two_temporal_centroid(audio_signal_1, audio_signal_2, sample_rate1, sample_rate1)}")
+              f"{analysis.compare_two_temporal_centroid(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
         print(f"Temporal centroid between signals 2 and 1: "
-              f"{analysis.compare_two_temporal_centroid(audio_signal_2, audio_signal_1, sample_rate1, sample_rate1)}\n")
+              f"{analysis.compare_two_temporal_centroid(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+
+        print("Temporal flux comparison:")
+        print(f"Temporal flux of signal 1 with it self: "
+              f"{analysis.compare_two_temporal_flux(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+        print(f"Temporal flux of signal 2 with it self: "
+              f"{analysis.compare_two_temporal_flux(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+        print(f"Temporal flux between signals 1 and 2: "
+              f"{analysis.compare_two_temporal_flux(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+        print(f"Temporal flux between signals 2 and 1: "
+              f"{analysis.compare_two_temporal_flux(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
 
         print("Zero Crossing Rate:")
         print(f"ZCR of signal 1 with itself: {analysis.compare_two_zcr(audio_signal_1, audio_signal_1)}")

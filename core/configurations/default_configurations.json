@@ -18,6 +18,8 @@
       "spectral_centroid": 4096,
       "spectral_contrast": 2048,
       "spectral_flatness": 8192,
+      "spectral_roll_off": 512,
+      "temporal_flux": 8192,
       "spectrogram": 4096
     }
   }

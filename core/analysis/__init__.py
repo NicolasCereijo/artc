@@ -13,6 +13,8 @@ from core.analysis.spectral_bandwidth import compare_two_spect_bandwidth, compar
 from core.analysis.spectral_centroid import compare_two_spect_centroid, compare_multiple_spect_centroid
 from core.analysis.spectral_contrast import compare_two_spect_contrast, compare_multiple_spect_contrast
 from core.analysis.spectral_flatness import compare_two_spect_flatness, compare_multiple_spect_flatness
+from core.analysis.spectral_roll_off import compare_two_spectral_roll_off, compare_multiple_spectral_roll_off
 from core.analysis.spectrogram import compare_two_spectrograms, compare_multiple_spectrograms
 from core.analysis.temporal_centroid import compare_two_temporal_centroid, compare_multiple_temporal_centroid
+from core.analysis.temporal_flux import compare_two_temporal_flux, compare_multiple_temporal_flux
 from core.analysis.zero_crossing_rate import check_zcr, compare_two_zcr, compare_multiple_zcr
