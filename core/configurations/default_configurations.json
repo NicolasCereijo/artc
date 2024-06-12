@@ -14,7 +14,10 @@
       "peak_matching": 4096,
       "pitch": 8192,
       "rhythm": 1024,
+      "spectral_bandwidth": 4096,
+      "spectral_centroid": 4096,
       "spectral_contrast": 2048,
+      "spectral_flatness": 8192,
       "spectrogram": 4096
     }
   }

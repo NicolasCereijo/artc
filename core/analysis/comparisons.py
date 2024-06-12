@@ -4,9 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def round_to_one(number: float) -> float:
-    if number > 0.999:
-        number = 1
-    return number
+    return 1 if number > 0.999 else number
 
 
 def map_to_zero_one(value: float) -> float:

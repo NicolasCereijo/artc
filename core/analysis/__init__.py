@@ -9,6 +9,10 @@ from core.analysis.onset_detection import compare_two_onset_detection, compare_m
 from core.analysis.peak_matching import compare_two_peak_matching, compare_multiple_peak_matching
 from core.analysis.pitch import compare_two_pitch, compare_multiple_pitch
 from core.analysis.rhythm import compare_two_rhythm, compare_multiple_rhythm
-from core.analysis.spectral_contrast import compare_two_spectral_contrast, compare_multiple_spectral_contrast
+from core.analysis.spectral_bandwidth import compare_two_spect_bandwidth, compare_multiple_spect_bandwidth
+from core.analysis.spectral_centroid import compare_two_spect_centroid, compare_multiple_spect_centroid
+from core.analysis.spectral_contrast import compare_two_spect_contrast, compare_multiple_spect_contrast
+from core.analysis.spectral_flatness import compare_two_spect_flatness, compare_multiple_spect_flatness
 from core.analysis.spectrogram import compare_two_spectrograms, compare_multiple_spectrograms
+from core.analysis.temporal_centroid import compare_two_temporal_centroid, compare_multiple_temporal_centroid
 from core.analysis.zero_crossing_rate import check_zcr, compare_two_zcr, compare_multiple_zcr
