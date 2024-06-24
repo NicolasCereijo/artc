@@ -28,23 +28,23 @@ def test_compare_two_peak_matching(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_peak_matching(audio_signal1, audio_signal1,
-                                              sample_rate1, sample_rate1, n_fft) == 1
+                                              sample_rate1, sample_rate1, n_fft=n_fft) == 1
     assert analysis.compare_two_peak_matching(audio_signal2, audio_signal2,
-                                              sample_rate2, sample_rate2, n_fft) == 1
+                                              sample_rate2, sample_rate2, n_fft=n_fft) == 1
     assert analysis.compare_two_peak_matching(audio_signal3, audio_signal3,
-                                              sample_rate3, sample_rate3, n_fft) == 1
+                                              sample_rate3, sample_rate3, n_fft=n_fft) == 1
     assert analysis.compare_two_peak_matching(audio_signal1, audio_signal2,
-                                              sample_rate1, sample_rate2, n_fft) == 0.6583367586135864
+                                              sample_rate1, sample_rate2, n_fft=n_fft) == 0.6583367586135864
     assert analysis.compare_two_peak_matching(audio_signal2, audio_signal1,
-                                              sample_rate2, sample_rate1, n_fft) == 0.6583367586135864
+                                              sample_rate2, sample_rate1, n_fft=n_fft) == 0.6583367586135864
     assert analysis.compare_two_peak_matching(audio_signal1, audio_signal3,
-                                              sample_rate1, sample_rate3, n_fft) == 0.762118935585022
+                                              sample_rate1, sample_rate3, n_fft=n_fft) == 0.762118935585022
     assert analysis.compare_two_peak_matching(audio_signal3, audio_signal1,
-                                              sample_rate3, sample_rate1, n_fft) == 0.762118935585022
+                                              sample_rate3, sample_rate1, n_fft=n_fft) == 0.762118935585022
     assert analysis.compare_two_peak_matching(audio_signal2, audio_signal3,
-                                              sample_rate2, sample_rate3, n_fft) == 0.6880395412445068
+                                              sample_rate2, sample_rate3, n_fft=n_fft) == 0.6880395412445068
     assert analysis.compare_two_peak_matching(audio_signal3, audio_signal2,
-                                              sample_rate3, sample_rate2, n_fft) == 0.6880395412445068
+                                              sample_rate3, sample_rate2, n_fft=n_fft) == 0.6880395412445068
 
 
 def test_compare_multiple_peak_matching(setup):
@@ -58,27 +58,27 @@ def test_compare_multiple_peak_matching(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_peak_matching([audio_signal1, audio_signal1],
-                                                   [sample_rate1, sample_rate1], n_fft) == 1
+                                                   [sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_peak_matching([audio_signal2, audio_signal2],
-                                                   [sample_rate2, sample_rate2], n_fft) == 1
+                                                   [sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_peak_matching([audio_signal3, audio_signal3],
-                                                   [sample_rate3, sample_rate3], n_fft) == 1
+                                                   [sample_rate3, sample_rate3], n_fft=n_fft) == 1
     assert analysis.compare_multiple_peak_matching([audio_signal1, audio_signal2],
-                                                   [sample_rate1, sample_rate2], n_fft) == 0.6583367586135864
+                                                   [sample_rate1, sample_rate2], n_fft=n_fft) == 0.6583367586135864
     assert analysis.compare_multiple_peak_matching([audio_signal2, audio_signal1],
-                                                   [sample_rate2, sample_rate1], n_fft) == 0.6583367586135864
+                                                   [sample_rate2, sample_rate1], n_fft=n_fft) == 0.6583367586135864
     assert analysis.compare_multiple_peak_matching([audio_signal1, audio_signal3],
-                                                   [sample_rate1, sample_rate3], n_fft) == 0.762118935585022
+                                                   [sample_rate1, sample_rate3], n_fft=n_fft) == 0.762118935585022
     assert analysis.compare_multiple_peak_matching([audio_signal3, audio_signal1],
-                                                   [sample_rate3, sample_rate1], n_fft) == 0.762118935585022
+                                                   [sample_rate3, sample_rate1], n_fft=n_fft) == 0.762118935585022
     assert analysis.compare_multiple_peak_matching([audio_signal2, audio_signal3],
-                                                   [sample_rate2, sample_rate3], n_fft) == 0.6880395412445068
+                                                   [sample_rate2, sample_rate3], n_fft=n_fft) == 0.6880395412445068
     assert analysis.compare_multiple_peak_matching([audio_signal3, audio_signal2],
-                                                   [sample_rate3, sample_rate2], n_fft) == 0.6880395412445068
+                                                   [sample_rate3, sample_rate2], n_fft=n_fft) == 0.6880395412445068
 
     assert analysis.compare_multiple_peak_matching([audio_signal1, audio_signal1, audio_signal1],
-                                                   [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1
+                                                   [sample_rate1, sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_peak_matching([audio_signal2, audio_signal2, audio_signal2],
-                                                   [sample_rate2, sample_rate2, sample_rate2], n_fft) == 1
+                                                   [sample_rate2, sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_peak_matching([audio_signal3, audio_signal3, audio_signal3],
-                                                   [sample_rate3, sample_rate3, sample_rate3], n_fft) == 1
+                                                   [sample_rate3, sample_rate3, sample_rate3], n_fft=n_fft) == 1

@@ -29,23 +29,23 @@ def test_compare_two_harm_noise_ratio(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_harm_noise_ratio(audio_signal1, audio_signal1,
-                                                 n_fft, hop_length) == 1
+                                                 n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_two_harm_noise_ratio(audio_signal2, audio_signal2,
-                                                 n_fft, hop_length) == 1
+                                                 n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal3,
-                                                 n_fft, hop_length) == 1
+                                                 n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_two_harm_noise_ratio(audio_signal1, audio_signal2,
-                                                 n_fft, hop_length) == 0.731856495141983
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.731856495141983
     assert analysis.compare_two_harm_noise_ratio(audio_signal2, audio_signal1,
-                                                 n_fft, hop_length) == 0.731856495141983
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.731856495141983
     assert analysis.compare_two_harm_noise_ratio(audio_signal1, audio_signal3,
-                                                 n_fft, hop_length) == 0.4296490550041199
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.4296490550041199
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal1,
-                                                 n_fft, hop_length) == 0.4296490550041199
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.4296490550041199
     assert analysis.compare_two_harm_noise_ratio(audio_signal2, audio_signal3,
-                                                 n_fft, hop_length) == 0.5870673954486847
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.5870673954486847
     assert analysis.compare_two_harm_noise_ratio(audio_signal3, audio_signal2,
-                                                 n_fft, hop_length) == 0.5870673954486847
+                                                 n_fft=n_fft, hop_length=hop_length) == 0.5870673954486847
 
 
 def test_compare_multiple_harm_noise_ratio(setup):
@@ -60,27 +60,27 @@ def test_compare_multiple_harm_noise_ratio(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal1],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal2],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal3],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal2],
-                                                      n_fft, hop_length) == 0.731856495141983
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.731856495141983
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal1],
-                                                      n_fft, hop_length) == 0.731856495141983
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.731856495141983
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal3],
-                                                      n_fft, hop_length) == 0.4296490550041199
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.4296490550041199
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal1],
-                                                      n_fft, hop_length) == 0.4296490550041199
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.4296490550041199
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal3],
-                                                      n_fft, hop_length) == 0.5870673954486847
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.5870673954486847
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal2],
-                                                      n_fft, hop_length) == 0.5870673954486847
+                                                      n_fft=n_fft, hop_length=hop_length) == 0.5870673954486847
 
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal1, audio_signal1, audio_signal1],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal2, audio_signal2, audio_signal2],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1
     assert analysis.compare_multiple_harm_noise_ratio([audio_signal3, audio_signal3, audio_signal3],
-                                                      n_fft, hop_length) == 1
+                                                      n_fft=n_fft, hop_length=hop_length) == 1

@@ -20,8 +20,8 @@ def main():
 
     if os.access(configuration_path, os.R_OK):
         example_set = dt_structs.WorkingSet("main_set")
-        example_set.add_file(files_path, "little-waves.mp3", configuration_path)
-        example_set.add_file(files_path, "waves-in-caves.wav", configuration_path)
+        example_set.add_file(path=files_path, name="little-waves.mp3", configuration_path=configuration_path)
+        example_set.add_file(path=files_path, name="waves-in-caves.wav", configuration_path=configuration_path)
 
         audio_signal_1 = example_set["little-waves.mp3"].audio_signal_loaded
         sample_rate1 = example_set["little-waves.mp3"].sample_rate
@@ -70,13 +70,13 @@ def main():
 
         print("Harmonic noise ratio comparison:")
         print(f"Harmonic noise ratio of signal 1 with it self: "
-              f"{analysis.compare_two_harm_noise_ratio(audio_signal_1, audio_signal_1, sample_rate1, sample_rate1)}")
+              f"{analysis.compare_two_harm_noise_ratio(audio_signal_1, audio_signal_1)}")
         print(f"Harmonic noise ratio of signal 2 with it self: "
-              f"{analysis.compare_two_harm_noise_ratio(audio_signal_2, audio_signal_2, sample_rate2, sample_rate2)}")
+              f"{analysis.compare_two_harm_noise_ratio(audio_signal_2, audio_signal_2)}")
         print(f"Harmonic noise ratio between signals 1 and 2: "
-              f"{analysis.compare_two_harm_noise_ratio(audio_signal_1, audio_signal_2, sample_rate1, sample_rate2)}")
+              f"{analysis.compare_two_harm_noise_ratio(audio_signal_1, audio_signal_2)}")
         print(f"Harmonic noise ratio between signals 2 and 1: "
-              f"{analysis.compare_two_harm_noise_ratio(audio_signal_2, audio_signal_1, sample_rate2, sample_rate1)}\n")
+              f"{analysis.compare_two_harm_noise_ratio(audio_signal_2, audio_signal_1)}\n")
 
         print("Loudness comparison:")
         print(f"Loudness of signal 1 with it self: "

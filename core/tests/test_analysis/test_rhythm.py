@@ -28,23 +28,23 @@ def test_compare_two_rhythm(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_rhythm(audio_signal1, audio_signal1,
-                                       sample_rate1, sample_rate1, hop_length) == 1
+                                       sample_rate1, sample_rate1, hop_length=hop_length) == 1
     assert analysis.compare_two_rhythm(audio_signal2, audio_signal2,
-                                       sample_rate2, sample_rate2, hop_length) == 1
+                                       sample_rate2, sample_rate2, hop_length=hop_length) == 1
     assert analysis.compare_two_rhythm(audio_signal3, audio_signal3,
-                                       sample_rate3, sample_rate3, hop_length) == 1
+                                       sample_rate3, sample_rate3, hop_length=hop_length) == 1
     assert analysis.compare_two_rhythm(audio_signal1, audio_signal2,
-                                       sample_rate1, sample_rate2, hop_length) == 0.8333333333333334
+                                       sample_rate1, sample_rate2, hop_length=hop_length) == 0.8333333333333334
     assert analysis.compare_two_rhythm(audio_signal2, audio_signal1,
-                                       sample_rate2, sample_rate1, hop_length) == 0.8333333333333334
+                                       sample_rate2, sample_rate1, hop_length=hop_length) == 0.8333333333333334
     assert analysis.compare_two_rhythm(audio_signal1, audio_signal3,
-                                       sample_rate1, sample_rate3, hop_length) == 0.9
+                                       sample_rate1, sample_rate3, hop_length=hop_length) == 0.9
     assert analysis.compare_two_rhythm(audio_signal3, audio_signal1,
-                                       sample_rate3, sample_rate1, hop_length) == 0.9
+                                       sample_rate3, sample_rate1, hop_length=hop_length) == 0.9
     assert analysis.compare_two_rhythm(audio_signal2, audio_signal3,
-                                       sample_rate2, sample_rate3, hop_length) == 0.75
+                                       sample_rate2, sample_rate3, hop_length=hop_length) == 0.75
     assert analysis.compare_two_rhythm(audio_signal3, audio_signal2,
-                                       sample_rate3, sample_rate2, hop_length) == 0.75
+                                       sample_rate3, sample_rate2, hop_length=hop_length) == 0.75
 
 
 def test_compare_multiple_rhythm(setup):
@@ -58,27 +58,27 @@ def test_compare_multiple_rhythm(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_rhythm([audio_signal1, audio_signal1],
-                                            [sample_rate1, sample_rate1], hop_length) == 1
+                                            [sample_rate1, sample_rate1], hop_length=hop_length) == 1
     assert analysis.compare_multiple_rhythm([audio_signal2, audio_signal2],
-                                            [sample_rate2, sample_rate2], hop_length) == 1
+                                            [sample_rate2, sample_rate2], hop_length=hop_length) == 1
     assert analysis.compare_multiple_rhythm([audio_signal3, audio_signal3],
-                                            [sample_rate3, sample_rate3], hop_length) == 1
+                                            [sample_rate3, sample_rate3], hop_length=hop_length) == 1
     assert analysis.compare_multiple_rhythm([audio_signal1, audio_signal2],
-                                            [sample_rate1, sample_rate2], hop_length) == 0.8333333333333334
+                                            [sample_rate1, sample_rate2], hop_length=hop_length) == 0.8333333333333334
     assert analysis.compare_multiple_rhythm([audio_signal2, audio_signal1],
-                                            [sample_rate2, sample_rate1], hop_length) == 0.8333333333333334
+                                            [sample_rate2, sample_rate1], hop_length=hop_length) == 0.8333333333333334
     assert analysis.compare_multiple_rhythm([audio_signal1, audio_signal3],
-                                            [sample_rate1, sample_rate3], hop_length) == 0.9
+                                            [sample_rate1, sample_rate3], hop_length=hop_length) == 0.9
     assert analysis.compare_multiple_rhythm([audio_signal3, audio_signal1],
-                                            [sample_rate3, sample_rate1], hop_length) == 0.9
+                                            [sample_rate3, sample_rate1], hop_length=hop_length) == 0.9
     assert analysis.compare_multiple_rhythm([audio_signal2, audio_signal3],
-                                            [sample_rate2, sample_rate3], hop_length) == 0.75
+                                            [sample_rate2, sample_rate3], hop_length=hop_length) == 0.75
     assert analysis.compare_multiple_rhythm([audio_signal3, audio_signal2],
-                                            [sample_rate3, sample_rate2], hop_length) == 0.75
+                                            [sample_rate3, sample_rate2], hop_length=hop_length) == 0.75
 
     assert analysis.compare_multiple_rhythm([audio_signal1, audio_signal1, audio_signal1],
-                                            [sample_rate1, sample_rate1, sample_rate1], hop_length) == 1
+                                            [sample_rate1, sample_rate1, sample_rate1], hop_length=hop_length) == 1
     assert analysis.compare_multiple_rhythm([audio_signal2, audio_signal2, audio_signal2],
-                                            [sample_rate2, sample_rate2, sample_rate2], hop_length) == 1
+                                            [sample_rate2, sample_rate2, sample_rate2], hop_length=hop_length) == 1
     assert analysis.compare_multiple_rhythm([audio_signal3, audio_signal3, audio_signal3],
-                                            [sample_rate3, sample_rate3, sample_rate3], hop_length) == 1
+                                            [sample_rate3, sample_rate3, sample_rate3], hop_length=hop_length) == 1

@@ -28,23 +28,23 @@ def test_compare_two_spectral_roll_off(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_spectral_roll_off(audio_signal1, audio_signal1,
-                                                  sample_rate1, sample_rate1, n_fft) == 1
+                                                  sample_rate1, sample_rate1, n_fft=n_fft) == 1
     assert analysis.compare_two_spectral_roll_off(audio_signal2, audio_signal2,
-                                                  sample_rate2, sample_rate2, n_fft) == 1
+                                                  sample_rate2, sample_rate2, n_fft=n_fft) == 1
     assert analysis.compare_two_spectral_roll_off(audio_signal3, audio_signal3,
-                                                  sample_rate3, sample_rate3, n_fft) == 1
+                                                  sample_rate3, sample_rate3, n_fft=n_fft) == 1
     assert analysis.compare_two_spectral_roll_off(audio_signal1, audio_signal2,
-                                                  sample_rate1, sample_rate2, n_fft) == 0.8707927973098482
+                                                  sample_rate1, sample_rate2, n_fft=n_fft) == 0.8707927973098482
     assert analysis.compare_two_spectral_roll_off(audio_signal2, audio_signal1,
-                                                  sample_rate2, sample_rate1, n_fft) == 0.8707927973098482
+                                                  sample_rate2, sample_rate1, n_fft=n_fft) == 0.8707927973098482
     assert analysis.compare_two_spectral_roll_off(audio_signal1, audio_signal3,
-                                                  sample_rate1, sample_rate3, n_fft) == 0.8751719403368576
+                                                  sample_rate1, sample_rate3, n_fft=n_fft) == 0.8751719403368576
     assert analysis.compare_two_spectral_roll_off(audio_signal3, audio_signal1,
-                                                  sample_rate3, sample_rate1, n_fft) == 0.8751719403368576
+                                                  sample_rate3, sample_rate1, n_fft=n_fft) == 0.8751719403368576
     assert analysis.compare_two_spectral_roll_off(audio_signal2, audio_signal3,
-                                                  sample_rate2, sample_rate3, n_fft) == 0.994996248365408
+                                                  sample_rate2, sample_rate3, n_fft=n_fft) == 0.994996248365408
     assert analysis.compare_two_spectral_roll_off(audio_signal3, audio_signal2,
-                                                  sample_rate3, sample_rate2, n_fft) == 0.994996248365408
+                                                  sample_rate3, sample_rate2, n_fft=n_fft) == 0.994996248365408
 
 
 def test_compare_multiple_spectral_roll_off(setup):
@@ -58,27 +58,27 @@ def test_compare_multiple_spectral_roll_off(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_spectral_roll_off([audio_signal1, audio_signal1],
-                                                       [sample_rate1, sample_rate1], n_fft) == 1
+                                                       [sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spectral_roll_off([audio_signal2, audio_signal2],
-                                                       [sample_rate2, sample_rate2], n_fft) == 1
+                                                       [sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spectral_roll_off([audio_signal3, audio_signal3],
-                                                       [sample_rate3, sample_rate3], n_fft) == 1
+                                                       [sample_rate3, sample_rate3], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spectral_roll_off([audio_signal1, audio_signal2],
-                                                       [sample_rate1, sample_rate2], n_fft) == 0.8707927973098482
+                                                       [sample_rate1, sample_rate2], n_fft=n_fft) == 0.8707927973098482
     assert analysis.compare_multiple_spectral_roll_off([audio_signal2, audio_signal1],
-                                                       [sample_rate2, sample_rate1], n_fft) == 0.8707927973098482
+                                                       [sample_rate2, sample_rate1], n_fft=n_fft) == 0.8707927973098482
     assert analysis.compare_multiple_spectral_roll_off([audio_signal1, audio_signal3],
-                                                       [sample_rate1, sample_rate3], n_fft) == 0.8751719403368576
+                                                       [sample_rate1, sample_rate3], n_fft=n_fft) == 0.8751719403368576
     assert analysis.compare_multiple_spectral_roll_off([audio_signal3, audio_signal1],
-                                                       [sample_rate3, sample_rate1], n_fft) == 0.8751719403368576
+                                                       [sample_rate3, sample_rate1], n_fft=n_fft) == 0.8751719403368576
     assert analysis.compare_multiple_spectral_roll_off([audio_signal2, audio_signal3],
-                                                       [sample_rate2, sample_rate3], n_fft) == 0.994996248365408
+                                                       [sample_rate2, sample_rate3], n_fft=n_fft) == 0.994996248365408
     assert analysis.compare_multiple_spectral_roll_off([audio_signal3, audio_signal2],
-                                                       [sample_rate3, sample_rate2], n_fft) == 0.994996248365408
+                                                       [sample_rate3, sample_rate2], n_fft=n_fft) == 0.994996248365408
 
     assert analysis.compare_multiple_spectral_roll_off([audio_signal1, audio_signal1, audio_signal1],
-                                                       [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1
+                                                       [sample_rate1, sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spectral_roll_off([audio_signal2, audio_signal2, audio_signal2],
-                                                       [sample_rate2, sample_rate2, sample_rate2], n_fft) == 1
+                                                       [sample_rate2, sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spectral_roll_off([audio_signal3, audio_signal3, audio_signal3],
-                                                       [sample_rate3, sample_rate3, sample_rate3], n_fft) == 1
+                                                       [sample_rate3, sample_rate3, sample_rate3], n_fft=n_fft) == 1

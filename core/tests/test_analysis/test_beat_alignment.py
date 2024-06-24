@@ -19,7 +19,7 @@ def setup():
 
 def test_compare_two_beat_alignment(setup):
     data_set = setup
-    n_fft = 1024
+    hop_length = 1024
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -28,28 +28,28 @@ def test_compare_two_beat_alignment(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_beat_alignment(audio_signal1, audio_signal1,
-                                               sample_rate1, sample_rate1, n_fft) == 1
+                                               sample_rate1, sample_rate1, hop_length=hop_length) == 1
     assert analysis.compare_two_beat_alignment(audio_signal2, audio_signal2,
-                                               sample_rate2, sample_rate2, n_fft) == 1
+                                               sample_rate2, sample_rate2, hop_length=hop_length) == 1
     assert analysis.compare_two_beat_alignment(audio_signal3, audio_signal3,
-                                               sample_rate3, sample_rate3, n_fft) == 1
+                                               sample_rate3, sample_rate3, hop_length=hop_length) == 1
     assert analysis.compare_two_beat_alignment(audio_signal1, audio_signal2,
-                                               sample_rate1, sample_rate2, n_fft) == 0.9372443556785583
+                                               sample_rate1, sample_rate2, hop_length=hop_length) == 0.9372443556785583
     assert analysis.compare_two_beat_alignment(audio_signal2, audio_signal1,
-                                               sample_rate2, sample_rate1, n_fft) == 0.9372443556785583
+                                               sample_rate2, sample_rate1, hop_length=hop_length) == 0.9372443556785583
     assert analysis.compare_two_beat_alignment(audio_signal1, audio_signal3,
-                                               sample_rate1, sample_rate3, n_fft) == 0.9319576025009155
+                                               sample_rate1, sample_rate3, hop_length=hop_length) == 0.9319576025009155
     assert analysis.compare_two_beat_alignment(audio_signal3, audio_signal1,
-                                               sample_rate3, sample_rate1, n_fft) == 0.9319576025009155
+                                               sample_rate3, sample_rate1, hop_length=hop_length) == 0.9319576025009155
     assert analysis.compare_two_beat_alignment(audio_signal2, audio_signal3,
-                                               sample_rate2, sample_rate3, n_fft) == 0.8939124345779419
+                                               sample_rate2, sample_rate3, hop_length=hop_length) == 0.8939124345779419
     assert analysis.compare_two_beat_alignment(audio_signal3, audio_signal2,
-                                               sample_rate3, sample_rate2, n_fft) == 0.8939124345779419
+                                               sample_rate3, sample_rate2, hop_length=hop_length) == 0.8939124345779419
 
 
 def test_compare_multiple_beat_alignment(setup):
     data_set = setup
-    n_fft = 1024
+    hop_length = 1024
     audio_signal1, sample_rate1 = librosa.load(data_set["individual_files"][0]["path"] +
                                                data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = librosa.load(data_set["individual_files"][1]["path"] +
@@ -58,27 +58,36 @@ def test_compare_multiple_beat_alignment(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_beat_alignment([audio_signal1, audio_signal1],
-                                                    [sample_rate1, sample_rate1], n_fft) == 1
+                                                    [sample_rate1, sample_rate1], hop_length=hop_length) == 1
     assert analysis.compare_multiple_beat_alignment([audio_signal2, audio_signal2],
-                                                    [sample_rate2, sample_rate2], n_fft) == 1
+                                                    [sample_rate2, sample_rate2], hop_length=hop_length) == 1
     assert analysis.compare_multiple_beat_alignment([audio_signal3, audio_signal3],
-                                                    [sample_rate3, sample_rate3], n_fft) == 1
+                                                    [sample_rate3, sample_rate3], hop_length=hop_length) == 1
     assert analysis.compare_multiple_beat_alignment([audio_signal1, audio_signal2],
-                                                    [sample_rate1, sample_rate2], n_fft) == 0.9372443556785583
+                                                    [sample_rate1, sample_rate2],
+                                                    hop_length=hop_length) == 0.9372443556785583
     assert analysis.compare_multiple_beat_alignment([audio_signal2, audio_signal1],
-                                                    [sample_rate2, sample_rate1], n_fft) == 0.9372443556785583
+                                                    [sample_rate2, sample_rate1],
+                                                    hop_length=hop_length) == 0.9372443556785583
     assert analysis.compare_multiple_beat_alignment([audio_signal1, audio_signal3],
-                                                    [sample_rate1, sample_rate3], n_fft) == 0.9319576025009155
+                                                    [sample_rate1, sample_rate3],
+                                                    hop_length=hop_length) == 0.9319576025009155
     assert analysis.compare_multiple_beat_alignment([audio_signal3, audio_signal1],
-                                                    [sample_rate3, sample_rate1], n_fft) == 0.9319576025009155
+                                                    [sample_rate3, sample_rate1],
+                                                    hop_length=hop_length) == 0.9319576025009155
     assert analysis.compare_multiple_beat_alignment([audio_signal2, audio_signal3],
-                                                    [sample_rate2, sample_rate3], n_fft) == 0.8939124345779419
+                                                    [sample_rate2, sample_rate3],
+                                                    hop_length=hop_length) == 0.8939124345779419
     assert analysis.compare_multiple_beat_alignment([audio_signal3, audio_signal2],
-                                                    [sample_rate3, sample_rate2], n_fft) == 0.8939124345779419
+                                                    [sample_rate3, sample_rate2],
+                                                    hop_length=hop_length) == 0.8939124345779419
 
     assert analysis.compare_multiple_beat_alignment([audio_signal1, audio_signal1, audio_signal1],
-                                                    [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1
+                                                    [sample_rate1, sample_rate1, sample_rate1],
+                                                    hop_length=hop_length) == 1
     assert analysis.compare_multiple_beat_alignment([audio_signal2, audio_signal2, audio_signal2],
-                                                    [sample_rate2, sample_rate2, sample_rate2], n_fft) == 1
+                                                    [sample_rate2, sample_rate2, sample_rate2],
+                                                    hop_length=hop_length) == 1
     assert analysis.compare_multiple_beat_alignment([audio_signal3, audio_signal3, audio_signal3],
-                                                    [sample_rate3, sample_rate3, sample_rate3], n_fft) == 1
+                                                    [sample_rate3, sample_rate3, sample_rate3],
+                                                    hop_length=hop_length) == 1

@@ -74,58 +74,61 @@ def test_normalize_btw_0_1():
 # ----------------------------------------------------------------------------------------------------------------------
 def test_search_file(setup):
     _, _, data_set = setup
-    test_set = dt_structs.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", test_mode=True, data_set=data_set)
 
-    assert test_set.__contains__(data_set["individual_files"][0].name, "individual_files")
-    assert test_set.__contains__(data_set["individual_files"][1].name, "individual_files")
-    assert test_set.__contains__(data_set["individual_files"][2].name, "individual_files")
+    assert test_set.__contains__(name=data_set["individual_files"][0].name, group="individual_files")
+    assert test_set.__contains__(name=data_set["individual_files"][1].name, group="individual_files")
+    assert test_set.__contains__(name=data_set["individual_files"][2].name, group="individual_files")
 
-    assert test_set.__contains__("", "") is False
-    assert test_set.__contains__(data_set["individual_files"][2].name, "") is False
-    assert test_set.__contains__("", "individual_files") is False
-    assert test_set.__contains__(data_set["individual_files"][2].name, "invalid_group") is False
-    assert test_set.__contains__("invalid_file", "individual_files") is False
+    assert test_set.__contains__(name="", group="") is False
+    assert test_set.__contains__(name=data_set["individual_files"][2].name, group="") is False
+    assert test_set.__contains__(name="", group="individual_files") is False
+    assert test_set.__contains__(name=data_set["individual_files"][2].name, group="invalid_group") is False
+    assert test_set.__contains__(name="invalid_file", group="individual_files") is False
 
 
 def test_add_file(setup):
     configuration_path, files_path, data_set = setup
-    test_set = dt_structs.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", test_mode=True, data_set=data_set)
 
-    assert test_set.add_file(files_path, "smallwaves1.mp3", configuration_path)
+    assert test_set.add_file(path=files_path, name="smallwaves1.mp3", configuration_path=configuration_path)
 
-    assert test_set.add_file("", "", "") is False
-    assert test_set.add_file("", "smallwaves1.mp3", configuration_path) is False
-    assert test_set.add_file(files_path, "smallwaves1.mp3", "") is False
-    assert test_set.add_file(files_path, "", configuration_path) is False
-    assert test_set.add_file("invalid_path", "smallwaves1.mp3", configuration_path) is False
-    assert test_set.add_file(files_path, "smallwaves1.mp3", "invalid_config_path") is False
-    assert test_set.add_file(files_path, "invalid_name", configuration_path) is False
+    assert test_set.add_file(path="", name="", configuration_path="") is False
+    assert test_set.add_file(path="", name="smallwaves1.mp3", configuration_path=configuration_path) is False
+    assert test_set.add_file(path=files_path, name="smallwaves1.mp3", configuration_path="") is False
+    assert test_set.add_file(path=files_path, name="", configuration_path=configuration_path) is False
+    assert test_set.add_file(path="invalid_path", name="smallwaves1.mp3",
+                             configuration_path=configuration_path) is False
+    assert test_set.add_file(path=files_path, name="smallwaves1.mp3", configuration_path="invalid_config_path") is False
+    assert test_set.add_file(path=files_path, name="invalid_name", configuration_path=configuration_path) is False
 
 
 def test_remove_file(setup):
     _, _, data_set = setup
-    test_set = dt_structs.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", test_mode=True, data_set=data_set)
 
-    assert test_set.remove_file("little-waves.mp3")
-    assert test_set.remove_file(data_set["individual_files"][1].name, "individual_files")
+    assert test_set.remove_file(name="little-waves.mp3")
+    assert test_set.remove_file(name=data_set["individual_files"][1].name, group="individual_files")
 
-    assert test_set.remove_file("", "") is False
-    assert test_set.remove_file("", "individual_files") is False
-    assert test_set.remove_file(data_set["individual_files"][0].name, "") is False
-    assert test_set.remove_file("invalid_name", "individual_files") is False
-    assert test_set.remove_file(data_set["individual_files"][0].name, "invalid_group") is False
+    assert test_set.remove_file(name="", group="") is False
+    assert test_set.remove_file(name="", group="individual_files") is False
+    assert test_set.remove_file(name=data_set["individual_files"][0].name, group="") is False
+    assert test_set.remove_file(name="invalid_name", group="individual_files") is False
+    assert test_set.remove_file(name=data_set["individual_files"][0].name, group="invalid_group") is False
 
 
 def test_add_directory(setup):
     configuration_path, files_path, data_set = setup
-    test_set = dt_structs.WorkingSet("test_set", True, data_set)
+    test_set = dt_structs.WorkingSet("test_set", test_mode=True, data_set=data_set)
 
-    assert test_set.add_directory(files_path, configuration_path, "individual_files")
-    assert test_set.add_directory(files_path, configuration_path, "new_group")
+    assert test_set.add_directory(path=files_path, configuration_path=configuration_path, group="individual_files")
+    assert test_set.add_directory(path=files_path, configuration_path=configuration_path, group="new_group")
 
-    assert test_set.add_directory("", "", "") is False
-    assert test_set.add_directory("", configuration_path, "individual_files") is False
-    assert test_set.add_directory(files_path, "", "individual_files") is False
-    assert test_set.add_directory(files_path, configuration_path, "") is False
-    assert test_set.add_directory("invalid_path", configuration_path, "individual_files") is False
-    assert test_set.add_directory(files_path, "invalid_config_path", "individual_files") is False
+    assert test_set.add_directory(path="", configuration_path="", group="") is False
+    assert test_set.add_directory(path="", configuration_path=configuration_path, group="individual_files") is False
+    assert test_set.add_directory(path=files_path, configuration_path="", group="individual_files") is False
+    assert test_set.add_directory(path=files_path, configuration_path=configuration_path, group="") is False
+    assert test_set.add_directory(path="invalid_path", configuration_path=configuration_path,
+                                  group="individual_files") is False
+    assert test_set.add_directory(path=files_path, configuration_path="invalid_config_path",
+                                  group="individual_files") is False

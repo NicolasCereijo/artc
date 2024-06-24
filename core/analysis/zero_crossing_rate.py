@@ -4,7 +4,7 @@ import numpy as np
 import librosa
 
 
-def check_zcr(signal: np.ndarray) -> [bool, int]:
+def check_zcr(signal: np.ndarray, /) -> [bool, int]:
     if len(signal) == 0:
         return False, 0
 
@@ -15,11 +15,11 @@ def check_zcr(signal: np.ndarray) -> [bool, int]:
     return check_any_zc, count_zc
 
 
-def calculate_zcr(audio_signal: np.ndarray) -> np.ndarray:
+def calculate_zcr(audio_signal: np.ndarray, /) -> np.ndarray:
     return librosa.feature.zero_crossing_rate(y=audio_signal)
 
 
-def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
+def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray, /) -> float:
     zcr1 = calculate_zcr(signal1)
     zcr2 = calculate_zcr(signal2)
 
@@ -33,7 +33,7 @@ def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray) -> float:
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_zcr(audio_signals: list) -> float:
+def compare_multiple_zcr(audio_signals: list, /) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

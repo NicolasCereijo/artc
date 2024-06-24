@@ -3,15 +3,15 @@ import numpy as np
 import librosa
 
 
-def calculate_beat_alignment(audio_signal: np.ndarray, sample_rate: float, hop_length: int = 1024) -> np.ndarray:
+def calculate_beat_alignment(audio_signal: np.ndarray, sample_rate: float, /, *, hop_length: int = 1024) -> np.ndarray:
     _, beat_frames = librosa.beat.beat_track(y=audio_signal, sr=sample_rate, hop_length=hop_length)
     return beat_frames
 
 
 def compare_two_beat_alignment(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                               sample_rate1: float, sample_rate2: float, hop_length: int = 1024) -> float:
-    beats1 = calculate_beat_alignment(audio_signal1, sample_rate1, hop_length)
-    beats2 = calculate_beat_alignment(audio_signal2, sample_rate2, hop_length)
+                               sample_rate1: float, sample_rate2: float, /, *, hop_length: int = 1024) -> float:
+    beats1 = calculate_beat_alignment(audio_signal1, sample_rate1, hop_length=hop_length)
+    beats2 = calculate_beat_alignment(audio_signal2, sample_rate2, hop_length=hop_length)
 
     similarity_percentage = comparisons.round_to_one(
         comparisons.normalized_relative_difference_array(beats1, beats2))
@@ -19,7 +19,7 @@ def compare_two_beat_alignment(audio_signal1: np.ndarray, audio_signal2: np.ndar
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_beat_alignment(audio_signals: list, sample_rates: list, hop_length: int = 1024) -> float:
+def compare_multiple_beat_alignment(audio_signals: list, sample_rates: list, /, *, hop_length: int = 1024) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 
@@ -29,7 +29,7 @@ def compare_multiple_beat_alignment(audio_signals: list, sample_rates: list, hop
     for i in range(num_signals):
         for j in range(i + 1, num_signals):
             similarity = compare_two_beat_alignment(audio_signals[i], audio_signals[j],
-                                                    sample_rates[i], sample_rates[j], hop_length)
+                                                    sample_rates[i], sample_rates[j], hop_length=hop_length)
             similarity_values.append(similarity)
 
     mean_similarity = comparisons.round_to_one(np.mean(similarity_values))

@@ -28,23 +28,23 @@ def test_compare_two_spect_bandwidth(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_spect_bandwidth(audio_signal1, audio_signal1,
-                                                sample_rate1, sample_rate1, n_fft) == 1
+                                                sample_rate1, sample_rate1, n_fft=n_fft) == 1
     assert analysis.compare_two_spect_bandwidth(audio_signal2, audio_signal2,
-                                                sample_rate2, sample_rate2, n_fft) == 1
+                                                sample_rate2, sample_rate2, n_fft=n_fft) == 1
     assert analysis.compare_two_spect_bandwidth(audio_signal3, audio_signal3,
-                                                sample_rate3, sample_rate3, n_fft) == 1
+                                                sample_rate3, sample_rate3, n_fft=n_fft) == 1
     assert analysis.compare_two_spect_bandwidth(audio_signal1, audio_signal2,
-                                                sample_rate1, sample_rate2, n_fft) == 0.8461638848671262
+                                                sample_rate1, sample_rate2, n_fft=n_fft) == 0.8461638848671262
     assert analysis.compare_two_spect_bandwidth(audio_signal2, audio_signal1,
-                                                sample_rate2, sample_rate1, n_fft) == 0.8461638848671262
+                                                sample_rate2, sample_rate1, n_fft=n_fft) == 0.8461638848671262
     assert analysis.compare_two_spect_bandwidth(audio_signal1, audio_signal3,
-                                                sample_rate1, sample_rate3, n_fft) == 0.8381435936697156
+                                                sample_rate1, sample_rate3, n_fft=n_fft) == 0.8381435936697156
     assert analysis.compare_two_spect_bandwidth(audio_signal3, audio_signal1,
-                                                sample_rate3, sample_rate1, n_fft) == 0.8381435936697156
+                                                sample_rate3, sample_rate1, n_fft=n_fft) == 0.8381435936697156
     assert analysis.compare_two_spect_bandwidth(audio_signal2, audio_signal3,
-                                                sample_rate2, sample_rate3, n_fft) == 0.849314970421333
+                                                sample_rate2, sample_rate3, n_fft=n_fft) == 0.849314970421333
     assert analysis.compare_two_spect_bandwidth(audio_signal3, audio_signal2,
-                                                sample_rate3, sample_rate2, n_fft) == 0.849314970421333
+                                                sample_rate3, sample_rate2, n_fft=n_fft) == 0.849314970421333
 
 
 def test_compare_multiple_spect_bandwidth(setup):
@@ -58,27 +58,27 @@ def test_compare_multiple_spect_bandwidth(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_spect_bandwidth([audio_signal1, audio_signal1],
-                                                     [sample_rate1, sample_rate1], n_fft) == 1
+                                                     [sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spect_bandwidth([audio_signal2, audio_signal2],
-                                                     [sample_rate2, sample_rate2], n_fft) == 1
+                                                     [sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spect_bandwidth([audio_signal3, audio_signal3],
-                                                     [sample_rate3, sample_rate3], n_fft) == 1
+                                                     [sample_rate3, sample_rate3], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spect_bandwidth([audio_signal1, audio_signal2],
-                                                     [sample_rate1, sample_rate2], n_fft) == 0.8461638848671262
+                                                     [sample_rate1, sample_rate2], n_fft=n_fft) == 0.8461638848671262
     assert analysis.compare_multiple_spect_bandwidth([audio_signal2, audio_signal1],
-                                                     [sample_rate2, sample_rate1], n_fft) == 0.8461638848671262
+                                                     [sample_rate2, sample_rate1], n_fft=n_fft) == 0.8461638848671262
     assert analysis.compare_multiple_spect_bandwidth([audio_signal1, audio_signal3],
-                                                     [sample_rate1, sample_rate3], n_fft) == 0.8381435936697156
+                                                     [sample_rate1, sample_rate3], n_fft=n_fft) == 0.8381435936697156
     assert analysis.compare_multiple_spect_bandwidth([audio_signal3, audio_signal1],
-                                                     [sample_rate3, sample_rate1], n_fft) == 0.8381435936697156
+                                                     [sample_rate3, sample_rate1], n_fft=n_fft) == 0.8381435936697156
     assert analysis.compare_multiple_spect_bandwidth([audio_signal2, audio_signal3],
-                                                     [sample_rate2, sample_rate3], n_fft) == 0.849314970421333
+                                                     [sample_rate2, sample_rate3], n_fft=n_fft) == 0.849314970421333
     assert analysis.compare_multiple_spect_bandwidth([audio_signal3, audio_signal2],
-                                                     [sample_rate3, sample_rate2], n_fft) == 0.849314970421333
+                                                     [sample_rate3, sample_rate2], n_fft=n_fft) == 0.849314970421333
 
     assert analysis.compare_multiple_spect_bandwidth([audio_signal1, audio_signal1, audio_signal1],
-                                                     [sample_rate1, sample_rate1, sample_rate1], n_fft) == 1
+                                                     [sample_rate1, sample_rate1, sample_rate1], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spect_bandwidth([audio_signal2, audio_signal2, audio_signal2],
-                                                     [sample_rate2, sample_rate2, sample_rate2], n_fft) == 1
+                                                     [sample_rate2, sample_rate2, sample_rate2], n_fft=n_fft) == 1
     assert analysis.compare_multiple_spect_bandwidth([audio_signal3, audio_signal3, audio_signal3],
-                                                     [sample_rate3, sample_rate3, sample_rate3], n_fft) == 1
+                                                     [sample_rate3, sample_rate3, sample_rate3], n_fft=n_fft) == 1

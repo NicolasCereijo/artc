@@ -3,14 +3,14 @@ import numpy as np
 import librosa
 
 
-def calculate_temporal_centroid(audio_signal: np.ndarray, sample_rate: float) -> float:
+def calculate_temporal_centroid(audio_signal: np.ndarray, sample_rate: float, /) -> float:
     envelope = np.abs(librosa.onset.onset_strength(y=audio_signal, sr=sample_rate))
     times = librosa.times_like(envelope, sr=sample_rate)
     return np.sum(envelope * times) / np.sum(envelope)
 
 
 def compare_two_temporal_centroid(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                                  sample_rate1: float, sample_rate2: float) -> float:
+                                  sample_rate1: float, sample_rate2: float, /) -> float:
     centroid1 = calculate_temporal_centroid(audio_signal1, sample_rate1)
     centroid2 = calculate_temporal_centroid(audio_signal2, sample_rate2)
 
@@ -20,7 +20,7 @@ def compare_two_temporal_centroid(audio_signal1: np.ndarray, audio_signal2: np.n
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_temporal_centroid(audio_signals: list, sample_rates: list) -> float:
+def compare_multiple_temporal_centroid(audio_signals: list, sample_rates: list, /) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 

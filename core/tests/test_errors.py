@@ -27,13 +27,16 @@ def test_check_audio_format(setup):
     path, name, ambient_sounds_path, fire_sounds_path = setup
     configuration_file = path + name
 
-    assert errors.check_audio_format(ambient_sounds_path, "Desert Howling Wind.mp3", configuration_file)
-    assert errors.check_audio_format(fire_sounds_path, "Burning-fireplace.wav", configuration_file)
+    assert errors.check_audio_format(path=ambient_sounds_path, name="Desert Howling Wind.mp3",
+                                     configuration_path=configuration_file)
+    assert errors.check_audio_format(path=fire_sounds_path, name="Burning-fireplace.wav",
+                                     configuration_path=configuration_file)
 
-    assert errors.check_audio_format("", "", configuration_file) is False
-    assert errors.check_audio_format("", "invalid_file", configuration_file) is False
-    assert errors.check_audio_format("", "invalid_file.pdf", configuration_file) is False
-    assert errors.check_audio_format(ambient_sounds_path, "invalid_file", configuration_file) is False
+    assert errors.check_audio_format(path="", name="", configuration_path=configuration_file) is False
+    assert errors.check_audio_format(path="", name="invalid_file", configuration_path=configuration_file) is False
+    assert errors.check_audio_format(path="", name="invalid_file.pdf", configuration_path=configuration_file) is False
+    assert errors.check_audio_format(path=ambient_sounds_path, name="invalid_file",
+                                     configuration_path=configuration_file) is False
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -67,12 +70,12 @@ def test_check_path_accessible(setup):
 def test_check_file_readable(setup):
     path, name, _, _ = setup
 
-    assert errors.check_file_readable(path, name)
+    assert errors.check_file_readable(path=path, name=name)
 
-    assert errors.check_file_readable("", name) is False
-    assert errors.check_file_readable("invalid_path", name) is False
-    assert errors.check_file_readable(path, "") is False
-    assert errors.check_file_readable(path, "invalid_name") is False
+    assert errors.check_file_readable(path="", name=name) is False
+    assert errors.check_file_readable(path="invalid_path", name=name) is False
+    assert errors.check_file_readable(path=path, name="") is False
+    assert errors.check_file_readable(path=path, name="invalid_name") is False
 
 
 @pytest.mark.skipif(not errors.check_url_reachable("https://www.google.com/"),
@@ -81,18 +84,18 @@ def test_validate_path(setup):
     path, name, _, _ = setup
     url_message_error = "\nIMPORTANT: Access to a test static URL has failed, check if this URL is still accessible"
 
-    assert errors.validate_path(path, name)
+    assert errors.validate_path(path=path, name=name)
 
-    assert errors.validate_path("", "") is False
-    assert errors.validate_path("", name) is False
-    assert errors.validate_path("invalid_path", name) is False
-    assert errors.validate_path(path, "") is False
-    assert errors.validate_path("", "invalid_name") is False
-    assert errors.validate_path("https://invalid_url", "") is False
-    assert errors.validate_path("https://invalid_url", "invalid_file") is False
+    assert errors.validate_path(path="", name="") is False
+    assert errors.validate_path(path="", name=name) is False
+    assert errors.validate_path(path="invalid_path", name=name) is False
+    assert errors.validate_path(path=path, name="") is False
+    assert errors.validate_path(path="", name="invalid_name") is False
+    assert errors.validate_path(path="https://invalid_url", name="") is False
+    assert errors.validate_path(path="https://invalid_url", name="invalid_file") is False
 
     try:
-        assert errors.validate_path("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/", "bootstrap.css")
+        assert errors.validate_path(path="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/", name="bootstrap.css")
     except Exception as ex:
         print(url_message_error)
         raise ex

@@ -27,15 +27,21 @@ def test_compare_two_en_envelope(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal1, hop_length) == 1
-    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal2, hop_length) == 1
-    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal3, hop_length) == 1
-    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal2, hop_length) == 0.7295681421302518
-    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal1, hop_length) == 0.7295681421302518
-    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal3, hop_length) == 0.7420387115960934
-    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal1, hop_length) == 0.7420387115960934
-    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal3, hop_length) == 0.7922906537475337
-    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal2, hop_length) == 0.7922906537475337
+    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal1, hop_length=hop_length) == 1
+    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal2, hop_length=hop_length) == 1
+    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal3, hop_length=hop_length) == 1
+    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal2,
+                                                hop_length=hop_length) == 0.7295681421302518
+    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal1,
+                                                hop_length=hop_length) == 0.7295681421302518
+    assert analysis.compare_two_energy_envelope(audio_signal1, audio_signal3,
+                                                hop_length=hop_length) == 0.7420387115960934
+    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal1,
+                                                hop_length=hop_length) == 0.7420387115960934
+    assert analysis.compare_two_energy_envelope(audio_signal2, audio_signal3,
+                                                hop_length=hop_length) == 0.7922906537475337
+    assert analysis.compare_two_energy_envelope(audio_signal3, audio_signal2,
+                                                hop_length=hop_length) == 0.7922906537475337
 
 
 def test_compare_multiple_en_envelope(setup):
@@ -48,16 +54,25 @@ def test_compare_multiple_en_envelope(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal1], hop_length) == 1
-    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal2], hop_length) == 1
-    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal3], hop_length) == 1
-    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal2], hop_length) == 0.7295681421302518
-    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal1], hop_length) == 0.7295681421302518
-    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal3], hop_length) == 0.7420387115960934
-    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal1], hop_length) == 0.7420387115960934
-    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal3], hop_length) == 0.7922906537475337
-    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal2], hop_length) == 0.7922906537475337
+    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal1], hop_length=hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal2], hop_length=hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal3], hop_length=hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal2],
+                                                     hop_length=hop_length) == 0.7295681421302518
+    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal1],
+                                                     hop_length=hop_length) == 0.7295681421302518
+    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal3],
+                                                     hop_length=hop_length) == 0.7420387115960934
+    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal1],
+                                                     hop_length=hop_length) == 0.7420387115960934
+    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal3],
+                                                     hop_length=hop_length) == 0.7922906537475337
+    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal2],
+                                                     hop_length=hop_length) == 0.7922906537475337
 
-    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal1, audio_signal1], hop_length) == 1
-    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal2, audio_signal2], hop_length) == 1
-    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal3, audio_signal3], hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal1, audio_signal1, audio_signal1],
+                                                     hop_length=hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal2, audio_signal2, audio_signal2],
+                                                     hop_length=hop_length) == 1
+    assert analysis.compare_multiple_energy_envelope([audio_signal3, audio_signal3, audio_signal3],
+                                                     hop_length=hop_length) == 1

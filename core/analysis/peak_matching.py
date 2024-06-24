@@ -3,8 +3,8 @@ import numpy as np
 import librosa
 
 
-def calculate_peak_matching(audio_signal: np.ndarray, sample_rate: float,
-                            n_fft: int = 4096) -> [np.ndarray, np.ndarray]:
+def calculate_peak_matching(audio_signal: np.ndarray, sample_rate: float, /,
+                            *, n_fft: int = 4096) -> [np.ndarray, np.ndarray]:
     spectrogram = np.abs(librosa.stft(audio_signal, n_fft=n_fft))
     one_dimensional_spectrogram = np.mean(spectrogram, axis=1)
 
@@ -33,9 +33,9 @@ def calculate_peak_matching(audio_signal: np.ndarray, sample_rate: float,
 
 
 def compare_two_peak_matching(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
-                              sample_rate1: float, sample_rate2: float, n_fft: int = 4096) -> float:
-    peak_freq1, peak_mag1 = calculate_peak_matching(audio_signal1, sample_rate1, n_fft)
-    peak_freq2, peak_mag2 = calculate_peak_matching(audio_signal2, sample_rate2, n_fft)
+                              sample_rate1: float, sample_rate2: float, /, *, n_fft: int = 4096) -> float:
+    peak_freq1, peak_mag1 = calculate_peak_matching(audio_signal1, sample_rate1, n_fft=n_fft)
+    peak_freq2, peak_mag2 = calculate_peak_matching(audio_signal2, sample_rate2, n_fft=n_fft)
 
     similarity_percentage_peak_freq = comparisons.round_to_one(
         comparisons.normalized_relative_difference_array(peak_freq1, peak_freq2))
@@ -47,7 +47,7 @@ def compare_two_peak_matching(audio_signal1: np.ndarray, audio_signal2: np.ndarr
     return max(0.0, similarity_percentage)
 
 
-def compare_multiple_peak_matching(audio_signals: list, sample_rates: list, n_fft: int = 4096) -> float:
+def compare_multiple_peak_matching(audio_signals: list, sample_rates: list, /, *, n_fft: int = 4096) -> float:
     num_signals = len(audio_signals)
     similarity_values = []
 
@@ -57,7 +57,7 @@ def compare_multiple_peak_matching(audio_signals: list, sample_rates: list, n_ff
     for i in range(num_signals):
         for j in range(i + 1, num_signals):
             similarity = compare_two_peak_matching(audio_signals[i], audio_signals[j],
-                                                   sample_rates[i], sample_rates[j], n_fft)
+                                                   sample_rates[i], sample_rates[j], n_fft=n_fft)
             similarity_values.append(similarity)
 
     mean_similarity = comparisons.round_to_one(np.mean(similarity_values))

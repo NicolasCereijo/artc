@@ -19,7 +19,7 @@ def check_audio_corruption(file_path: str) -> bool:
         return False
 
 
-def check_audio_format(path: str, name: str, configuration_path: str) -> bool:
+def check_audio_format(*, path: str, name: str, configuration_path: str) -> bool:
     if (not check_audio_corruption(path + name)
             or not errors.check_path_accessible(configuration_path)
             or not (os.path.isfile(os.path.join(path, name))

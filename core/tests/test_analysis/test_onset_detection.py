@@ -28,23 +28,23 @@ def test_compare_two_onset_detection(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_two_onset_detection(audio_signal1, audio_signal1,
-                                                sample_rate1, sample_rate1, hop_length) == 1
+                                                sample_rate1, sample_rate1, hop_length=hop_length) == 1
     assert analysis.compare_two_onset_detection(audio_signal2, audio_signal2,
-                                                sample_rate2, sample_rate2, hop_length) == 1
+                                                sample_rate2, sample_rate2, hop_length=hop_length) == 1
     assert analysis.compare_two_onset_detection(audio_signal3, audio_signal3,
-                                                sample_rate3, sample_rate3, hop_length) == 1
+                                                sample_rate3, sample_rate3, hop_length=hop_length) == 1
     assert analysis.compare_two_onset_detection(audio_signal1, audio_signal2,
-                                                sample_rate1, sample_rate2, hop_length) == 0.8602384328842163
+                                                sample_rate1, sample_rate2, hop_length=hop_length) == 0.8602384328842163
     assert analysis.compare_two_onset_detection(audio_signal2, audio_signal1,
-                                                sample_rate2, sample_rate1, hop_length) == 0.8602384328842163
+                                                sample_rate2, sample_rate1, hop_length=hop_length) == 0.8602384328842163
     assert analysis.compare_two_onset_detection(audio_signal1, audio_signal3,
-                                                sample_rate1, sample_rate3, hop_length) == 0.9278815984725952
+                                                sample_rate1, sample_rate3, hop_length=hop_length) == 0.9278815984725952
     assert analysis.compare_two_onset_detection(audio_signal3, audio_signal1,
-                                                sample_rate3, sample_rate1, hop_length) == 0.9278815984725952
+                                                sample_rate3, sample_rate1, hop_length=hop_length) == 0.9278815984725952
     assert analysis.compare_two_onset_detection(audio_signal2, audio_signal3,
-                                                sample_rate2, sample_rate3, hop_length) == 0.944302499294281
+                                                sample_rate2, sample_rate3, hop_length=hop_length) == 0.944302499294281
     assert analysis.compare_two_onset_detection(audio_signal3, audio_signal2,
-                                                sample_rate3, sample_rate2, hop_length) == 0.944302499294281
+                                                sample_rate3, sample_rate2, hop_length=hop_length) == 0.944302499294281
 
 
 def test_compare_multiple_onset_detection(setup):
@@ -58,27 +58,36 @@ def test_compare_multiple_onset_detection(setup):
                                                data_set["individual_files"][2]["name"])
 
     assert analysis.compare_multiple_onset_detection([audio_signal1, audio_signal1],
-                                                     [sample_rate1, sample_rate1], hop_length) == 1
+                                                     [sample_rate1, sample_rate1], hop_length=hop_length) == 1
     assert analysis.compare_multiple_onset_detection([audio_signal2, audio_signal2],
-                                                     [sample_rate2, sample_rate2], hop_length) == 1
+                                                     [sample_rate2, sample_rate2], hop_length=hop_length) == 1
     assert analysis.compare_multiple_onset_detection([audio_signal3, audio_signal3],
-                                                     [sample_rate3, sample_rate3], hop_length) == 1
+                                                     [sample_rate3, sample_rate3], hop_length=hop_length) == 1
     assert analysis.compare_multiple_onset_detection([audio_signal1, audio_signal2],
-                                                     [sample_rate1, sample_rate2], hop_length) == 0.8602384328842163
+                                                     [sample_rate1, sample_rate2],
+                                                     hop_length=hop_length) == 0.8602384328842163
     assert analysis.compare_multiple_onset_detection([audio_signal2, audio_signal1],
-                                                     [sample_rate2, sample_rate1], hop_length) == 0.8602384328842163
+                                                     [sample_rate2, sample_rate1],
+                                                     hop_length=hop_length) == 0.8602384328842163
     assert analysis.compare_multiple_onset_detection([audio_signal1, audio_signal3],
-                                                     [sample_rate1, sample_rate3], hop_length) == 0.9278815984725952
+                                                     [sample_rate1, sample_rate3],
+                                                     hop_length=hop_length) == 0.9278815984725952
     assert analysis.compare_multiple_onset_detection([audio_signal3, audio_signal1],
-                                                     [sample_rate3, sample_rate1], hop_length) == 0.9278815984725952
+                                                     [sample_rate3, sample_rate1],
+                                                     hop_length=hop_length) == 0.9278815984725952
     assert analysis.compare_multiple_onset_detection([audio_signal2, audio_signal3],
-                                                     [sample_rate2, sample_rate3], hop_length) == 0.944302499294281
+                                                     [sample_rate2, sample_rate3],
+                                                     hop_length=hop_length) == 0.944302499294281
     assert analysis.compare_multiple_onset_detection([audio_signal3, audio_signal2],
-                                                     [sample_rate3, sample_rate2], hop_length) == 0.944302499294281
+                                                     [sample_rate3, sample_rate2],
+                                                     hop_length=hop_length) == 0.944302499294281
 
     assert analysis.compare_multiple_onset_detection([audio_signal1, audio_signal1, audio_signal1],
-                                                     [sample_rate1, sample_rate1, sample_rate1], hop_length) == 1
+                                                     [sample_rate1, sample_rate1, sample_rate1],
+                                                     hop_length=hop_length) == 1
     assert analysis.compare_multiple_onset_detection([audio_signal2, audio_signal2, audio_signal2],
-                                                     [sample_rate2, sample_rate2, sample_rate2], hop_length) == 1
+                                                     [sample_rate2, sample_rate2, sample_rate2],
+                                                     hop_length=hop_length) == 1
     assert analysis.compare_multiple_onset_detection([audio_signal3, audio_signal3, audio_signal3],
-                                                     [sample_rate3, sample_rate3, sample_rate3], hop_length) == 1
+                                                     [sample_rate3, sample_rate3, sample_rate3],
+                                                     hop_length=hop_length) == 1

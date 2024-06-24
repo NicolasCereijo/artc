@@ -27,15 +27,15 @@ def test_compare_two_spect_flatness(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal1, n_fft) == 1
-    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal2, n_fft) == 1
-    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal3, n_fft) == 1
-    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal2, n_fft) == 0.6417408585548401
-    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal1, n_fft) == 0.6417408585548401
-    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal3, n_fft) == 0.3992359936237335
-    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal1, n_fft) == 0.3992359936237335
-    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal3, n_fft) == 0.48906615376472473
-    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal2, n_fft) == 0.48906615376472473
+    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal1, n_fft=n_fft) == 1
+    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal2, n_fft=n_fft) == 1
+    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal3, n_fft=n_fft) == 1
+    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal2, n_fft=n_fft) == 0.6417408585548401
+    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal1, n_fft=n_fft) == 0.6417408585548401
+    assert analysis.compare_two_spect_flatness(audio_signal1, audio_signal3, n_fft=n_fft) == 0.3992359936237335
+    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal1, n_fft=n_fft) == 0.3992359936237335
+    assert analysis.compare_two_spect_flatness(audio_signal2, audio_signal3, n_fft=n_fft) == 0.48906615376472473
+    assert analysis.compare_two_spect_flatness(audio_signal3, audio_signal2, n_fft=n_fft) == 0.48906615376472473
 
 
 def test_compare_multiple_spect_flatness(setup):
@@ -48,16 +48,16 @@ def test_compare_multiple_spect_flatness(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal1], n_fft) == 1
-    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal2], n_fft) == 1
-    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal3], n_fft) == 1
-    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal2], n_fft) == 0.6417408585548401
-    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal1], n_fft) == 0.6417408585548401
-    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal3], n_fft) == 0.3992359936237335
-    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal1], n_fft) == 0.3992359936237335
-    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal3], n_fft) == 0.48906615376472473
-    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal2], n_fft) == 0.48906615376472473
+    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal2], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal3], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal2], n_fft=n_fft) == 0.6417408585548401
+    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal1], n_fft=n_fft) == 0.6417408585548401
+    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal3], n_fft=n_fft) == 0.3992359936237335
+    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal1], n_fft=n_fft) == 0.3992359936237335
+    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal3], n_fft=n_fft) == 0.48906615376472473
+    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal2], n_fft=n_fft) == 0.48906615376472473
+    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal1], n_fft=n_fft) == 1
 
-    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal1, audio_signal1], n_fft) == 1
-    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal2, audio_signal2], n_fft) == 1
-    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal3, audio_signal3], n_fft) == 1
+    assert analysis.compare_multiple_spect_flatness([audio_signal1, audio_signal1, audio_signal1], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spect_flatness([audio_signal2, audio_signal2, audio_signal2], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spect_flatness([audio_signal3, audio_signal3, audio_signal3], n_fft=n_fft) == 1

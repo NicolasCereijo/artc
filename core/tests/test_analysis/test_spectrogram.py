@@ -27,15 +27,15 @@ def test_compare_two_spectrograms(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal1, n_fft) == 1
-    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal2, n_fft) == 1
-    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal3, n_fft) == 1
-    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal2, n_fft) == 0.6109837889671326
-    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal1, n_fft) == 0.6109837889671326
-    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal3, n_fft) == 0.8003208935260773
-    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal1, n_fft) == 0.8003208935260773
-    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal3, n_fft) == 0.7371675223112106
-    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal2, n_fft) == 0.7371675223112106
+    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal1, n_fft=n_fft) == 1
+    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal2, n_fft=n_fft) == 1
+    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal3, n_fft=n_fft) == 1
+    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal2, n_fft=n_fft) == 0.6109837889671326
+    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal1, n_fft=n_fft) == 0.6109837889671326
+    assert analysis.compare_two_spectrograms(audio_signal1, audio_signal3, n_fft=n_fft) == 0.8003208935260773
+    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal1, n_fft=n_fft) == 0.8003208935260773
+    assert analysis.compare_two_spectrograms(audio_signal2, audio_signal3, n_fft=n_fft) == 0.7371675223112106
+    assert analysis.compare_two_spectrograms(audio_signal3, audio_signal2, n_fft=n_fft) == 0.7371675223112106
 
 
 def test_compare_multiple_spectrograms(setup):
@@ -48,16 +48,16 @@ def test_compare_multiple_spectrograms(setup):
     audio_signal3, sample_rate3 = librosa.load(data_set["individual_files"][2]["path"] +
                                                data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal1], n_fft) == 1
-    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal2], n_fft) == 1
-    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal3], n_fft) == 1
-    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal2], n_fft) == 0.6109837889671326
-    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal1], n_fft) == 0.6109837889671326
-    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal3], n_fft) == 0.8003208935260773
-    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal1], n_fft) == 0.8003208935260773
-    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal3], n_fft) == 0.7371675223112106
-    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal2], n_fft) == 0.7371675223112106
+    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal1], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal2], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal3], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal2], n_fft=n_fft) == 0.6109837889671326
+    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal1], n_fft=n_fft) == 0.6109837889671326
+    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal3], n_fft=n_fft) == 0.8003208935260773
+    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal1], n_fft=n_fft) == 0.8003208935260773
+    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal3], n_fft=n_fft) == 0.7371675223112106
+    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal2], n_fft=n_fft) == 0.7371675223112106
 
-    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal1, audio_signal1], n_fft) == 1
-    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal2, audio_signal2], n_fft) == 1
-    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal3, audio_signal3], n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal1, audio_signal1, audio_signal1], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal2, audio_signal2, audio_signal2], n_fft=n_fft) == 1
+    assert analysis.compare_multiple_spectrograms([audio_signal3, audio_signal3, audio_signal3], n_fft=n_fft) == 1
