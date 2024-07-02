@@ -13,5 +13,9 @@ __pycache__/
 # Ignore PyCharm project files
 .idea/
 
+# Ignore auto-generated directories
+artc.egg-info/
+build/
+
 # Private until first kernel release
 test_collection/
