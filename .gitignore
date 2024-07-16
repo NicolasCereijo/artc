@@ -17,5 +17,3 @@ __pycache__/
 artc.egg-info/
 build/
 
-# Private until first kernel release
-test_collection/
