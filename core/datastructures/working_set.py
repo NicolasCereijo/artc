@@ -1,16 +1,19 @@
-import core.errors as errors
-import numpy as np
-import librosa
 import os
+
+import librosa
+import numpy as np
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable, Optional
+
+import core.errors as errors
 
 logger = errors.logger_config.LoggerSingleton().get_logger()
 
 
 @dataclass
 class AudioFile:
-    path: str
+    path: Path
     name: str
     audio_signal_unloaded: Callable[[], np.ndarray]
     sample_rate: int
@@ -19,17 +22,17 @@ class AudioFile:
     def audio_signal_loaded(self) -> np.ndarray:
         return self.audio_signal_unloaded()
 
-    def check_audio(self, configuration_path: str) -> bool:
+    def check_audio(self, configuration_path: Path) -> bool:
         verifications = [
-            (errors.check_audio_corruption, (self.path + self.name,), {},
+            (errors.check_audio_corruption, (self.path / self.name,), {},
              f"Audio file '{self.path}' is corrupted"),
             (errors.check_audio_format, (),
-             {'path': self.path, 'name': self.name, 'configuration_path': configuration_path},
-             f"Invalid file format for '{self.name}'"),
+             {'path': self.path, 'name': self.name,
+              'configuration_path': configuration_path}, f"Invalid file format for '{self.name}'"),
             (errors.check_path_accessible, (self.path,), {},
              f"Path '{self.path}' does not exist or is not accessible"),
-            (errors.check_path_accessible, (configuration_path,), {},
-             f"Path '{configuration_path}' does not exist or is not accessible")
+            (errors.check_path_accessible, (configuration_path.parent,), {},
+             f"Path '{configuration_path.parent}' does not exist or is not accessible")
         ]
 
         no_error = all(
@@ -61,7 +64,8 @@ class WorkingSet:
         for file in self.working_set[group]:
             if file.name == name:
                 return file
-        logger.error(f"No file with name '{name}' was found in key '{group}' in working set '{self.name}'")
+        logger.error(f"No file with name '{name}' was found in group '{group}' in working set "
+                     f"'{self.name}'")
         return None
 
     def __contains__(self, *, name: str, group: str = "individual_files") -> bool:
@@ -70,17 +74,19 @@ class WorkingSet:
             return False
         return True
 
-    def add_file(self, *, path: str, name: str, configuration_path: str, group: str = "individual_files") -> bool:
+    def add_file(self, *, path: Path, name: str, configuration_path: Path,
+                 group: str = "individual_files") -> bool:
         if not errors.validate_path(path=path, name=name):
-            logger.error(f"Path '{path + name}' does not exist or is not accessible")
+            logger.error(f"Path '{path / name}' does not exist or is not accessible")
             return False
 
-        audio_signal, sample_rate = librosa.load(os.path.join(path, name))
+        audio_signal, sample_rate = librosa.load(path / name)
         audio = AudioFile(path=path, name=name,
                           audio_signal_unloaded=lambda: audio_signal, sample_rate=int(sample_rate))
 
         if not audio.check_audio(configuration_path):
-            logger.error(f"Could not add file '{name}' in group '{group}' in working set '{self.name}'")
+            logger.error(f"Could not add file '{name}' in group '{group}' in working set "
+                         f"'{self.name}'")
             return False
         if group == "":
             logger.error("Can not add groups with empty names")
@@ -93,22 +99,26 @@ class WorkingSet:
         return True
 
     def remove_file(self, *, name: str, group: str = "individual_files") -> bool:
-        if group not in self.working_set or not any(audio.name == name for audio in self.working_set[group]):
+        if group not in self.working_set or not any(audio.name == name for audio in
+                                                    self.working_set[group]):
             logger.error(f"Could not delete file. "
-                         f"No file with name '{name}' was found in key '{group}' in working set '{self.name}'")
+                         f"No file with name '{name}' was found in key '{group}' in working set "
+                         f"'{self.name}'")
             return False
         else:
-            self.working_set[group] = [audio for audio in self.working_set[group] if audio.name != name]
+            self.working_set[group] = [audio for audio in self.working_set[group] if
+                                       audio.name != name]
             return True
 
-    def add_directory(self, *, path: str, configuration_path: str, group: str = "individual_files") -> bool:
+    def add_directory(self, *, path: Path, configuration_path: Path,
+                      group: str = "individual_files") -> bool:
         any_files_added = False
 
         directory_verifications = [
             (errors.check_path_accessible, (path,),
              f"Path '{path}' does not exist or is not accessible"),
-            (errors.check_path_accessible, (configuration_path,),
-             f"Path '{configuration_path}' does not exist or is not accessible"),
+            (errors.check_path_accessible, (configuration_path.parent,),
+             f"Path '{configuration_path.parent}' does not exist or is not accessible"),
             (lambda check_group: group != "", (group,), "Can not add groups with empty names")
         ]
 
@@ -119,12 +129,13 @@ class WorkingSet:
             for check_function, args, error_message in directory_verifications
         )
 
-        if not no_error:
+        if not no_error or path.as_posix() == ".":
             return False
 
         for file_name in os.listdir(path):
             if os.path.isfile(os.path.join(path, file_name)):
-                if self.add_file(path=path, name=file_name, configuration_path=configuration_path, group=group):
+                if self.add_file(path=path, name=file_name, configuration_path=configuration_path,
+                                 group=group):
                     any_files_added = True
 
         return any_files_added

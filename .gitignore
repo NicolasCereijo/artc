@@ -1,19 +1,64 @@
-# Ignore Python bytecode cache files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Ignore C extension files
 *.so
 
-# Ignore application-generated log files
+# Virtual environment directories
+venv/
+.venv/
+env/
+.env/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Test results
+.pytest_cache/
+.tox/
+coverage/
+htmlcov/
+*.cover
+.cache
+nosetests.xml
+coverage.xml
 *.log
 
-# Ignore PyCharm project files
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# IDE / Editor directories and settings
 .idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
 
-# Ignore auto-generated directories
-artc.egg-info/
-build/
+# Python environment variables
+*.env
 
+# Local configuration files
+*.local
+*.cfg
+
+# Git-specific files
+.git/
+.gitignore

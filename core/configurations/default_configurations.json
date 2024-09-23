@@ -1,6 +1,6 @@
 {
   "audio": {
-    "valid_extensions": ["mp3", "wav"]
+    "valid_extensions": [".mp3", ".wav"]
   },
   "metric": {
     "window_parameter": {

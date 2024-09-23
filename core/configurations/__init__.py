@@ -1,26 +1,26 @@
 import core.errors as errors
+from pathlib import Path
 import json
-import os
 
 logger = errors.logger_config.LoggerSingleton().get_logger()
 
 
-def open_config(configuration_path: str) -> dict:
+def open_config(configuration_path: Path) -> dict:
     try:
-        if os.access(configuration_path, os.R_OK):
-            with open(configuration_path, 'r') as file:
+        if errors.check_path_accessible(configuration_path.parent) and configuration_path.is_file():
+            with configuration_path.open('r') as file:
                 return json.load(file)
     except ValueError:
-        logger.critical("Could not access configuration file")
+        logger.critical("Could not access or parse configuration file")
 
 
-def read_config(config_section: str, configuration_path: str) -> dict:
+def read_config(config_section: str, configuration_path: Path) -> dict:
     """
         Read and retrieve configuration settings from a specified section of a configuration file.
 
         Args:
             config_section (str): The section of the configuration file to read.
-            configuration_path (str): The path to the configuration file.
+            configuration_path (Path): The path to the configuration file.
 
         Returns:
             dict: A dictionary containing the configuration settings for the specified section.

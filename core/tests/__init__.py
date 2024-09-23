@@ -1,21 +1,23 @@
-from core.tests import *
-import core.errors as errors
+import os
+import sys
 import importlib.resources
 import pytest
-import os
+
+import core.errors as errors
+from core.tests import *
 
 
 def main():
-    configuration_path = str(importlib.resources.files('core.configurations') / 'default_configurations.json')
+    configuration_path = str(importlib.resources.files('core.configurations') /
+                             'default_configurations.json')
     logger = errors.logger_config.LoggerSingleton().get_logger()
 
     logger.info("Running the main test suite for ARtC...\n" +
-                "If internet access is not possible some tests will be skipped\n\n" +
-                "    |     '||''|.     .     ..|'''.|       .|'''.|            ||    .          \n" +
-                "   |||     ||   ||  .||.  .|'      '       ||..  '  ... ...  ...  .||.    .... \n" +
-                "  |  ||    ||''|'    ||   ||                ''|||.   ||  ||   ||   ||   .|...||\n" +
-                " .''''|.   ||   |.   ||   '|.      .      .     '||  ||  ||   ||   ||   ||     \n" +
-                ".|.  .||. .||.  '|' .||.   ''|....'       |'....|'   '|..'|. .||.  '|.'  '|...'\n")
+                "    |     '||''|.     .     ..|'''.|      .|'''.|            ||    .          \n" +
+                "   |||     ||   ||  .||.  .|'      '      ||..  '  ... ...  ...  .||.    .... \n" +
+                "  |  ||    ||''|'    ||   ||               ''|||.   ||  ||   ||   ||   .|...||\n" +
+                " .''''|.   ||   |.   ||   '|.      .     .     '||  ||  ||   ||   ||   ||     \n" +
+                ".|.  .||. .||.  '|' .||.   ''|....'      |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
     if os.access(configuration_path, os.R_OK):
         result = pytest.main()
@@ -26,8 +28,9 @@ def main():
             logger.error("Bugs were found in the test set during execution")
     else:
         logger.critical("Could not access configuration file, suite execution aborted. The\n"
-                        "default_configurations.json file should be located in the /core/configurations/\n"
-                        "folder. Check the directory and access permissions.")
+                        "default_configurations.json file should be located in the\n"
+                        "/core/configurations/ folder. Check the directory and access permissions.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

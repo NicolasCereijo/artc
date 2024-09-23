@@ -1,6 +1,6 @@
 colorlog==6.8.2
 librosa==0.10.2.post1
-numpy==1.26.4
-pytest==8.2.2
+numpy==2.0.2
+pytest==8.3.2
 requests==2.32.3
-scikit-learn==1.5.0
+scikit-learn==1.5.1
