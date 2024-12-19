@@ -1,12 +1,13 @@
 import os
-
-import librosa
-import numpy as np
-from dataclasses import dataclass
 from pathlib import Path
+
+import numpy as np
+import librosa
+from dataclasses import dataclass
 from typing import Callable, Optional
 
-import core.errors as errors
+from .. import errors
+
 
 logger = errors.logger_config.LoggerSingleton().get_logger()
 
@@ -24,22 +25,36 @@ class AudioFile:
 
     def check_audio(self, configuration_path: Path) -> bool:
         verifications = [
-            (errors.check_audio_corruption, (self.path / self.name,), {},
+            # (Check function,
+            # {Function parameters},
+            # Error message)
+
+            (errors.check_audio_corruption,
+             {'file_path': self.path / self.name},
              f"Audio file '{self.path}' is corrupted"),
-            (errors.check_audio_format, (),
-             {'path': self.path, 'name': self.name,
-              'configuration_path': configuration_path}, f"Invalid file format for '{self.name}'"),
-            (errors.check_path_accessible, (self.path,), {},
+
+            (errors.check_audio_format,
+             {'path': self.path, 'name': self.name, 'configuration_path': configuration_path},
+             f"Invalid file format for '{self.name}'"),
+
+            (errors.check_path_accessible,
+             {'path': self.path},
              f"Path '{self.path}' does not exist or is not accessible"),
-            (errors.check_path_accessible, (configuration_path.parent,), {},
+
+            (errors.check_path_accessible,
+             {'path': configuration_path.parent},
              f"Path '{configuration_path.parent}' does not exist or is not accessible")
         ]
 
-        no_error = all(
-            logger.error(error_message.format(audio_data=self))
-            if not check_function(*args, **kwargs)
-            else True
-            for check_function, args, kwargs, error_message in verifications
+        # Generator expression (no condition in this case) inside an iterator function:
+        # ╔════════════╗          ╔════════════╗         ╔════════════╗         ┌────────────┐
+        # ║ Expression ╠══ for ══>║ Variables  ╠══ in ══>║  Iterable  ╠══ if ══>│ Condition  │
+        # ╚════════════╝          ╚════════════╝         ╚════════════╝         └────────────┘
+        no_error = all(                                                # Iterator function
+            logger.error(error_message.format(audio_data=self))        # ╔════════════╗
+            if not check_function(**kwargs)                            # ║ Expression ║
+            else True                                                  # ╚════════════╝
+            for check_function, kwargs, error_message in verifications # [Variables] and [Iterable]
         )
 
         return no_error

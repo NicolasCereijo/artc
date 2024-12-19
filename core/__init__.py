@@ -1,7 +1,7 @@
-from core import analysis
-from core import configurations
-from core import datastructures
-from core import errors
-from core import tests
+from . import analysis
+from . import configurations
+from . import datastructures
+from . import errors
+from . import tests
 
 __all__ = ["analysis", "configurations", "datastructures", "errors"]

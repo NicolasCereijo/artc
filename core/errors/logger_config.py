@@ -15,21 +15,22 @@ class LoggerSingleton:
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 
-        handler = logging.StreamHandler()
-        handler.setLevel(logging.INFO)
+        if not self.logger.hasHandlers():
+            handler = logging.StreamHandler()
+            handler.setLevel(logging.INFO)
 
-        formatter = colorlog.ColoredFormatter(
-            '%(log_color)s%(levelname)s - %(message)s',
-            log_colors={
-                'INFO': 'green',
-                'WARNING': 'yellow',
-                'ERROR': 'red',
-                'CRITICAL': 'bold_red',
-            }
-        )
+            formatter = colorlog.ColoredFormatter(
+                '%(log_color)s%(levelname)s - %(message)s',
+                log_colors={
+                    'INFO': 'green',
+                    'WARNING': 'yellow',
+                    'ERROR': 'red',
+                    'CRITICAL': 'bold_red',
+                }
+            )
 
-        handler.setFormatter(formatter)
-        self.logger.addHandler(handler)
+            handler.setFormatter(formatter)
+            self.logger.addHandler(handler)
 
     def get_logger(self):
         return self.logger

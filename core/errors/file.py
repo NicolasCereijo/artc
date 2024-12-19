@@ -1,7 +1,7 @@
 from pathlib import Path
 
-import core.errors as errors
-import core.configurations as config
+from .. import errors
+from .. import configurations as config
 
 
 def get_extension(file: Path) -> str:

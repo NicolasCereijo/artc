@@ -1,6 +1,8 @@
-import core.errors as errors
 from pathlib import Path
 import json
+
+from .. import errors
+
 
 logger = errors.logger_config.LoggerSingleton().get_logger()
 
@@ -27,10 +29,10 @@ def read_config(config_section: str, configuration_path: Path) -> dict:
             None: If the specified section does not exist.
 
         Note:
-            This function assumes that the configuration file follows a specific structure where 'audio'
-            is a section containing various settings. It returns different parts of the 'audio' section
-            based on the provided `config_section`. If the specified section or the configuration file
-            itself does not exist, appropriate error messages are logged.
+            This function assumes that the configuration file follows a specific structure where
+            'audio' is a section containing various settings. It returns different parts of the
+            'audio' section based on the provided `config_section`. If the specified section or the
+            configuration file itself does not exist, appropriate error messages are logged.
     """
     config = open_config(configuration_path)
 

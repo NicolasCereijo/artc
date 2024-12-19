@@ -3,4 +3,5 @@ librosa==0.10.2.post1
 numpy==2.0.2
 pytest==8.3.2
 requests==2.32.3
+setuptools==75.1.0
 scikit-learn==1.5.1

@@ -25,9 +25,9 @@ def setup():
     return data_set
 
 
-def test_compare_two_spect_bandwidth(setup):
+def test_compare_two_harmonic_tempogram(setup):
     data_set = setup
-    n_fft = 512
+    hop_length = 512
     audio_signal1, sample_rate1 = load(data_set["individual_files"][0]["path"] /
                                        data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = load(data_set["individual_files"][1]["path"] /
@@ -35,38 +35,38 @@ def test_compare_two_spect_bandwidth(setup):
     audio_signal3, sample_rate3 = load(data_set["individual_files"][2]["path"] /
                                        data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_two_spectral_bandwidth(audio_signal1, audio_signal1,
+    assert analysis.compare_two_harmonic_tempogram(audio_signal1, audio_signal1,
                                                    sample_rate1, sample_rate1,
-                                                   n_fft=n_fft) == 1
-    assert analysis.compare_two_spectral_bandwidth(audio_signal2, audio_signal2,
+                                                   hop_length=hop_length) == 1
+    assert analysis.compare_two_harmonic_tempogram(audio_signal2, audio_signal2,
                                                    sample_rate2, sample_rate2,
-                                                   n_fft=n_fft) == 1
-    assert analysis.compare_two_spectral_bandwidth(audio_signal3, audio_signal3,
+                                                   hop_length=hop_length) == 1
+    assert analysis.compare_two_harmonic_tempogram(audio_signal3, audio_signal3,
                                                    sample_rate3, sample_rate3,
-                                                   n_fft=n_fft) == 1
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal1, audio_signal2,
+                                                   hop_length=hop_length) == 1
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal1, audio_signal2,
                                                          sample_rate1, sample_rate2,
-                                                         n_fft=n_fft), 5) == 0.63918
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal2, audio_signal1,
+                                                         hop_length=hop_length), 5) == 0.54038
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal2, audio_signal1,
                                                          sample_rate2, sample_rate1,
-                                                         n_fft=n_fft), 5) == 0.63918
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal1, audio_signal3,
+                                                         hop_length=hop_length), 5) == 0.54038
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal1, audio_signal3,
                                                          sample_rate1, sample_rate3,
-                                                         n_fft=n_fft), 5) == 0.87712
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal3, audio_signal1,
+                                                         hop_length=hop_length), 5) == 0.77211
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal3, audio_signal1,
                                                          sample_rate3, sample_rate1,
-                                                         n_fft=n_fft), 5) == 0.87712
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal2, audio_signal3,
+                                                         hop_length=hop_length), 5) == 0.77211
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal2, audio_signal3,
                                                          sample_rate2, sample_rate3,
-                                                         n_fft=n_fft), 5) == 0.57434
-    assert round(analysis.compare_two_spectral_bandwidth(audio_signal3, audio_signal2,
+                                                         hop_length=hop_length), 5) == 0.38535
+    assert round(analysis.compare_two_harmonic_tempogram(audio_signal3, audio_signal2,
                                                          sample_rate3, sample_rate2,
-                                                         n_fft=n_fft), 5) == 0.57434
+                                                         hop_length=hop_length), 5) == 0.38535
 
 
-def test_compare_multiple_spect_bandwidth(setup):
+def test_compare_multiple_harmonic_tempogram(setup):
     data_set = setup
-    n_fft = 512
+    hop_length = 512
     audio_signal1, sample_rate1 = load(data_set["individual_files"][0]["path"] /
                                        data_set["individual_files"][0]["name"])
     audio_signal2, sample_rate2 = load(data_set["individual_files"][1]["path"] /
@@ -74,49 +74,49 @@ def test_compare_multiple_spect_bandwidth(setup):
     audio_signal3, sample_rate3 = load(data_set["individual_files"][2]["path"] /
                                        data_set["individual_files"][2]["name"])
 
-    assert analysis.compare_multiple_spectral_bandwidth([audio_signal1, audio_signal1],
+    assert analysis.compare_multiple_harmonic_tempogram([audio_signal1, audio_signal1],
                                                         [sample_rate1, sample_rate1],
-                                                        n_fft=n_fft) == 1
-    assert analysis.compare_multiple_spectral_bandwidth([audio_signal2, audio_signal2],
+                                                        hop_length=hop_length) == 1
+    assert analysis.compare_multiple_harmonic_tempogram([audio_signal2, audio_signal2],
                                                         [sample_rate2, sample_rate2],
-                                                        n_fft=n_fft) == 1
-    assert analysis.compare_multiple_spectral_bandwidth([audio_signal3, audio_signal3],
+                                                        hop_length=hop_length) == 1
+    assert analysis.compare_multiple_harmonic_tempogram([audio_signal3, audio_signal3],
                                                         [sample_rate3, sample_rate3],
-                                                        n_fft=n_fft) == 1
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+                                                        hop_length=hop_length) == 1
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal1, audio_signal2],
         [sample_rate1, sample_rate2],
-        n_fft=n_fft), 5) == 0.63918
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length), 5) == 0.54038
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal2, audio_signal1],
         [sample_rate2, sample_rate1],
-        n_fft=n_fft), 5) == 0.63918
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length), 5) == 0.54038
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal1, audio_signal3],
         [sample_rate1, sample_rate3],
-        n_fft=n_fft), 5) == 0.87712
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length), 5) == 0.77211
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal3, audio_signal1],
         [sample_rate3, sample_rate1],
-        n_fft=n_fft), 5) == 0.87712
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length), 5) == 0.77211
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal2, audio_signal3],
         [sample_rate2, sample_rate3],
-        n_fft=n_fft), 5) == 0.57434
-    assert round(analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length), 5) == 0.38535
+    assert round(analysis.compare_multiple_harmonic_tempogram(
         [audio_signal3, audio_signal2],
         [sample_rate3, sample_rate2],
-        n_fft=n_fft), 5) == 0.57434
+        hop_length=hop_length), 5) == 0.38535
 
-    assert analysis.compare_multiple_spectral_bandwidth(
+    assert analysis.compare_multiple_harmonic_tempogram(
         [audio_signal1, audio_signal1, audio_signal1],
         [sample_rate1, sample_rate1, sample_rate1],
-        n_fft=n_fft) == 1
-    assert analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length) == 1
+    assert analysis.compare_multiple_harmonic_tempogram(
         [audio_signal2, audio_signal2, audio_signal2],
         [sample_rate2, sample_rate2, sample_rate2],
-        n_fft=n_fft) == 1
-    assert analysis.compare_multiple_spectral_bandwidth(
+        hop_length=hop_length) == 1
+    assert analysis.compare_multiple_harmonic_tempogram(
         [audio_signal3, audio_signal3, audio_signal3],
         [sample_rate3, sample_rate3, sample_rate3],
-        n_fft=n_fft) == 1
+        hop_length=hop_length) == 1
