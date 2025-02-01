@@ -10,6 +10,8 @@ def get_extension(file: Path) -> str:
     if extension != "":
         return extension
 
+    return ""
+
 
 def check_audio_corruption(file_path: Path) -> bool:
     try:

@@ -19,18 +19,18 @@ def setup():
 def test_open_config(setup):
     configuration_file = setup
 
-    assert config.open_config(configuration_file) is not None
+    assert len(config.open_config(configuration_file)) != 0
 
-    assert config.open_config(Path("")) is None
-    assert config.open_config(Path("invalid_configuration_path")) is None
-    assert config.open_config(Path("invalid_configuration_path.json")) is None
+    assert len(config.open_config(Path(""))) == 0
+    assert len(config.open_config(Path("invalid_configuration_path"))) == 0
+    assert len(config.open_config(Path("invalid_configuration_path.json"))) == 0
 
 
 def test_read_config(setup):
     configuration_file = setup
 
-    assert config.read_config("all", configuration_file) is not None
-    assert config.read_config("extensions", configuration_file) is not None
+    assert len(config.read_config("all", configuration_file)) != 0
+    assert len(config.read_config("extensions", configuration_file)) != 0
 
-    assert config.read_config("invalid_section", configuration_file) is None
-    assert config.read_config("all", Path("invalid_configuration_path")) is None
+    assert len(config.read_config("invalid_section", configuration_file)) == 0
+    assert len(config.read_config("all", Path("invalid_configuration_path"))) == 0

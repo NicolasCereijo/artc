@@ -22,7 +22,7 @@ def compare_two_spectral_flatness(audio_signal1: np.ndarray, audio_signal2: np.n
                     np.linalg.norm(np.abs(flatness_2_adjusted)))
 
     similarity = (1 - distance / max_distance) if max_distance > 0 else 1.0
-    return similarity
+    return float(similarity)
 
 
 def compare_multiple_spectral_flatness(audio_signals: list,

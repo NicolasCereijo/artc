@@ -22,7 +22,7 @@ def compare_two_zcr(signal1: np.ndarray, signal2: np.ndarray,
     relative_difference = (np.abs(zcr1_adjusted - zcr2_adjusted) /
                            (np.abs(zcr1_adjusted) + np.abs(zcr2_adjusted) + 1e-8))
     similarity = 1.0 - np.mean(relative_difference)
-    return max(0.0, similarity)
+    return float(max(0.0, similarity))
 
 
 def compare_multiple_zcr(audio_signals: list, /) -> float:

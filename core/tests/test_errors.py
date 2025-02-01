@@ -25,8 +25,8 @@ def test_get_extension():
     assert errors.get_extension(Path("path_example/file.mp3")) == ".mp3"
     assert errors.get_extension(Path("path_example/file.wav")) == ".wav"
 
-    assert errors.get_extension(Path("path_example/file")) is None
-    assert errors.get_extension(Path("path_example/")) is None
+    assert len(errors.get_extension(Path("path_example/file"))) == 0
+    assert len(errors.get_extension(Path("path_example/"))) == 0
 
 
 def test_check_audio_format(setup):

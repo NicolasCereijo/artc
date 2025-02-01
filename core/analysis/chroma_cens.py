@@ -24,7 +24,7 @@ def compare_two_chroma_cens(signal1: np.ndarray, signal2: np.ndarray,
                     np.linalg.norm(np.abs(chroma_cens2_adjusted)))
 
     similarity = (1 - distance / max_distance) if max_distance > 0 else 1.0
-    return similarity
+    return float(similarity)
 
 
 def compare_multiple_chroma_cens(audio_signals: list, sample_rates: list,

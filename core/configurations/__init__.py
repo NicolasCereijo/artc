@@ -15,6 +15,8 @@ def open_config(configuration_path: Path) -> dict:
     except ValueError:
         logger.critical("Could not access or parse configuration file")
 
+    return {}
+
 
 def read_config(config_section: str, configuration_path: Path) -> dict:
     """
@@ -51,3 +53,5 @@ def read_config(config_section: str, configuration_path: Path) -> dict:
     else:
         logger.critical("Error, configuration file does not exist or is not accessible. \nA "
                         "configuration file is required to run the program.")
+
+    return {}

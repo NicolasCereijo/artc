@@ -11,7 +11,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="artc",
-    version="1.0b2",
+    version="1.0b3",
     description="Beta version of the ARtC (Audio Real-time Comparator) core",
     long_description="A tool designed to compare and analyze audio files in real time.",
     author="Nicolás Cereijo Ranchal",

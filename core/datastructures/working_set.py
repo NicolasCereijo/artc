@@ -47,12 +47,12 @@ class AudioFile:
         ]
 
         # Generator expression (no condition in this case) inside an iterator function:
-        # ╔════════════╗          ╔════════════╗         ╔════════════╗         ┌────────────┐
-        # ║ Expression ╠══ for ══>║ Variables  ╠══ in ══>║  Iterable  ╠══ if ══>│ Condition  │
-        # ╚════════════╝          ╚════════════╝         ╚════════════╝         └────────────┘
+        # ╔════════════╗             ╔════════════╗           ╔════════════╗            ┌────────────┐
+        # ║     Expression     ╠══ for ══>║     Variables      ╠══ in ══>║      Iterable      ╠══ if ══>│     Condition      │
+        # ╚════════════╝             ╚════════════╝           ╚════════════╝            └────────────┘
         no_error = all(                                                # Iterator function
             logger.error(error_message.format(audio_data=self))        # ╔════════════╗
-            if not check_function(**kwargs)                            # ║ Expression ║
+            if not check_function(**kwargs)                            # ║     Expression     ║
             else True                                                  # ╚════════════╝
             for check_function, kwargs, error_message in verifications # [Variables] and [Iterable]
         )
@@ -63,7 +63,7 @@ class AudioFile:
 class WorkingSet:
     name: str
 
-    def __init__(self, name: str, /, *, test_mode: bool = False, data_set: dict = None):
+    def __init__(self, name: str, /, *, test_mode: bool = False, data_set: dict = {}):
         self.name = name
 
         if not test_mode:

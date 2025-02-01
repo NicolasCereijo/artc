@@ -11,7 +11,7 @@ def calculate_harmonic_noise_ratio(audio_signal: np.ndarray,
     percussive_power = np.sum(np.abs(stft(percussive, n_fft=n_fft, hop_length=hop_length))**2)
 
     total_power = harmonic_power + percussive_power
-    return harmonic_power / total_power if total_power > 0 else 0.0
+    return float(harmonic_power / total_power if total_power > 0 else 0.0)
 
 
 def compare_two_hnr(audio_signal1: np.ndarray, audio_signal2: np.ndarray,

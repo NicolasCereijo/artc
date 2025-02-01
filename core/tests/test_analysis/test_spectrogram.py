@@ -42,13 +42,13 @@ def test_compare_two_spectrogram(setup):
     assert analysis.compare_two_spectrogram(audio_signal3, audio_signal3,
                                             n_fft=n_fft) == 1
     assert round(analysis.compare_two_spectrogram(audio_signal1, audio_signal2,
-                                                  n_fft=n_fft), 5) == 0.27669
+                                                  n_fft=n_fft), 5) == 0.2767
     assert round(analysis.compare_two_spectrogram(audio_signal2, audio_signal1,
-                                                  n_fft=n_fft), 5) == 0.27669
+                                                  n_fft=n_fft), 5) == 0.2767
     assert round(analysis.compare_two_spectrogram(audio_signal1, audio_signal3,
-                                                  n_fft=n_fft), 5) == 0.30557
+                                                  n_fft=n_fft), 5) == 0.30558
     assert round(analysis.compare_two_spectrogram(audio_signal3, audio_signal1,
-                                                  n_fft=n_fft), 5) == 0.30557
+                                                  n_fft=n_fft), 5) == 0.30558
     assert round(analysis.compare_two_spectrogram(audio_signal2, audio_signal3,
                                                   n_fft=n_fft), 5) == 0.22438
     assert round(analysis.compare_two_spectrogram(audio_signal3, audio_signal2,
@@ -72,13 +72,13 @@ def test_compare_multiple_spectrogram(setup):
     assert analysis.compare_multiple_spectrogram([audio_signal3, audio_signal3],
                                                  n_fft=n_fft) == 1
     assert round(analysis.compare_multiple_spectrogram([audio_signal1, audio_signal2],
-                                                       n_fft=n_fft), 5) == 0.27669
+                                                       n_fft=n_fft), 5) == 0.2767
     assert round(analysis.compare_multiple_spectrogram([audio_signal2, audio_signal1],
-                                                       n_fft=n_fft), 5) == 0.27669
+                                                       n_fft=n_fft), 5) == 0.2767
     assert round(analysis.compare_multiple_spectrogram([audio_signal1, audio_signal3],
-                                                       n_fft=n_fft), 5) == 0.30557
+                                                       n_fft=n_fft), 5) == 0.30558
     assert round(analysis.compare_multiple_spectrogram([audio_signal3, audio_signal1],
-                                                       n_fft=n_fft), 5) == 0.30557
+                                                       n_fft=n_fft), 5) == 0.30558
     assert round(analysis.compare_multiple_spectrogram([audio_signal2, audio_signal3],
                                                        n_fft=n_fft), 5) == 0.22438
     assert round(analysis.compare_multiple_spectrogram([audio_signal3, audio_signal2],

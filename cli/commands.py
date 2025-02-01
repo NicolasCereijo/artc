@@ -16,7 +16,7 @@ def about() -> None:
 
         ARtC is a software suite designed to compare and analyze audio files in real time.
 
-        Version: 1.0b2
+        Version: 1.0b3
         Author: Nicolás Cereijo Ranchal
         Author Email: nicolascereijoranchal@gmail.com
         URL: https://github.com/NicolasCereijo/artc
@@ -60,7 +60,7 @@ def parse_args(commands_path: str, *, logger: Logger) -> argparse.Namespace:
     return parser.parse_args()
 
 
-def handle_command(command: str, *, command_args: list = None, logger: Logger) -> None:
+def handle_command(command: str, *, command_args: list = [], logger: Logger) -> None:
     if command == "test":
         tests.main(command_args)
 

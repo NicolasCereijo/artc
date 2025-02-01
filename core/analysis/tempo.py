@@ -8,7 +8,7 @@ def calculate_tempo(audio_signal: np.ndarray, sample_rate: float,
 
     if isinstance(tempo, np.ndarray):
         tempo = np.mean(tempo)
-    return tempo
+    return float(tempo)
 
 
 def compare_two_tempo(audio_signal1: np.ndarray, audio_signal2: np.ndarray,

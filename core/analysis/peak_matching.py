@@ -3,7 +3,7 @@ import librosa
 
 
 def calculate_peak_matching(audio_signal: np.ndarray, sample_rate: float,
-                            /, *, n_fft: int = 4096) -> [np.ndarray, np.ndarray]:
+                            /, *, n_fft: int = 4096) -> tuple[np.ndarray, np.ndarray]:
     spectrogram = np.abs(librosa.stft(audio_signal, n_fft=n_fft))
     one_dimensional_spectrogram = np.mean(spectrogram, axis=1)
 
@@ -56,7 +56,7 @@ def compare_two_peak_matching(audio_signal1: np.ndarray, audio_signal2: np.ndarr
     similarity_mag = (1 - distance_mag / max_distance_mag) if max_distance_mag > 0 else 1.0
 
     similarity = (similarity_freq + similarity_mag) / 2
-    return similarity
+    return float(similarity)
 
 
 def compare_multiple_peak_matching(audio_signals: list, sample_rates: list,

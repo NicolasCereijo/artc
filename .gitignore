@@ -47,6 +47,7 @@ coverage.xml
 dmypy.json
 
 # IDE / Editor directories and settings
+.zed
 .idea/
 .vscode/
 *.sublime-project
