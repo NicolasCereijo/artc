@@ -146,3 +146,7 @@ COMPARE_FUNCTIONS = {
         "use_sample_rate": True
     }
 }
+
+
+def get_metric_names() -> list:
+    return list(COMPARE_FUNCTIONS.keys())
