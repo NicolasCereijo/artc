@@ -47,14 +47,11 @@ class AudioFile:
         ]
 
         # Generator expression (no condition in this case) inside an iterator function:
-        # ╔════════════╗             ╔════════════╗           ╔════════════╗            ┌────────────┐
-        # ║     Expression     ╠══ for ══>║     Variables      ╠══ in ══>║      Iterable      ╠══ if ══>│     Condition      │
-        # ╚════════════╝             ╚════════════╝           ╚════════════╝            └────────────┘
         no_error = all(                                                # Iterator function
             logger.error(error_message.format(audio_data=self))        # ╔════════════╗
             if not check_function(**kwargs)                            # ║     Expression     ║
             else True                                                  # ╚════════════╝
-            for check_function, kwargs, error_message in verifications # [Variables] and [Iterable]
+            for check_function, kwargs, error_message in verifications # Variables and iterable
         )
 
         return no_error
@@ -147,7 +144,7 @@ class WorkingSet:
         if not no_error or path.as_posix() == ".":
             return False
 
-        for file_name in os.listdir(path):
+        for file_name in sorted(sorted(os.listdir(path), key=str.lower)):
             if os.path.isfile(os.path.join(path, file_name)):
                 if self.add_file(path=path, name=file_name, configuration_path=configuration_path,
                                  group=group):

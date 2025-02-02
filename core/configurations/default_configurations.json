@@ -1,5 +1,9 @@
 {
+  "sysconfig": {
+    "max_cpu_usage": 80
+  },
   "audio": {
+    "seconds_per_chunk": 30,
     "valid_extensions": [".mp3", ".wav"]
   },
   "metric": {
