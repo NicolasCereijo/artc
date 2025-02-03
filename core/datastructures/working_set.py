@@ -144,7 +144,7 @@ class WorkingSet:
         if not no_error or path.as_posix() == ".":
             return False
 
-        for file_name in sorted(sorted(os.listdir(path), key=str.lower)):
+        for file_name in sorted(os.listdir(path), key=str.lower):
             if os.path.isfile(os.path.join(path, file_name)):
                 if self.add_file(path=path, name=file_name, configuration_path=configuration_path,
                                  group=group):
