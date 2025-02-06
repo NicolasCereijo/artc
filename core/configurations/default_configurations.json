@@ -1,6 +1,7 @@
 {
   "sysconfig": {
-    "max_cpu_usage": 80
+    "max_processes": 4,
+    "max_memory_usage": 50
   },
   "audio": {
     "seconds_per_chunk": 30,

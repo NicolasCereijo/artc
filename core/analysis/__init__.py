@@ -48,12 +48,12 @@ COMPARE_FUNCTIONS = {
     "energy_envelope": {
         "compare_two": compare_two_energy_envelope,
         "compare_multiple": compare_multiple_energy_envelope,
-        "use_sample_rate": True
+        "use_sample_rate": False
     },
     "harmonic_noise_ratio": {
         "compare_two": compare_two_hnr,
         "compare_multiple": compare_multiple_hnr,
-        "use_sample_rate": True
+        "use_sample_rate": False
     },
     "harmonic_tempogram": {
         "compare_two": compare_two_harmonic_tempogram,
@@ -103,7 +103,7 @@ COMPARE_FUNCTIONS = {
     "spectral_flatness": {
         "compare_two": compare_two_spectral_flatness,
         "compare_multiple": compare_multiple_spectral_flatness,
-        "use_sample_rate": True
+        "use_sample_rate": False
     },
     "spectral_roll_off": {
         "compare_two": compare_two_spectral_roll_off,
@@ -113,7 +113,7 @@ COMPARE_FUNCTIONS = {
     "spectrogram": {
         "compare_two": compare_two_spectrogram,
         "compare_multiple": compare_multiple_spectrogram,
-        "use_sample_rate": True
+        "use_sample_rate": False
     },
     "tempo": {
         "compare_two": compare_two_tempo,
@@ -143,7 +143,7 @@ COMPARE_FUNCTIONS = {
     "zero_crossing_rate": {
         "compare_two": compare_two_zcr,
         "compare_multiple": compare_multiple_zcr,
-        "use_sample_rate": True
+        "use_sample_rate": False
     }
 }
 

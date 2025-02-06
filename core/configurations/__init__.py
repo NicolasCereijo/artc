@@ -26,7 +26,9 @@ def read_config(config_section: str, configuration_path: Path) -> Any:
         Args:
             config_section (str): The section of the configuration file to read. Available options:
                 - "all": Returns the entire configuration file as a dictionary.
-                - "cpu": Returns the value of "max_cpu_usage" from the "sysconfig" section.
+                - "processes": Returns the maximum number of allowed processes from the "sysconfig"
+                section.
+                - "memory": Returns the maximum memory usage setting from the "sysconfig" section.
                 - "extensions": Returns the list of valid audio file extensions from the "audio"
                 section.
             configuration_path (Path): The path to the configuration file.
@@ -48,7 +50,8 @@ def read_config(config_section: str, configuration_path: Path) -> Any:
     if config is not None:
         cases = {
             "all": config,
-            "cpu": config.get("sysconfig", {}).get("max_cpu_usage"),
+            "processes": config.get("sysconfig", {}).get("max_processes"),
+            "memory": config.get("sysconfig", {}).get("max_memory_usage"),
             "extensions": config.get("audio", {}).get("valid_extensions", [])
         }
 
