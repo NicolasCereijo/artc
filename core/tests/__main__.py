@@ -21,6 +21,13 @@ def main(args=None):
                 " .''''|.   ||   |.   ||   '|.      .     .     '||  ||  ||   ||   ||   ||     \n" +
                 ".|.  .||. .||.  '|' .||.   ''|....'      |'....|'   '|..'|. .||.  '|.'  '|...'\n")
 
+    logger.info(
+        "Technical note: Libraries aifc, audioop, and sunau have deprecation\n" +
+        "warnings for Python 3.13. This is a known issue dependent on third-party\n" +
+        "libraries. If these libraries are not updated and a migration to Python 3.13\n" +
+        "is considered in a future version, alternatives to the current libraries will\n" +
+        "be explored.\n")
+
     if os.access(configuration_path, os.R_OK):
         result = pytest.main(args)
 

@@ -11,11 +11,11 @@ def compare_two_dtw(audio_signal1: np.ndarray, audio_signal2: np.ndarray,
     mfcc2 = calculate_mfcc(audio_signal2, sample_rate2, n_fft=n_fft)
 
     distance, _ = dtw(X=mfcc1, Y=mfcc2)
-    dtw_distance = distance[-1, -1]
+    dtw_distance = distance[-1, -1] / (mfcc1.shape[0] * mfcc2.shape[0])
     max_distance = max(mfcc1.shape[1], mfcc2.shape[1])
 
     similarity = (dtw_distance / max_distance) if max_distance > 0 else 1.0
-    return max(0.0, 1 - similarity / 100)
+    return max(0, 1 - similarity)
 
 
 def compare_multiple_dtw(audio_signals: list, sample_rates: list,

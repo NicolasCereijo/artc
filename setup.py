@@ -2,8 +2,9 @@ import sys
 from setuptools import setup, find_packages
 
 # Check Python version
-if sys.version_info < (3, 10):
-    sys.exit("Python 3.10 or higher is required for this project.")
+if sys.version_info < (3, 10) or sys.version_info >= (3, 13):
+    sys.exit("Python 3.10 or higher and below 3.13 is required for this project.")
+
 
 # Dependencies list
 with open('requirements.txt') as f:
@@ -11,7 +12,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="artc",
-    version="1.0b3",
+    version="1.0b4",
     description="Beta version of the ARtC (Audio Real-time Comparator) core",
     long_description="A tool designed to compare and analyze audio files in real time.",
     author="Nicolás Cereijo Ranchal",

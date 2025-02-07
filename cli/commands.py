@@ -16,7 +16,7 @@ def about() -> None:
 
         ARtC is a software suite designed to compare and analyze audio files in real time.
 
-        Version: 1.0b3
+        Version: 1.0b4
         Author: Nicolás Cereijo Ranchal
         Author Email: nicolascereijoranchal@gmail.com
         URL: https://github.com/NicolasCereijo/artc
