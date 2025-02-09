@@ -26,11 +26,11 @@ def read_config(config_section: str, configuration_path: Path) -> Any:
         Args:
             config_section (str): The section of the configuration file to read. Available options:
                 - "all": Returns the entire configuration file as a dictionary.
-                - "processes": Returns the maximum number of allowed processes from the "sysconfig"
-                section.
+                - "processes": Returns the maximum number of allowed processes.
                 - "memory": Returns the maximum memory usage setting from the "sysconfig" section.
-                - "extensions": Returns the list of valid audio file extensions from the "audio"
-                section.
+                - "sampling": Returns the number of samples per audio chunk.
+                - "extensions": Returns the list of valid audio file extensions.
+                - "stats": Returns the list of statistics available for comparisons.
             configuration_path (Path): The path to the configuration file.
 
         Returns:
@@ -52,7 +52,9 @@ def read_config(config_section: str, configuration_path: Path) -> Any:
             "all": config,
             "processes": config.get("sysconfig", {}).get("max_processes"),
             "memory": config.get("sysconfig", {}).get("max_memory_usage"),
-            "extensions": config.get("audio", {}).get("valid_extensions", [])
+            "sampling": config.get("audio", {}).get("samples_per_chunk"),
+            "extensions": config.get("audio", {}).get("valid_extensions", []),
+            "stats": config.get("stats", [])
         }
 
         case_function = cases.get(config_section)
