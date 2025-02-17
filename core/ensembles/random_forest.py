@@ -31,7 +31,6 @@ def preprocessing(weak_classifiers: list[np.ndarray], group_labels: list[int]) -
                     first_classifier.shape[0]})")
 
     # Rows equal to the number of audio pair combinations minus the number of equal pairs
-    # dataset_rows = (first_classifier.shape[0] * first_classifier.shape[1]) - len(group_labels)
     dataset_rows = sum(classifier.shape[0] * (classifier.shape[1] - 1) for classifier in weak_classifiers)
     dataset = np.zeros((dataset_rows, len(weak_classifiers)))
 
