@@ -1,9 +1,17 @@
-colorlog==6.9.0
-librosa==0.10.2.post1
-numba==0.61.0
-numpy>=1.24.2,<2.0
-psutil==6.1.1
-pytest==8.3.4
-requests==2.32.3
-scikit-learn==1.6.1
+# Installation tools
 setuptools==75.8.0
+
+# Core dependencies
+numpy>=1.24.2,<2.0
+scikit-learn==1.6.1
+numba==0.61.0
+
+# Libraries for data and audio processing
+librosa==0.10.2.post1
+matplotlib==3.8.4
+psutil==6.1.1
+requests==2.32.3
+
+# Logging and testing tools
+colorlog==6.9.0
+pytest==8.3.4

@@ -103,6 +103,11 @@ def handle_command(command: str, *, command_args: list, logger: Logger) -> None:
         include executing tasks, logging messages or validating configuration files. If required
         resources are unavailable, it logs critical errors and may terminate execution.
 
+        When the 'test' command is used, the function automatically adds a default configuration
+        file (`artc/core/tests/pytest.ini`) for `pytest`. This can be overwritten by specifying a
+        custom configuration file using the `-c` argument, e.g., `python -m artc test -c
+        path_to_custom_config/pytest.ini`.
+
         Args:
             command (str): The command to execute.
             command_args (list): Additional arguments passed to the command handler. Defaults to an
@@ -114,7 +119,7 @@ def handle_command(command: str, *, command_args: list, logger: Logger) -> None:
     """
 
     if command == "test":
-        tests.main(command_args)
+        tests.main(['-c', 'artc/core/tests/pytest.ini'] + command_args)
 
     elif command == "welcome":
         configuration_path = str(
